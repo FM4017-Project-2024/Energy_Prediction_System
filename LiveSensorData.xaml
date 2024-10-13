@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Energy_Prediction_System.LiveSensorData"
+             Title="LiveSensorData">
+    <VerticalStackLayout Padding="20" Spacing="10" BackgroundColor="WhiteSmoke">
+        <Label Text="Temperature 1-7" VerticalOptions="Center"  HorizontalOptions="Center" FontSize="20" FontAttributes="Bold" />
+
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
+            <Label x:Name="TT01_Label" FontSize="26" Text="TT01: "/>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
+            <Label x:Name="TT02_Label" FontSize="26" Text="TT02: "/>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
+            <Label x:Name="TT03_Label" FontSize="26" Text="TT03: "/>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
+            <Label x:Name="TT04_Label" FontSize="26" Text="TT04: "/>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
+            <Label x:Name="TT05_Label" FontSize="26" Text="TT05: "/>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+
+        
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
+            <Label x:Name="RHT01_Label" FontSize="26" Text="RHT01: "/>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
+            <Label x:Name="RHT02_Label" FontSize="26" Text="RHT02: "/>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
+            <Label x:Name="RHT03_Label" FontSize="26" Text="RHT03: "/>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
+            <Label x:Name="RHT04_Label" FontSize="26" Text="RHT04: "/>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+        
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
+            <Label x:Name="KWH_Label" FontSize="26" Text="KWH01: "/>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+
+
+    </VerticalStackLayout>
+</ContentPage>

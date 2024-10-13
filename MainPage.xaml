@@ -5,10 +5,10 @@
             Title="Energy Prediction System">
 
     <ScrollView>
-        <VerticalStackLayout  Padding="30,0" Spacing="20" BackgroundColor="WhiteSmoke">
+        <VerticalStackLayout  Padding="30,0" Spacing="10" BackgroundColor="WhiteSmoke">
             <Image Source="eps.png"  Aspect="Center"    SemanticProperties.Description="Energy Prediction System EPS" />
-            <Label Text="Sensors" Style="{StaticResource Headline}" SemanticProperties.HeadingLevel="Level1" />
-            <Button Text="Overview"  Clicked="OnSensorData1ButtonClicked" HorizontalOptions="Fill"/>
+            <Label Text="Live data" Style="{StaticResource Headline}" SemanticProperties.HeadingLevel="Level1" />
+            <Button Text="Live sensor data"  Clicked="OnLiveSensorData1ButtonClicked" HorizontalOptions="Fill"/>
             <Button Text="Temperatures"  Clicked="OnSensorData2ButtonClicked" HorizontalOptions="Fill"/>
             <Label Text="Historical data" Style="{StaticResource Headline}" SemanticProperties.HeadingLevel="Level1" />
             <Button Text="Temperatures"  Clicked="OnHistData1ButtonClicked" HorizontalOptions="Fill"/>

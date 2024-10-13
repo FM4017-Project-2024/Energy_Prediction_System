@@ -6,7 +6,7 @@
         {
             InitializeComponent();
         }
-        private async void OnSensorData1ButtonClicked(object sender, EventArgs e) => await Navigation.PushAsync(new SensorData_1());
+        private async void OnLiveSensorData1ButtonClicked(object sender, EventArgs e) => await Navigation.PushAsync(new LiveSensorData());
         private async void OnSensorData2ButtonClicked(object sender, EventArgs e) => await Navigation.PushAsync(new SensorData_2());
         private async void OnHistData1ButtonClicked(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1());
     }

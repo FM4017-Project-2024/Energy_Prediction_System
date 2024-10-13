@@ -67,7 +67,10 @@
 	  <MauiXaml Update="HistoricalData_1.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="SensorData_1.xaml">
+	  <MauiXaml Update="LiveSensorData.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="LiveWheaterData.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="SensorData_2.xaml">
