@@ -8,6 +8,21 @@ public partial class LiveSensorData : ContentPage
     private readonly SensorSim rndVal = new();
     private bool _simulate = true;
 
+    private struct Livesensors 
+    {
+        public double TT01 { get; set; }
+        public double TT02 { get; set; }
+        public double TT03 { get; set; }
+        public double TT04 { get; set; }
+        public double TT05 { get; set; }
+        public double RHT01 { get; set; }
+        public double RHT02 { get; set; }
+        public double RHT03 { get; set; }
+        public double RHT04 { get; set; }
+        public double KWH01 { get; set; }
+    }
+    Livesensors sensor = new Livesensors();
+
     public LiveSensorData()
     {
         InitializeComponent();
@@ -19,29 +34,19 @@ public partial class LiveSensorData : ContentPage
         {
             await Task.Delay(2000);
 
-            double TT01 = 0;
-            double TT02 = 0;
-            double TT03 = 0;
-            double TT04 = 0;
-            double TT05 = 0;
-            double RHT01 = 0;
-            double RHT02 = 0;
-            double RHT03 = 0;
-            double RHT04 = 0;
-            double KWH01 = 0;
 
             if (_simulate)
             {
-                TT01 = rndVal.GetRandomDouble(0, 20);
-                TT02 = rndVal.GetRandomDouble(0, 10);
-                TT03 = rndVal.GetRandomDouble(0, 30);
-                TT04 = rndVal.GetRandomDouble(0, 30);
-                TT05 = rndVal.GetRandomDouble(0, 30);
-                RHT01 = rndVal.GetRandomDouble(0, 30);
-                RHT02 = rndVal.GetRandomDouble(0, 30);
-                RHT03 = rndVal.GetRandomDouble(0, 30);
-                RHT04 = rndVal.GetRandomDouble(0, 30);
-                KWH01 = rndVal.GetRandomDouble(0, 30);
+                sensor.TT01 = rndVal.GetRandomDouble(0, 20);
+                sensor.TT02 = rndVal.GetRandomDouble(0, 10);
+                sensor.TT03 = rndVal.GetRandomDouble(0, 30);
+                sensor.TT04 = rndVal.GetRandomDouble(0, 30);
+                sensor.TT05 = rndVal.GetRandomDouble(0, 30);
+                sensor.RHT01 = rndVal.GetRandomDouble(0, 30);
+                sensor.RHT02 = rndVal.GetRandomDouble(0, 30);
+                sensor.RHT03 = rndVal.GetRandomDouble(0, 30);
+                sensor.RHT04 = rndVal.GetRandomDouble(0, 30);
+                sensor.KWH01 = rndVal.GetRandomDouble(0, 30);
             }
             else
             {
@@ -49,16 +54,16 @@ public partial class LiveSensorData : ContentPage
             }
             MainThread.BeginInvokeOnMainThread(() =>
             {
-                TT01_Label.Text = $"TT01: {TT01:F2}";
-                TT02_Label.Text = $"TT02: {TT02:F2}";
-                TT03_Label.Text = $"TT03: {TT03:F2}";
-                TT04_Label.Text = $"TT04: {TT04:F2}";
-                TT05_Label.Text = $"TT05: {TT05:F2}";
-                RHT01_Label.Text = $"RHT01: {RHT01:F2}";
-                RHT02_Label.Text = $"RHT02: {RHT02:F2}";
-                RHT03_Label.Text = $"RHT03: {RHT03:F2}";
-                RHT04_Label.Text = $"RHT04: {RHT04:F2}";
-                KWH_Label.Text = $"KWH01: {KWH01:F2}";
+                TT01_Label.Text = $"TT01: {sensor.TT01:F2}";
+                TT02_Label.Text = $"TT02: {sensor.TT02:F2}";
+                TT03_Label.Text = $"TT03: {sensor.TT03:F2}";
+                TT04_Label.Text = $"TT04: {sensor.TT04:F2}";
+                TT05_Label.Text = $"TT05: {sensor.TT05:F2}";
+                RHT01_Label.Text = $"RHT01: {sensor.RHT01:F2}";
+                RHT02_Label.Text = $"RHT02: {sensor.RHT02:F2}";
+                RHT03_Label.Text = $"RHT03: {sensor.RHT03:F2}";
+                RHT04_Label.Text = $"RHT04: {sensor.RHT04:F2}";
+                KWH_Label.Text = $"KWH01: {sensor.KWH01:F2}";
             });
         }
     }
