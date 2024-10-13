@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Energy_Prediction_System.SensorData_2"
+             Title="Temperature">
+    <VerticalStackLayout Padding="20" Spacing="10" BackgroundColor="WhiteSmoke">
+        <Label Text="Temperature 1-7" VerticalOptions="Center"  HorizontalOptions="Center" FontSize="20" FontAttributes="Bold" />
+
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
+            <Label x:Name="T1Label" FontSize="26" Text="T_1: "/>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
+            <Label x:Name="T2Label" FontSize="26" Text="T_2: " />
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
+            <Label x:Name="T3Label" FontSize="26" Text="T_3: " />
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
+            <Label x:Name="T4Label" FontSize="26" Text="T_4: " />
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
+            <Label x:Name="T5Label" FontSize="26" Text="T_5: " />
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
+            <Label x:Name="T6Label" FontSize="26" Text="T_6: " />
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+        
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
+            <Label x:Name="T7Label" FontSize="26" Text="T_7: " />
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+
+
+    </VerticalStackLayout>
+</ContentPage>
