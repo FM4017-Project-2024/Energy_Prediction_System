@@ -67,8 +67,4 @@ public partial class LiveSensorData : ContentPage
         base.OnDisappearing();
         _isRunning = false;
     }
-    private async void OnSensorData2ButtonClicked(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new SensorData_2());
-    }
 }

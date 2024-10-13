@@ -4,9 +4,93 @@
              x:Class="Energy_Prediction_System.LiveWheaterData"
              Title="LiveWheaterData">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Label Text="Wheater API data" VerticalOptions="Center"  HorizontalOptions="Center" FontSize="20" FontAttributes="Bold" />
+
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
+            <Label x:Name="TTT_Label" FontSize="26" Text="TTT: "/>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
+            <Label x:Name="dd_Label" FontSize="26" Text="dd: "/>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+
+
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
+            <Label x:Name="ff_Label" FontSize="26" Text="ff: "/>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
+            <Label x:Name="ff_gust_Label" FontSize="26" Text="ff_gust: "/>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
+            <Label x:Name="NA_Label" FontSize="26" Text="NA: "/>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
+            <Label x:Name="pr_Label" FontSize="26" Text="pr: "/>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
+            <Label x:Name="NN_Label" FontSize="26" Text="NN: "/>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
+            <Label x:Name="FOG_Label" FontSize="26" Text="FOG: "/>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
+            <Label x:Name="LOW_Label" FontSize="26" Text="LOW: "/>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+        
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
+            <Label x:Name="MEDIUM_Label" FontSize="26" Text="MEDIUM: "/>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
+            <Label x:Name="HIGH_Label" FontSize="26" Text="HIGH: "/>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
+            <Label x:Name="TD_Label" FontSize="26" Text="TD: "/>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+        
     </VerticalStackLayout>
 </ContentPage>
+
