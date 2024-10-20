@@ -24,7 +24,7 @@
 		<ApplicationTitle>Energy_Prediction_System</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.energy_prediction_system</ApplicationId>
+		<ApplicationId>com.companyname.energyPredictionSystem</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
