@@ -8,8 +8,7 @@
         }
         private async void OnLiveSensorData1ButtonClicked(object sender, EventArgs e) => await Navigation.PushAsync(new LiveSensorData());
         private async void OnLiveWheaterData1ButtonClicked(object sender, EventArgs e) => await Navigation.PushAsync(new LiveWheaterData());
-
-        private async void OnHistData1ButtonClicked(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1());
+        private async void OnHistData1ButtonClicked(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("sensorname"));
     }
 }
 

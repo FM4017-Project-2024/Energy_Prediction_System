@@ -5,6 +5,13 @@
              x:Class="Energy_Prediction_System.HistoricalData_1">
 
     <Grid>
+        <Label Text="{Binding SensorName}"
+               FontSize="20"
+               HorizontalOptions="Center"
+               VerticalOptions="Start"
+               Margin="10" />
+
+
         <chart:SfCartesianChart>
             <chart:SfCartesianChart.Series>
                 <chart:LineSeries ItemsSource="{Binding Data}" XBindingPath="Time" YBindingPath="Value" Label="Sensor Data" StrokeWidth="2">

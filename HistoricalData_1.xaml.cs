@@ -16,10 +16,13 @@ public partial class HistoricalData_1 : ContentPage
     private bool _isRunning = true;
     public ObservableCollection<ChartModel> Data { get; set; }
     private int _counter;
-    
-    public HistoricalData_1()
+    public string SensorName { get; set; }
+
+    public HistoricalData_1(string sensorName)
     {
         InitializeComponent();
+        SensorName = sensorName;
+
         Data = new ObservableCollection<ChartModel>
         {
             new ChartModel { Time = "10:00", Value = 20.5 },
@@ -55,6 +58,8 @@ public partial class HistoricalData_1 : ContentPage
             });
         }
     }
+
+
 
     protected override void OnDisappearing()
     {
