@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Energy_Prediction_System.Views.DatabaseViewPage">
+
+    <StackLayout Padding="20">
+        <!-- Knapper for å hente temperaturdata -->
+        <Button Text="Get All Building Temperatures" Clicked="OnGetAllBuildingTempsClicked"/>
+        <Button Text="Get Latest Building Temperature" Clicked="OnGetLatestBuildingTempClicked"/>
+
+        <!-- Listevisning for temperaturdata -->
+        <ListView x:Name="TemperatureListView">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding TempDateTime, StringFormat='Date: {0:dd-MM-yyyy HH:mm}'}" />
+                            <Label Text="{Binding Temp1, StringFormat='Temp1: {0}'}" />
+                            <Label Text="{Binding Temp2, StringFormat='Temp2: {0}'}" />
+                            <Label Text="{Binding Temp3, StringFormat='Temp3: {0}'}" />
+                            <Label Text="{Binding Temp4, StringFormat='Temp4: {0}'}" />
+                            <Label Text="{Binding Temp5, StringFormat='Temp5: {0}'}" />
+                            <Label Text="{Binding TempUoM, StringFormat='Unit: {0}'}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- Knapper for å hente fuktighetsdata -->
+        <Button Text="Get All Building Relative Humidity" Clicked="OnGetAllBuildingRelHumidityClicked"/>
+        <Button Text="Get Latest Building Relative Humidity" Clicked="OnGetLatestBuildingRelHumidityClicked"/>
+
+        <!-- Listevisning for fuktighetsdata -->
+        <ListView x:Name="HumidityListView">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding RelHumidityDateTime, StringFormat='Date: {0:dd-MM-yyyy HH:mm}'}" />
+                            <Label Text="{Binding RelHumidity1, StringFormat='Humidity1: {0}'}" />
+                            <Label Text="{Binding RelHumidity2, StringFormat='Humidity2: {0}'}" />
+                            <Label Text="{Binding RelHumidity3, StringFormat='Humidity3: {0}'}" />
+                            <Label Text="{Binding RelHumidity4, StringFormat='Humidity4: {0}'}" />
+                            <Label Text="{Binding RelHumidityUoM, StringFormat='Unit: {0}'}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- Knapper for å hente data -->
+        <Button Text="Get All Building Energy Meter Data" Clicked="OnGetAllEnergyMeterDataClicked"/>
+        <Button Text="Get Latest Building Energy Meter Data" Clicked="OnGetLatestEnergyMeterDataClicked"/>
+
+        <!-- Listevisning for energidata -->
+        <ListView x:Name="EnergyMeterListView">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding EnergyMeterDateTime, StringFormat='Date: {0:dd-MM-yyyy HH:mm}'}" />
+                            <Label Text="{Binding EnergyMeter1, StringFormat='Energy: {0}'}" />
+                            <Label Text="{Binding EnergyMeterUoM, StringFormat='Unit: {0}'}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+
+</ContentPage>
