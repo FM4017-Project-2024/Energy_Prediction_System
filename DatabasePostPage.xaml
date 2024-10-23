@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Energy_Prediction_System.Views.DatabasePostPage">
+
+    <ScrollView>
+        <StackLayout Padding="20">
+            <!-- Building Temperature Item Section -->
+            <Label Text="Post Building Temperature Data" FontAttributes="Bold" />
+            <Entry x:Name="TempEntry1" Placeholder="Temperature 1" Keyboard="Numeric"/>
+            <Entry x:Name="TempEntry2" Placeholder="Temperature 2" Keyboard="Numeric"/>
+            <Entry x:Name="TempEntry3" Placeholder="Temperature 3" Keyboard="Numeric"/>
+            <Entry x:Name="TempEntry4" Placeholder="Temperature 4" Keyboard="Numeric"/>
+            <Entry x:Name="TempEntry5" Placeholder="Temperature 5" Keyboard="Numeric"/>
+            <Entry x:Name="TempUoMEntry" Placeholder="Unit of Measurement"/>
+            <Button Text="Post Building Temperature" Clicked="OnPostTemperatureClicked"/>
+
+            <!-- Building Relative Humidity Item Section -->
+            <Label Text="Post Building Relative Humidity Data" FontAttributes="Bold" />
+            <Entry x:Name="HumidityEntry1" Placeholder="Relative Humidity 1" Keyboard="Numeric"/>
+            <Entry x:Name="HumidityEntry2" Placeholder="Relative Humidity 2" Keyboard="Numeric"/>
+            <Entry x:Name="HumidityEntry3" Placeholder="Relative Humidity 3" Keyboard="Numeric"/>
+            <Entry x:Name="HumidityEntry4" Placeholder="Relative Humidity 4" Keyboard="Numeric"/>
+            <Entry x:Name="HumidityUoMEntry" Placeholder="Unit of Measurement"/>
+            <Button Text="Post Building Relative Humidity" Clicked="OnPostHumidityClicked"/>
+
+            <!-- Building Energy Meter Item Section -->
+            <Label Text="Post Building Energy Meter Data" FontAttributes="Bold" />
+            <Entry x:Name="EnergyMeterEntry1" Placeholder="Energy Meter 1" Keyboard="Numeric"/>
+            <Entry x:Name="EnergyMeterUoMEntry" Placeholder="Unit of Measurement"/>
+            <Button Text="Post Building Energy Meter" Clicked="OnPostEnergyMeterClicked"/>
+
+            <!-- Label for API response confirmation -->
+            <Label x:Name="ApiResponseLabel" TextColor="Green" FontAttributes="Italic" />
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

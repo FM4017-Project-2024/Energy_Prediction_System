@@ -11,6 +11,7 @@
             <Button Text="Live sensor data"  Clicked="OnLiveSensorData1ButtonClicked" HorizontalOptions="Fill"/>
             <Button Text="Weather data"  Clicked="OnLiveWeatherData1ButtonClicked" HorizontalOptions="Fill"/>
             <Button Text="Database read test"  Clicked="OnDatabaseViewPageButtonClicked" HorizontalOptions="Fill"/>
+            <Button Text="Database write test" Clicked="OnOpenDatabasePostPageClicked" HorizontalOptions="Fill"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

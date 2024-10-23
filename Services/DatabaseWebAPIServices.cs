@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Energy_Prediction_System.Classes;
+using System.Text;
 
 namespace Energy_Prediction_System.Services
 {
@@ -62,6 +63,39 @@ namespace Energy_Prediction_System.Services
         public Task<BuildingEnergyMeterItem> GetLatestBuildingEnergyMeterAsync(string url)
         {
             return GetAsync<BuildingEnergyMeterItem>(url);
+        }
+
+        // Generisk metode for POST-forespørsler med en dynamisk URL
+        private async Task<string> PostAsync<T>(string apiUrl, T data)
+        {
+            var jsonData = JsonConvert.SerializeObject(data);
+            var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync(apiUrl, content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsStringAsync(); // Returner API-bekreftelse
+            }
+            else
+            {
+                throw new HttpRequestException($"Failed to post data: {response.StatusCode}");
+            }
+        }
+
+        // POST-metoder mottar nå URL som parameter
+        public Task<string> PostBuildingTemperatureAsync(string apiUrl, BuildingTemperatureItem item)
+        {
+            return PostAsync(apiUrl, item);
+        }
+
+        public Task<string> PostBuildingRelativeHumidityAsync(string apiUrl, BuildingRelativeHumidityItem item)
+        {
+            return PostAsync(apiUrl, item);
+        }
+
+        public Task<string> PostBuildingEnergyMeterAsync(string apiUrl, BuildingEnergyMeterItem item)
+        {
+            return PostAsync(apiUrl, item);
         }
     }
 }
