@@ -8,10 +8,13 @@ public partial class LiveWheaterData : ContentPage
     private readonly SensorSim rndVal = new();
     private bool _simulate = true;
 
+    private readonly WeatherService weatherService = new();
+
     public LiveWheaterData()
     {
         InitializeComponent();
         StartSimulatingSensorData();
+        LoadWeatherData();
     }
     private async void StartSimulatingSensorData()
     {
@@ -31,6 +34,8 @@ public partial class LiveWheaterData : ContentPage
             double MEDIUM = 0;
             double HIGH = 0;
             double TD = 0;
+            double API_Txt = 0;
+
 
             if (_simulate)
             {
@@ -46,6 +51,7 @@ public partial class LiveWheaterData : ContentPage
                 MEDIUM = rndVal.GetRandomDouble(0, 30);
                 HIGH = rndVal.GetRandomDouble(0, 30);
                 TD = rndVal.GetRandomDouble(0, 30);
+                API_Txt = rndVal.GetRandomDouble(0, 30);
             }
             else
             {
@@ -65,6 +71,8 @@ public partial class LiveWheaterData : ContentPage
                 MEDIUM_Label.Text = $"MEDIUM: {MEDIUM:F2}";
                 HIGH_Label.Text = $"HIGH: {HIGH:F2}";
                 TD_Label.Text = $"TD: {TD:F2}";
+                //API_TEXT.Text = $"API_TEXT: {API_Txt:F2}";
+
             });
         }
     }
@@ -72,5 +80,22 @@ public partial class LiveWheaterData : ContentPage
     {
         base.OnDisappearing();
         _isRunning = false;
+    }
+    private async void LoadWeatherData()
+    {
+        string weatherData = await weatherService.GetWeatherAsync(59.7076562, 10.1559495, 90, 0);
+        //API_TEXT.Text = weatherData;
+
+        // Split by comma and then process each part
+        var dataParts = weatherData.Split(',');
+        // Extract values only (remove units)
+        string temperature = dataParts[0].Split(':')[1].Trim().Replace("°C", "");
+        string windSpeed = dataParts[1].Split(':')[1].Trim().Replace("m/s", "");
+        string humidity = dataParts[2].Split(':')[1].Trim().Replace("%", "");
+        string pressure = dataParts[3].Split(':')[1].Trim().Replace("hPa", "");
+        string cloudiness = dataParts[4].Split(':')[1].Trim().Split(' ')[0].Replace("%", "");
+     
+        API_TEXT.Text = temperature + " °C " + windSpeed + " m/s "  + humidity + " % " + pressure + " hPa " + cloudiness + " % ";
+
     }
 }
