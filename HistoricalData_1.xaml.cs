@@ -43,8 +43,6 @@ public partial class HistoricalData_1 : ContentPage
     {
         while (_isRunning)
         {
-            await Task.Delay(3000);
-
             string newTime = $"13:{_counter * 5:00}";
             double newValue = rndVal.GetRandomDouble(0, 20);
             MainThread.BeginInvokeOnMainThread(() =>
@@ -56,10 +54,9 @@ public partial class HistoricalData_1 : ContentPage
                     Data.RemoveAt(0);
                 }
             });
+            await Task.Delay(3000);
         }
     }
-
-
 
     protected override void OnDisappearing()
     {
