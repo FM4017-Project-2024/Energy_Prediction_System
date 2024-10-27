@@ -4,26 +4,30 @@ namespace Energy_Prediction_System;
 
 public partial class LiveWheaterData : ContentPage
 {
-    private readonly WeatherService weatherService = new();
-    private readonly SensorSim rndVal = new();
+    private readonly WeatherService _weatherService = new();
+    private readonly SensorSim _rndVal = new();
 
     private bool _isRunning = true;
     private bool _simulate = false;
     private int _taskDelay = 2000;
 
-    private double TTT = 0;
-    private double dd = 0;
-    private double ff = 0;
-    private double ff_gust = 0;
-    private double NA = 0;
-    private double pr = 0;
-    private double NN = 0;
-    private double FOG = 0;
-    private double LOW = 0;
-    private double MEDIUM = 0;
-    private  double HIGH = 0;
-    private double TD = 0;
-    DateTime currentDateTime;
+    private struct weatherData
+    {
+        public string TTT { get; set; }
+        public string dd { get; set; }
+        public string ff { get; set; }
+        public string ff_gust { get; set; }
+        public string NA { get; set; }
+        public string pr { get; set; }
+        public string NN { get; set; }
+        public string FOG { get; set; }
+        public string LOW { get; set; }
+        public string MEDIUM { get; set; }
+        public string HIGH { get; set; }
+        public string TD { get; set; }
+        public DateTime currentDateTime { get; set; }
+    }
+    weatherData value = new weatherData();
 
     public LiveWheaterData()
     {
@@ -39,6 +43,7 @@ public partial class LiveWheaterData : ContentPage
         InitializeComponent();
         getWeatherData();
     }
+
     private async void getWeatherData()
     {
         while (_isRunning)
@@ -54,65 +59,58 @@ public partial class LiveWheaterData : ContentPage
             await Task.Delay(_taskDelay);
         }
     }
+    private void UpdateGUI()
+    {
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            TTT_Label.Text = $"TTT: {value.TTT:F2}";
+            dd_Label.Text = $"dd: {value.dd:F2}";
+            ff_Label.Text = $"ff: {value.ff:F2}";
+            ff_gust_Label.Text = $"ff_gust: {value.ff_gust:F2}";
+            NA_Label.Text = $"NA: {value.NA:F2}";
+            pr_Label.Text = $"pr: {value.pr:F2}";
+            NN_Label.Text = $"NN: {value.NN:F2}";
+            FOG_Label.Text = $"FOG: {value.FOG:F2}";
+            LOW_Label.Text = $"LOW: {value.LOW:F2}";
+            MEDIUM_Label.Text = $"MEDIUM: {value.MEDIUM:F2}";
+            HIGH_Label.Text = $"HIGH: {value.HIGH:F2}";
+            TD_Label.Text = $"TD: {value.TD:F2}";
+            DT_Label.Text = "Last update: " + value.currentDateTime;
+        });
+    }
 
     private void StartSimulatingSensorData()
     {
+        value.TTT = _rndVal.GetRandomDouble(0, 20).ToString();
+        value.dd = _rndVal.GetRandomDouble(0, 10).ToString();
+        value.ff = _rndVal.GetRandomDouble(0, 30).ToString();
+        value.ff_gust = _rndVal.GetRandomDouble(0, 30).ToString();
+        value.NA = _rndVal.GetRandomDouble(0, 30).ToString();
+        value.pr = _rndVal.GetRandomDouble(0, 30).ToString();
+        value.NN = _rndVal.GetRandomDouble(0, 30).ToString();
+        value.FOG = _rndVal.GetRandomDouble(0, 30).ToString();
+        value.LOW = _rndVal.GetRandomDouble(0, 30).ToString();
+        value.MEDIUM = _rndVal.GetRandomDouble(0, 30).ToString();
+        value.HIGH = _rndVal.GetRandomDouble(0, 30).ToString();
+        value.TD = _rndVal.GetRandomDouble(0, 30).ToString();
+        value.currentDateTime = DateTime.Now;
 
-        TTT = rndVal.GetRandomDouble(0, 20);
-        dd = rndVal.GetRandomDouble(0, 10);
-        ff = rndVal.GetRandomDouble(0, 30);
-        ff_gust = rndVal.GetRandomDouble(0, 30);
-        NA = rndVal.GetRandomDouble(0, 30);
-        pr = rndVal.GetRandomDouble(0, 30);
-        NN = rndVal.GetRandomDouble(0, 30);
-        FOG = rndVal.GetRandomDouble(0, 30);
-        LOW = rndVal.GetRandomDouble(0, 30);
-        MEDIUM = rndVal.GetRandomDouble(0, 30);
-        HIGH = rndVal.GetRandomDouble(0, 30);
-        TD = rndVal.GetRandomDouble(0, 30);
-        currentDateTime = DateTime.Now;
-
-        MainThread.BeginInvokeOnMainThread(() =>
-        {
-            TTT_Label.Text = $"TTT: {TTT:F2}";
-            dd_Label.Text = $"dd: {dd:F2}";
-            ff_Label.Text = $"ff: {ff:F2}";
-            ff_gust_Label.Text = $"ff_gust: {ff_gust:F2}";
-            NA_Label.Text = $"NA: {NA:F2}";
-            pr_Label.Text = $"pr: {pr:F2}";
-            NN_Label.Text = $"NN: {NN:F2}";
-            FOG_Label.Text = $"FOG: {FOG:F2}";
-            LOW_Label.Text = $"LOW: {LOW:F2}";
-            MEDIUM_Label.Text = $"MEDIUM: {MEDIUM:F2}";
-            HIGH_Label.Text = $"HIGH: {HIGH:F2}";
-            TD_Label.Text = $"TD: {TD:F2}";
-            API_TEXT.Text = " Last update: " + currentDateTime;
-        });
+        UpdateGUI();
     }
 
     private async void ReadWeatherDataAPI()
     {
-        string weatherData = await weatherService.GetWeatherAsync(59.7076562, 10.1559495, 90, 0);
+        string weatherData = await _weatherService.GetWeatherAsync(59.7076562, 10.1559495, 90, 0);
 
-        // Split by comma and then process each part
-        var dataParts = weatherData.Split(',');
-        string temperature = dataParts[0].Split(':')[1].Trim().Replace("°C", "");
-        string windSpeed = dataParts[1].Split(':')[1].Trim().Replace("m/s", "");
-        string humidity = dataParts[2].Split(':')[1].Trim().Replace("%", "");
-        string pressure = dataParts[3].Split(':')[1].Trim().Replace("hPa", "");
-        string cloudiness = dataParts[4].Split(':')[1].Trim().Split(' ')[0].Replace("%", "");
-        currentDateTime = DateTime.Now;
-        MainThread.BeginInvokeOnMainThread(() =>
-        {
-            //API_TEXT.Text = temperature + " °C " + windSpeed + " m/s " + humidity + " % " + pressure + " hPa " + cloudiness + " % " + currentDateTime;
-            API_TEXT.Text = " Last update: " + currentDateTime;
+        var dataParts = weatherData.Split(','); // Split by comma and then process each part
+        value.TTT = dataParts[0].Split(':')[1].Trim().Replace("°C", "");
+        value.ff = dataParts[1].Split(':')[1].Trim().Replace("m/s", "");
+        value.NA = dataParts[2].Split(':')[1].Trim().Replace("%", "");
+        value.pr = dataParts[3].Split(':')[1].Trim().Replace("hPa", "");
+        value.NN = dataParts[4].Split(':')[1].Trim().Split(' ')[0].Replace("%", "");
+        value.currentDateTime = DateTime.Now;
 
-            TTT_Label.Text = $"TTT: {temperature:F2}";
-            ff_Label.Text = $"ff: {windSpeed:F2}";
-            NA_Label.Text = $"NA: {humidity:F2}";
-            pr_Label.Text = $"pr: {pressure:F2}";
-            NN_Label.Text = $"NN: {cloudiness:F2}";
-        });
+        UpdateGUI();
     }
 
     protected override void OnDisappearing()

@@ -41,7 +41,8 @@ public partial class LiveSensorData : ContentPage
             }
         }
     }
-    private void updateGUI()
+
+    private void UpdateGUI()
     {
         MainThread.BeginInvokeOnMainThread(() =>
         {
@@ -71,7 +72,7 @@ public partial class LiveSensorData : ContentPage
         sensor.RHT04 = rndVal.GetRandomDouble(0, 30);
         sensor.KWH01 = rndVal.GetRandomDouble(0, 30);
 
-        updateGUI();
+        UpdateGUI();
     }
 
     protected override void OnDisappearing()

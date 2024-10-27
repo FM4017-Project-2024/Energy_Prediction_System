@@ -92,7 +92,7 @@
         </Border>
 
         <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
-            <Label x:Name="API_TEXT" FontSize="26" Text="API_TEXT: "/>
+            <Label x:Name="DT_Label" FontSize="26" Text="Date time: "/>
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10,10,10,10" />
             </Border.StrokeShape>
