@@ -63,18 +63,18 @@ public partial class LiveWheaterData : ContentPage
     {
         MainThread.BeginInvokeOnMainThread(() =>
         {
-            TTT_Label.Text = $"TTT: {value.TTT:F2}";
-            dd_Label.Text = $"dd: {value.dd:F2}";
-            ff_Label.Text = $"ff: {value.ff:F2}";
-            ff_gust_Label.Text = $"ff_gust: {value.ff_gust:F2}";
-            NA_Label.Text = $"NA: {value.NA:F2}";
-            pr_Label.Text = $"pr: {value.pr:F2}";
-            NN_Label.Text = $"NN: {value.NN:F2}";
-            FOG_Label.Text = $"FOG: {value.FOG:F2}";
-            LOW_Label.Text = $"LOW: {value.LOW:F2}";
-            MEDIUM_Label.Text = $"MEDIUM: {value.MEDIUM:F2}";
-            HIGH_Label.Text = $"HIGH: {value.HIGH:F2}";
-            TD_Label.Text = $"TD: {value.TD:F2}";
+            TTT_Label.Text = $"Temperature: {value.TTT:F2}";
+            dd_Label.Text = $"Wind direction: {value.dd:F2}";
+            ff_Label.Text = $"Wind speed: {value.ff:F2}";
+            ff_gust_Label.Text = $"Wind gust: {value.ff_gust:F2}";
+            NA_Label.Text = $"Humidity: {value.NA:F2}";
+            pr_Label.Text = $"Pressure: {value.pr:F2}";
+            NN_Label.Text = $"Cloudiness: {value.NN:F2}";
+            FOG_Label.Text = $"Fog: {value.FOG:F2}";
+            LOW_Label.Text = $"Low clouds: {value.LOW:F2}";
+            MEDIUM_Label.Text = $"Medium clouds: {value.MEDIUM:F2}";
+            HIGH_Label.Text = $"High clouds: {value.HIGH:F2}";
+            TD_Label.Text = $"Dewpoint temperature: {value.TD:F2}";
             DT_Label.Text = "Last update: " + value.currentDateTime;
         });
     }
@@ -103,12 +103,21 @@ public partial class LiveWheaterData : ContentPage
         string weatherData = await _weatherService.GetWeatherAsync(59.7076562, 10.1559495, 90, 0);
 
         var dataParts = weatherData.Split(','); // Split by comma and then process each part
-        value.TTT = dataParts[0].Split(':')[1].Trim().Replace("°C", "");
-        value.ff = dataParts[1].Split(':')[1].Trim().Replace("m/s", "");
-        value.NA = dataParts[2].Split(':')[1].Trim().Replace("%", "");
-        value.pr = dataParts[3].Split(':')[1].Trim().Replace("hPa", "");
-        value.NN = dataParts[4].Split(':')[1].Trim().Split(' ')[0].Replace("%", "");
+        //value.NN = dataParts[4].Split(':')[1].Trim().Split(' ')[0].Replace("%", "");
+
         value.currentDateTime = DateTime.Now;
+        value.TTT = dataParts[0].Split(':')[1].Trim().Replace("°C", "");
+        value.dd = dataParts[1].Split(':')[1].Trim().Replace("°", "");
+        value.ff = dataParts[2].Split(':')[1].Trim().Replace("m/s", "");
+        value.ff_gust = dataParts[3].Split(':')[1].Trim().Replace("m/s", "");
+        value.NA = dataParts[4].Split(':')[1].Trim().Replace("%", "");
+        value.pr = dataParts[5].Split(':')[1].Trim().Replace("hPa", "");
+        value.NN = dataParts[6].Split(':')[1].Trim().Replace("%", "");
+        value.FOG = dataParts[7].Split(':')[1].Trim().Replace("%", "");
+        value.LOW = dataParts[8].Split(':')[1].Trim().Replace("%", "");
+        value.MEDIUM = dataParts[9].Split(':')[1].Trim().Replace("%", "");
+        value.HIGH = dataParts[10].Split(':')[1].Trim().Replace("%", "");
+        value.TD = dataParts[11].Split(':')[1].Trim().Replace("°C", "");
 
         UpdateGUI();
     }

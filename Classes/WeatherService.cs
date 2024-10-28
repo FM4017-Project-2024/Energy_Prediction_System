@@ -58,13 +58,22 @@ namespace Energy_Prediction_System.Classes
 
                 // Extract detailed weather data (if available)
                 var temperature = selectedTime.Descendants("temperature").FirstOrDefault()?.Attribute("value")?.Value ?? "N/A";
+                var windDirection = selectedTime.Descendants("windDirection").FirstOrDefault()?.Attribute("deg")?.Value ?? "N/A";
                 var windSpeed = selectedTime.Descendants("windSpeed").FirstOrDefault()?.Attribute("mps")?.Value ?? "N/A";
+                var windGust = selectedTime.Descendants("windGust").FirstOrDefault()?.Attribute("mps")?.Value ?? "N/A";
                 var humidity = selectedTime.Descendants("humidity").FirstOrDefault()?.Attribute("value")?.Value ?? "N/A";
                 var pressure = selectedTime.Descendants("pressure").FirstOrDefault()?.Attribute("value")?.Value ?? "N/A";
                 var cloudiness = selectedTime.Descendants("cloudiness").FirstOrDefault()?.Attribute("percent")?.Value ?? "N/A";
+                var fog = selectedTime.Descendants("fog").FirstOrDefault()?.Attribute("percent")?.Value ?? "N/A";
+                var lowClouds = selectedTime.Descendants("lowClouds").FirstOrDefault()?.Attribute("percent")?.Value ?? "N/A";
+                var mediumClouds = selectedTime.Descendants("mediumClouds").FirstOrDefault()?.Attribute("percent")?.Value ?? "N/A";
+                var highClouds = selectedTime.Descendants("highClouds").FirstOrDefault()?.Attribute("percent")?.Value ?? "N/A";
+                var dewpointTemperature = selectedTime.Descendants("dewpointTemperature").FirstOrDefault()?.Attribute("value")?.Value ?? "N/A";
 
 
-                return $"Temperature: {temperature}°C, Wind Speed: {windSpeed} m/s, Humidity: {humidity}%, Pressure: {pressure} hPa, Cloudiness: {cloudiness}% (Index {index})";
+
+                return $"Temperature: {temperature}°C, Wind Direction: {windDirection}°, Wind Speed: {windSpeed} m/s, Wind Gust: {windGust} m/s, Humidity: {humidity}%, Pressure: {pressure} hPa, Cloudiness: {cloudiness}%, Fog: {fog}%, Low Clouds: {lowClouds}%, Medium Clouds: {mediumClouds}%, High Clouds: {highClouds}%, Dewpoint Temperature: {dewpointTemperature}°C";
+
             }
             catch (HttpRequestException httpEx)
             {
