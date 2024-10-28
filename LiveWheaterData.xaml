@@ -7,14 +7,22 @@
         <Label Text="Wheater API data" VerticalOptions="Center"  HorizontalOptions="Center" FontSize="20" FontAttributes="Bold" />
 
         <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
-            <Label x:Name="TTT_Label" FontSize="26" Text="TTT: "/>
+            <Label x:Name="TTT_Label" FontSize="26" Text="TTT: ">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnLabelTapped_TTT" />
+                </Label.GestureRecognizers>
+            </Label>
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10,10,10,10" />
             </Border.StrokeShape>
         </Border>
 
         <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
-            <Label x:Name="dd_Label" FontSize="26" Text="dd: "/>
+            <Label x:Name="dd_Label" FontSize="26" Text="dd: ">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnLabelTapped_dd" />
+                </Label.GestureRecognizers>
+            </Label>
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10,10,10,10" />
             </Border.StrokeShape>
@@ -22,35 +30,55 @@
 
 
         <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
-            <Label x:Name="ff_Label" FontSize="26" Text="ff: "/>
+            <Label x:Name="ff_Label" FontSize="26" Text="ff: ">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnLabelTapped_ff" />
+                </Label.GestureRecognizers>
+            </Label>
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10,10,10,10" />
             </Border.StrokeShape>
         </Border>
 
         <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
-            <Label x:Name="ff_gust_Label" FontSize="26" Text="ff_gust: "/>
+            <Label x:Name="ff_gust_Label" FontSize="26" Text="ff_gust: ">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnLabelTapped_ff_gust" />
+                </Label.GestureRecognizers>
+            </Label>
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10,10,10,10" />
             </Border.StrokeShape>
         </Border>
 
         <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
-            <Label x:Name="NA_Label" FontSize="26" Text="NA: "/>
+            <Label x:Name="NA_Label" FontSize="26" Text="NA: ">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnLabelTapped_NA" />
+                </Label.GestureRecognizers>
+            </Label>
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10,10,10,10" />
             </Border.StrokeShape>
         </Border>
 
         <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
-            <Label x:Name="pr_Label" FontSize="26" Text="pr: "/>
+            <Label x:Name="pr_Label" FontSize="26" Text="pr: ">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnLabelTapped_pr" />
+                </Label.GestureRecognizers>
+            </Label>
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10,10,10,10" />
             </Border.StrokeShape>
         </Border>
 
         <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
-            <Label x:Name="NN_Label" FontSize="26" Text="NN: "/>
+            <Label x:Name="NN_Label" FontSize="26" Text="NN: ">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnLabelTapped_NN" />
+                </Label.GestureRecognizers>
+            </Label>
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10,10,10,10" />
             </Border.StrokeShape>
@@ -64,28 +92,44 @@
         </Border>
 
         <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
-            <Label x:Name="LOW_Label" FontSize="26" Text="LOW: "/>
+            <Label x:Name="LOW_Label" FontSize="26" Text="LOW: ">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnLabelTapped_LOW" />
+                </Label.GestureRecognizers>
+            </Label>
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10,10,10,10" />
             </Border.StrokeShape>
         </Border>
         
         <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
-            <Label x:Name="MEDIUM_Label" FontSize="26" Text="MEDIUM: "/>
+            <Label x:Name="MEDIUM_Label" FontSize="26" Text="MEDIUM: ">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnLabelTapped_MEDIUM" />
+                </Label.GestureRecognizers>
+            </Label>
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10,10,10,10" />
             </Border.StrokeShape>
         </Border>
 
         <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
-            <Label x:Name="HIGH_Label" FontSize="26" Text="HIGH: "/>
+            <Label x:Name="HIGH_Label" FontSize="26" Text="HIGH: ">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnLabelTapped_HIGH" />
+                </Label.GestureRecognizers>
+            </Label>
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10,10,10,10" />
             </Border.StrokeShape>
         </Border>
 
         <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
-            <Label x:Name="TD_Label" FontSize="26" Text="TD: "/>
+            <Label x:Name="TD_Label" FontSize="26" Text="TD: ">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnLabelTapped_TD" />
+                </Label.GestureRecognizers>
+            </Label>
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10,10,10,10" />
             </Border.StrokeShape>

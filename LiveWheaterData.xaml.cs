@@ -100,11 +100,9 @@ public partial class LiveWheaterData : ContentPage
 
     private async void ReadWeatherDataAPI()
     {
-        string weatherData = await _weatherService.GetWeatherAsync(59.7076562, 10.1559495, 90, 0);
+        string weatherData = await _weatherService.GetWeatherAsync(59.7076562, 10.1559495, 194, 0);
 
         var dataParts = weatherData.Split(','); // Split by comma and then process each part
-        //value.NN = dataParts[4].Split(':')[1].Trim().Split(' ')[0].Replace("%", "");
-
         value.currentDateTime = DateTime.Now;
         value.TTT = dataParts[0].Split(':')[1].Trim().Replace("°C", "");
         value.dd = dataParts[1].Split(':')[1].Trim().Replace("°", "");
@@ -127,4 +125,23 @@ public partial class LiveWheaterData : ContentPage
         base.OnDisappearing();
         _isRunning = false;
     }
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        _isRunning = true;
+        getWeatherData();
+    }
+
+    private async void OnLabelTapped_TTT(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("TTT"));
+    private async void OnLabelTapped_dd(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("dd"));
+    private async void OnLabelTapped_ff(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("ff"));
+    private async void OnLabelTapped_ff_gust(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("ff_gust"));
+    private async void OnLabelTapped_NA(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("NA"));
+    private async void OnLabelTapped_pr(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("NN"));
+    private async void OnLabelTapped_NN(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("TD"));
+    private async void OnLabelTapped_FOG(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("FOG"));
+    private async void OnLabelTapped_LOW(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("LOW"));
+    private async void OnLabelTapped_MEDIUM(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("MEDIUM"));
+    private async void OnLabelTapped_HIGH(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("HIGH"));
+    private async void OnLabelTapped_TD(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("TD"));
 }
