@@ -16,11 +16,9 @@ public partial class LiveWheaterData : ContentPage
         public string TTT { get; set; }
         public string dd { get; set; }
         public string ff { get; set; }
-        public string ff_gust { get; set; }
         public string NA { get; set; }
         public string pr { get; set; }
         public string NN { get; set; }
-        public string FOG { get; set; }
         public string LOW { get; set; }
         public string MEDIUM { get; set; }
         public string HIGH { get; set; }
@@ -66,11 +64,9 @@ public partial class LiveWheaterData : ContentPage
             TTT_Label.Text = $"Temperature: {value.TTT:F2}";
             dd_Label.Text = $"Wind direction: {value.dd:F2}";
             ff_Label.Text = $"Wind speed: {value.ff:F2}";
-            ff_gust_Label.Text = $"Wind gust: {value.ff_gust:F2}";
             NA_Label.Text = $"Humidity: {value.NA:F2}";
             pr_Label.Text = $"Pressure: {value.pr:F2}";
             NN_Label.Text = $"Cloudiness: {value.NN:F2}";
-            FOG_Label.Text = $"Fog: {value.FOG:F2}";
             LOW_Label.Text = $"Low clouds: {value.LOW:F2}";
             MEDIUM_Label.Text = $"Medium clouds: {value.MEDIUM:F2}";
             HIGH_Label.Text = $"High clouds: {value.HIGH:F2}";
@@ -84,11 +80,9 @@ public partial class LiveWheaterData : ContentPage
         value.TTT = _rndVal.GetRandomDouble(0, 20).ToString();
         value.dd = _rndVal.GetRandomDouble(0, 10).ToString();
         value.ff = _rndVal.GetRandomDouble(0, 30).ToString();
-        value.ff_gust = _rndVal.GetRandomDouble(0, 30).ToString();
         value.NA = _rndVal.GetRandomDouble(0, 30).ToString();
         value.pr = _rndVal.GetRandomDouble(0, 30).ToString();
         value.NN = _rndVal.GetRandomDouble(0, 30).ToString();
-        value.FOG = _rndVal.GetRandomDouble(0, 30).ToString();
         value.LOW = _rndVal.GetRandomDouble(0, 30).ToString();
         value.MEDIUM = _rndVal.GetRandomDouble(0, 30).ToString();
         value.HIGH = _rndVal.GetRandomDouble(0, 30).ToString();
@@ -100,22 +94,21 @@ public partial class LiveWheaterData : ContentPage
 
     private async void ReadWeatherDataAPI()
     {
-        string weatherData = await _weatherService.GetWeatherAsync(59.7076562, 10.1559495, 194, 0);
+        string test = await _weatherService.AddWeatherDataToDatabase(59.7076562, 10.1559495, 90); //Adding data automatically to database on opening LiveWeatherData. Will be removed. -Kim
+        WeatherForecastItem weatherData = await _weatherService.GetWeatherDataAsync(59.7076562, 10.1559495, 90);
 
-        var dataParts = weatherData.Split(','); // Split by comma and then process each part
         value.currentDateTime = DateTime.Now;
-        value.TTT = dataParts[0].Split(':')[1].Trim().Replace("°C", "");
-        value.dd = dataParts[1].Split(':')[1].Trim().Replace("°", "");
-        value.ff = dataParts[2].Split(':')[1].Trim().Replace("m/s", "");
-        value.ff_gust = dataParts[3].Split(':')[1].Trim().Replace("m/s", "");
-        value.NA = dataParts[4].Split(':')[1].Trim().Replace("%", "");
-        value.pr = dataParts[5].Split(':')[1].Trim().Replace("hPa", "");
-        value.NN = dataParts[6].Split(':')[1].Trim().Replace("%", "");
-        value.FOG = dataParts[7].Split(':')[1].Trim().Replace("%", "");
-        value.LOW = dataParts[8].Split(':')[1].Trim().Replace("%", "");
-        value.MEDIUM = dataParts[9].Split(':')[1].Trim().Replace("%", "");
-        value.HIGH = dataParts[10].Split(':')[1].Trim().Replace("%", "");
-        value.TD = dataParts[11].Split(':')[1].Trim().Replace("°C", "");
+        value.TTT = weatherData.Temperature.ToString();
+        value.dd = weatherData.WindDirection.ToString();
+        value.ff = weatherData.WindSpeed.ToString();
+        value.NA = weatherData.Humidity.ToString();
+        value.pr = weatherData.Pressure.ToString();
+        value.NN = weatherData.Cloudiness.ToString();
+        value.LOW = weatherData.LowClouds.ToString();
+        value.MEDIUM = weatherData.MediumClouds.ToString();
+        value.HIGH = weatherData.HighClouds.ToString();
+        value.TD = weatherData.DewpointTemperature.ToString();
+
 
         UpdateGUI();
     }

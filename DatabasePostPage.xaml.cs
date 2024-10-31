@@ -122,8 +122,8 @@ namespace Energy_Prediction_System.Views
 
             var weatherForecastItem = new WeatherForecastItem
             {
-                DateTime = DateTime.ParseExact(DateTimeEntry.Text, "yyyy-MM-dd HH:mm", null),
-                ForecastTime = DateTime.Parse(ForecastTimeEntry.Text),
+                DateTime = DateTime.ParseExact(DateTimeEntry.Text, "yyyy-MM-dd HH:mm", null).ToString(), //added .ToString to avoid error. Migth not be correct -Kim
+                ForecastTime = DateTime.Parse(ForecastTimeEntry.Text).ToString(),
                 Temperature = float.Parse(TemperatureEntry.Text),
                 WindDirection = float.Parse(WindDirectionEntry.Text),
                 WindSpeed = float.Parse(WindSpeedEntry.Text),

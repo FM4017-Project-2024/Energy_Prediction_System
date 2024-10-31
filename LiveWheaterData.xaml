@@ -75,7 +75,7 @@
 
         <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
             <Label x:Name="NN_Label" FontSize="26" Text="NN: ">
-                <Label.GestureRecognizers>
+            <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnLabelTapped_NN" />
                 </Label.GestureRecognizers>
             </Label>
