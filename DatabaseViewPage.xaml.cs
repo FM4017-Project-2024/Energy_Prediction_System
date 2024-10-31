@@ -10,6 +10,7 @@ namespace Energy_Prediction_System.Views
     public partial class DatabaseViewPage : ContentPage
     {
         private readonly DatabaseWebAPIServices _databaseWebAPIServices;
+        private const string BaseApiUrl = "https://localhost:7107/api/";
 
         public DatabaseViewPage()
         {
@@ -17,10 +18,10 @@ namespace Energy_Prediction_System.Views
             _databaseWebAPIServices = new DatabaseWebAPIServices();
         }
 
-        // Knappehendelser for å hente alle temperaturdata
+        // Methods to retrieve temperature data
         private async void OnGetAllBuildingTempsClicked(object sender, EventArgs e)
         {
-            string apiUrl = "https://localhost:7107/api/BuildingTemperatureItems"; // Eksempel URL for API
+            string apiUrl = $"{BaseApiUrl}BuildingTemperatureItems";
             try
             {
                 var temperatureItems = await _databaseWebAPIServices.GetBuildingTempsAsync(apiUrl);
@@ -28,14 +29,13 @@ namespace Energy_Prediction_System.Views
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", $"Failed to fetch temperature data: {ex.Message}", "OK");
+                await HandleError(ex, "Failed to fetch temperature data");
             }
         }
 
-        // Knappehendelser for å hente den siste temperaturmålingen
         private async void OnGetLatestBuildingTempClicked(object sender, EventArgs e)
         {
-            string apiUrl = "https://localhost:7107/api/BuildingTemperatureItems/latest"; // Eksempel URL for API
+            string apiUrl = $"{BaseApiUrl}BuildingTemperatureItems/latest";
             try
             {
                 var latestTemp = await _databaseWebAPIServices.GetLatestBuildingTempAsync(apiUrl);
@@ -43,14 +43,14 @@ namespace Energy_Prediction_System.Views
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", $"Failed to fetch latest temperature: {ex.Message}", "OK");
+                await HandleError(ex, "Failed to fetch latest temperature");
             }
         }
 
-        // Knappehendelser for å hente all fuktighetsdata
+        // Methods to retrieve humidity data
         private async void OnGetAllBuildingRelHumidityClicked(object sender, EventArgs e)
         {
-            string apiUrl = "https://localhost:7107/api/BuildingRelativeHumidityItems"; // Eksempel URL for API
+            string apiUrl = $"{BaseApiUrl}BuildingRelativeHumidityItems";
             try
             {
                 var humidityItems = await _databaseWebAPIServices.GetBuildingRelHumidityAsync(apiUrl);
@@ -58,14 +58,13 @@ namespace Energy_Prediction_System.Views
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", $"Failed to fetch humidity data: {ex.Message}", "OK");
+                await HandleError(ex, "Failed to fetch humidity data");
             }
         }
 
-        // Knappehendelser for å hente den siste fuktighetsmålingen
         private async void OnGetLatestBuildingRelHumidityClicked(object sender, EventArgs e)
         {
-            string apiUrl = "https://localhost:7107/api/BuildingRelativeHumidityItems/latest"; // Eksempel URL for API
+            string apiUrl = $"{BaseApiUrl}BuildingRelativeHumidityItems/latest";
             try
             {
                 var latestHumidity = await _databaseWebAPIServices.GetLatestBuildingRelHumidityAsync(apiUrl);
@@ -73,42 +72,150 @@ namespace Energy_Prediction_System.Views
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", $"Failed to fetch latest humidity: {ex.Message}", "OK");
+                await HandleError(ex, "Failed to fetch latest humidity");
             }
         }
 
-        // Håndter knappetrykk for å hente alle energimålerdata
+        // Methods to retrieve energy meter data
         private async void OnGetAllEnergyMeterDataClicked(object sender, EventArgs e)
         {
-            string apiUrl = "https://localhost:7107/api/BuildingEnergyMeterItems"; // Endre til ditt API-endepunkt
+            string apiUrl = $"{BaseApiUrl}BuildingEnergyMeterItems";
             try
             {
-                // Hent alle data
                 var energyMeterItems = await _databaseWebAPIServices.GetBuildingEnergyMeterAsync(apiUrl);
-                // Sett dataene til å vises i ListView
                 EnergyMeterListView.ItemsSource = energyMeterItems;
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", $"Failed to fetch energy meter data: {ex.Message}", "OK");
+                await HandleError(ex, "Failed to fetch energy meter data");
             }
         }
 
-        // Håndter knappetrykk for å hente den siste energimålingen
         private async void OnGetLatestEnergyMeterDataClicked(object sender, EventArgs e)
         {
-            string apiUrl = "https://localhost:7107/api/BuildingEnergyMeterItems/latest"; // Endre til ditt API-endepunkt
+            string apiUrl = $"{BaseApiUrl}BuildingEnergyMeterItems/latest";
             try
             {
-                // Hent siste energimåling
                 var latestEnergyMeter = await _databaseWebAPIServices.GetLatestBuildingEnergyMeterAsync(apiUrl);
-                // Vis den siste målingen som en liste med ett element
                 EnergyMeterListView.ItemsSource = new List<BuildingEnergyMeterItem> { latestEnergyMeter };
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", $"Failed to fetch latest energy meter data: {ex.Message}", "OK");
+                await HandleError(ex, "Failed to fetch latest energy meter data");
             }
+        }
+
+        // Methods to retrieve energy prediction data
+        private async void OnGetAllEnergyPredictionsClicked(object sender, EventArgs e)
+        {
+            string apiUrl = $"{BaseApiUrl}EnergyPredictionItems";
+            try
+            {
+                var energyPredictionItems = await _databaseWebAPIServices.GetEnergyPredictionsAsync(apiUrl);
+                EnergyPredictionListView.ItemsSource = energyPredictionItems;
+            }
+            catch (Exception ex)
+            {
+                await HandleError(ex, "Failed to fetch energy predictions");
+            }
+        }
+
+        private async void OnGetLatestEnergyPredictionClicked(object sender, EventArgs e)
+        {
+            string apiUrl = $"{BaseApiUrl}EnergyPredictionItems/latest";
+            try
+            {
+                var latestPrediction = await _databaseWebAPIServices.GetLatestEnergyPredictionAsync(apiUrl);
+                EnergyPredictionListView.ItemsSource = new List<EnergyPredictionItem> { latestPrediction };
+            }
+            catch (Exception ex)
+            {
+                await HandleError(ex, "Failed to fetch latest energy prediction");
+            }
+        }
+
+        // Methods to retrieve weather forecast data
+        private async void OnGetAllWeatherForecastsClicked(object sender, EventArgs e)
+        {
+            string apiUrl = $"{BaseApiUrl}WeatherForecastItems";
+            try
+            {
+                var weatherForecastItems = await _databaseWebAPIServices.GetWeatherForecastsAsync(apiUrl);
+                WeatherForecastListView.ItemsSource = weatherForecastItems;
+            }
+            catch (Exception ex)
+            {
+                await HandleError(ex, "Failed to fetch weather forecasts");
+            }
+        }
+
+        private async void OnGetLatestWeatherForecastClicked(object sender, EventArgs e)
+        {
+            string apiUrl = $"{BaseApiUrl}WeatherForecastItems/latest";
+            try
+            {
+                var latestForecast = await _databaseWebAPIServices.GetLatestWeatherForecastsAsync(apiUrl);
+                WeatherForecastListView.ItemsSource = latestForecast;
+            }
+            catch (Exception ex)
+            {
+                await HandleError(ex, "Failed to fetch latest weather forecast");
+            }
+        }
+
+        // Methods to retrieve weather forecast units of measurement (UoM)
+        private async void OnGetAllWeatherForecastUoMsClicked(object sender, EventArgs e)
+        {
+            string apiUrl = $"{BaseApiUrl}WeatherForecastUoMItems";
+            try
+            {
+                var uomItems = await _databaseWebAPIServices.GetWeatherForecastUoMsAsync(apiUrl);
+                WeatherForecastUoMListView.ItemsSource = uomItems;
+            }
+            catch (Exception ex)
+            {
+                await HandleError(ex, "Failed to fetch weather forecast UoM data");
+            }
+        }
+
+        // Retrieve UoM for a specific attribute
+        private async void OnGetUoMForAttributeClicked(object sender, EventArgs e)
+        {
+            string apiUrl = $"{BaseApiUrl}WeatherForecastUoMItems";
+
+            try
+            {
+                var attribute = AttributeEntry.Text;
+                var uom = await _databaseWebAPIServices.GetUoMForAttributeAsync(apiUrl, attribute);
+
+                if (!string.IsNullOrEmpty(uom))
+                {
+                    // Create a WeatherForecastUoMItem with the attribute and UoM
+                    var uomItem = new WeatherForecastUoMItem
+                    {
+                        Attribute = attribute,
+                        UoM = uom
+                    };
+
+                    // Set the WeatherForecastUoMListView to display the single item
+                    WeatherForecastUoMListView.ItemsSource = new List<WeatherForecastUoMItem> { uomItem };
+                }
+                else
+                {
+                    // Clear the ListView if no UoM is found
+                    WeatherForecastUoMListView.ItemsSource = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", "Failed to retrieve UoM: " + ex.Message, "OK");
+            }
+        }
+
+        // Error handling method
+        private async Task HandleError(Exception ex, string message)
+        {
+            await DisplayAlert("Error", $"{message}: {ex.Message}", "OK");
         }
     }
 }

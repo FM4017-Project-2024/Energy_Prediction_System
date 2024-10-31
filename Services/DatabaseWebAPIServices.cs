@@ -17,7 +17,7 @@ namespace Energy_Prediction_System.Services
             _httpClient = new HttpClient();
         }
 
-        // Generisk metode for å håndtere API-forespørsler
+        // Generic method to handle API requests
         private async Task<T> GetAsync<T>(string url)
         {
             var response = await _httpClient.GetAsync(url);
@@ -34,38 +34,36 @@ namespace Energy_Prediction_System.Services
             }
         }
 
-        // Spesifikke metoder som kaller den generiske
-        public Task<List<BuildingTemperatureItem>> GetBuildingTempsAsync(string url)
+        // Specific methods calling the generic one for classes
+        public Task<List<BuildingTemperatureItem>> GetBuildingTempsAsync(string url) => GetAsync<List<BuildingTemperatureItem>>(url);
+        public Task<BuildingTemperatureItem> GetLatestBuildingTempAsync(string url) => GetAsync<BuildingTemperatureItem>(url);
+        public Task<List<BuildingRelativeHumidityItem>> GetBuildingRelHumidityAsync(string url) => GetAsync<List<BuildingRelativeHumidityItem>>(url);
+        public Task<BuildingRelativeHumidityItem> GetLatestBuildingRelHumidityAsync(string url) => GetAsync<BuildingRelativeHumidityItem>(url);
+        public Task<List<BuildingEnergyMeterItem>> GetBuildingEnergyMeterAsync(string url) => GetAsync<List<BuildingEnergyMeterItem>>(url);
+        public Task<BuildingEnergyMeterItem> GetLatestBuildingEnergyMeterAsync(string url) => GetAsync<BuildingEnergyMeterItem>(url);
+        public Task<List<EnergyPredictionItem>> GetEnergyPredictionsAsync(string url) => GetAsync<List<EnergyPredictionItem>>(url);
+        public Task<EnergyPredictionItem> GetLatestEnergyPredictionAsync(string url) => GetAsync<EnergyPredictionItem>(url);
+        public Task<List<WeatherForecastItem>> GetWeatherForecastsAsync(string url) => GetAsync<List<WeatherForecastItem>>(url);
+        public Task<List<WeatherForecastItem>> GetLatestWeatherForecastsAsync(string url) => GetAsync<List<WeatherForecastItem>>(url);
+        public Task<List<WeatherForecastUoMItem>> GetWeatherForecastUoMsAsync(string url) => GetAsync<List<WeatherForecastUoMItem>>(url);
+
+        // Method to get UoM for a specific attribute
+        public async Task<string> GetUoMForAttributeAsync(string apiUrl, string attribute)
         {
-            return GetAsync<List<BuildingTemperatureItem>>(url);
+            var urlWithAttribute = $"{apiUrl}/uom/{Uri.EscapeDataString(attribute)}";
+            var response = await _httpClient.GetAsync(urlWithAttribute);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsStringAsync(); // Returns plain text, e.g., "deg C"
+            }
+            else
+            {
+                throw new HttpRequestException($"Unable to retrieve UoM: {response.StatusCode}");
+            }
         }
 
-        public Task<BuildingTemperatureItem> GetLatestBuildingTempAsync(string url)
-        {
-            return GetAsync<BuildingTemperatureItem>(url);
-        }
-
-        public Task<List<BuildingRelativeHumidityItem>> GetBuildingRelHumidityAsync(string url)
-        {
-            return GetAsync<List<BuildingRelativeHumidityItem>>(url);
-        }
-
-        public Task<BuildingRelativeHumidityItem> GetLatestBuildingRelHumidityAsync(string url)
-        {
-            return GetAsync<BuildingRelativeHumidityItem>(url);
-        }
-
-        public Task<List<BuildingEnergyMeterItem>> GetBuildingEnergyMeterAsync(string url)
-        {
-            return GetAsync<List<BuildingEnergyMeterItem>>(url);
-        }
-
-        public Task<BuildingEnergyMeterItem> GetLatestBuildingEnergyMeterAsync(string url)
-        {
-            return GetAsync<BuildingEnergyMeterItem>(url);
-        }
-
-        // Generisk metode for POST-forespørsler med en dynamisk URL
+        // Generic method for POST requests with a dynamic URL
         private async Task<string> PostAsync<T>(string apiUrl, T data)
         {
             var jsonData = JsonConvert.SerializeObject(data);
@@ -74,7 +72,7 @@ namespace Energy_Prediction_System.Services
 
             if (response.IsSuccessStatusCode)
             {
-                return await response.Content.ReadAsStringAsync(); // Returner API-bekreftelse
+                return await response.Content.ReadAsStringAsync(); // Return API confirmation
             }
             else
             {
@@ -82,20 +80,12 @@ namespace Energy_Prediction_System.Services
             }
         }
 
-        // POST-metoder mottar nå URL som parameter
-        public Task<string> PostBuildingTemperatureAsync(string apiUrl, BuildingTemperatureItem item)
-        {
-            return PostAsync(apiUrl, item);
-        }
-
-        public Task<string> PostBuildingRelativeHumidityAsync(string apiUrl, BuildingRelativeHumidityItem item)
-        {
-            return PostAsync(apiUrl, item);
-        }
-
-        public Task<string> PostBuildingEnergyMeterAsync(string apiUrl, BuildingEnergyMeterItem item)
-        {
-            return PostAsync(apiUrl, item);
-        }
+        // POST methods for classes
+        public Task<string> PostBuildingTemperatureAsync(string apiUrl, BuildingTemperatureItem item) => PostAsync(apiUrl, item);
+        public Task<string> PostBuildingRelativeHumidityAsync(string apiUrl, BuildingRelativeHumidityItem item) => PostAsync(apiUrl, item);
+        public Task<string> PostBuildingEnergyMeterAsync(string apiUrl, BuildingEnergyMeterItem item) => PostAsync(apiUrl, item);
+        public Task<string> PostEnergyPredictionAsync(string apiUrl, EnergyPredictionItem item) => PostAsync(apiUrl, item);
+        public Task<string> PostWeatherForecastAsync(string apiUrl, WeatherForecastItem item) => PostAsync(apiUrl, item);
+        public Task<string> PostWeatherForecastUoMAsync(string apiUrl, WeatherForecastUoMItem item) => PostAsync(apiUrl, item);
     }
 }

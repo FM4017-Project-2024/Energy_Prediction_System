@@ -8,6 +8,7 @@ namespace Energy_Prediction_System.Views
     public partial class DatabasePostPage : ContentPage
     {
         private readonly DatabaseWebAPIServices _databaseWebAPIServices;
+        private const string BaseApiUrl = "https://localhost:7107/api/";
 
         public DatabasePostPage()
         {
@@ -15,10 +16,10 @@ namespace Energy_Prediction_System.Views
             _databaseWebAPIServices = new DatabaseWebAPIServices();
         }
 
-        // Håndter POST for temperaturdata
+        // Handle POST for temperature data
         private async void OnPostTemperatureClicked(object sender, EventArgs e)
         {
-            string apiUrl = "https://localhost:7107/api/BuildingTemperatureItems"; // Oppdatert URL
+            string apiUrl = $"{BaseApiUrl}BuildingTemperatureItems";
 
             var temperatureItem = new BuildingTemperatureItem
             {
@@ -42,10 +43,10 @@ namespace Energy_Prediction_System.Views
             }
         }
 
-        // Håndter POST for fuktighetsdata
+        // Handle POST for humidity data
         private async void OnPostHumidityClicked(object sender, EventArgs e)
         {
-            string apiUrl = "https://localhost:7107/api/BuildingRelativeHumidityItems"; // Oppdatert URL
+            string apiUrl = $"{BaseApiUrl}BuildingRelativeHumidityItems";
 
             var humidityItem = new BuildingRelativeHumidityItem
             {
@@ -68,10 +69,10 @@ namespace Energy_Prediction_System.Views
             }
         }
 
-        // Håndter POST for energimålerdata
+        // Handle POST for energy meter data
         private async void OnPostEnergyMeterClicked(object sender, EventArgs e)
         {
-            string apiUrl = "https://localhost:7107/api/BuildingEnergyMeterItems"; // Oppdatert URL
+            string apiUrl = $"{BaseApiUrl}BuildingEnergyMeterItems";
 
             var energyMeterItem = new BuildingEnergyMeterItem
             {
@@ -83,6 +84,83 @@ namespace Energy_Prediction_System.Views
             try
             {
                 var response = await _databaseWebAPIServices.PostBuildingEnergyMeterAsync(apiUrl, energyMeterItem);
+                ApiResponseLabel.Text = "Success: " + response;
+            }
+            catch (Exception ex)
+            {
+                ApiResponseLabel.Text = "Error: " + ex.Message;
+            }
+        }
+
+        // Handle POST for energy predictions
+        private async void OnPostEnergyPredictionClicked(object sender, EventArgs e)
+        {
+            string apiUrl = $"{BaseApiUrl}EnergyPredictionItems";
+
+            var energyPredictionItem = new EnergyPredictionItem
+            {
+                EnergyPrediction = float.Parse(EnergyPredictionEntry.Text),
+                EnergyPredictionUoM = EnergyPredictionUoMEntry.Text,
+                DateTime = DateTime.Now
+            };
+
+            try
+            {
+                var response = await _databaseWebAPIServices.PostEnergyPredictionAsync(apiUrl, energyPredictionItem);
+                ApiResponseLabel.Text = "Success: " + response;
+            }
+            catch (Exception ex)
+            {
+                ApiResponseLabel.Text = "Error: " + ex.Message;
+            }
+        }
+
+        // Handle POST for weather forecast data
+        private async void OnPostWeatherForecastClicked(object sender, EventArgs e)
+        {
+            string apiUrl = $"{BaseApiUrl}WeatherForecastItems";
+
+            var weatherForecastItem = new WeatherForecastItem
+            {
+                DateTime = DateTime.ParseExact(DateTimeEntry.Text, "yyyy-MM-dd HH:mm", null),
+                ForecastTime = DateTime.Parse(ForecastTimeEntry.Text),
+                Temperature = float.Parse(TemperatureEntry.Text),
+                WindDirection = float.Parse(WindDirectionEntry.Text),
+                WindSpeed = float.Parse(WindSpeedEntry.Text),
+                Humidity = float.Parse(HumidityEntry.Text),
+                Pressure = float.Parse(PressureEntry.Text),
+                Cloudiness = float.Parse(CloudinessEntry.Text),
+                LowClouds = float.Parse(LowCloudsEntry.Text),
+                MediumClouds = float.Parse(MediumCloudsEntry.Text),
+                HighClouds = float.Parse(HighCloudsEntry.Text),
+                DewpointTemperature = float.Parse(DewpointTemperatureEntry.Text)
+            };
+
+            try
+            {
+                var response = await _databaseWebAPIServices.PostWeatherForecastAsync(apiUrl, weatherForecastItem);
+                ApiResponseLabel.Text = "Success: " + response;
+            }
+            catch (Exception ex)
+            {
+                ApiResponseLabel.Text = "Error: " + ex.Message;
+            }
+        }
+
+        // Handle POST for weather forecast unit of measure (UoM)
+        private async void OnPostWeatherForecastUoMClicked(object sender, EventArgs e)
+        {
+            string apiUrl = $"{BaseApiUrl}WeatherForecastUoMItems";
+
+            var weatherForecastUoMItem = new WeatherForecastUoMItem
+            {
+                Attribute = AttributeEntry.Text,
+                UoM = UoMEntry.Text
+            };
+
+            try
+            {
+                var response = await _databaseWebAPIServices.PostWeatherForecastUoMAsync(apiUrl, weatherForecastUoMItem);
                 ApiResponseLabel.Text = "Success: " + response;
             }
             catch (Exception ex)
