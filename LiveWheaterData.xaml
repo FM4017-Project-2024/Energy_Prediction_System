@@ -41,17 +41,6 @@
         </Border>
 
         <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
-            <Label x:Name="ff_gust_Label" FontSize="26" Text="ff_gust: ">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnLabelTapped_ff_gust" />
-                </Label.GestureRecognizers>
-            </Label>
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="10,10,10,10" />
-            </Border.StrokeShape>
-        </Border>
-
-        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
             <Label x:Name="NA_Label" FontSize="26" Text="NA: ">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnLabelTapped_NA" />
