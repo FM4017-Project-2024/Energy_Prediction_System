@@ -139,7 +139,7 @@ public partial class LiveWheaterData : ContentPage
     {
         try
         {
-            string test = await _weatherService.AddWeatherDataToDatabase(59.7076562, 10.1559495, 124);
+            string test = await _weatherService.AddWeatherDataToDatabase(59.7076562, 10.1559495, 194);
             await DisplayAlert("Data Lagt til", "Værdata er lagt til i databasen.", "OK");
         }
         catch (Exception ex)

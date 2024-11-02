@@ -131,7 +131,7 @@
             </Border.StrokeShape>
         </Border>
 
-        <Button Text="Legg til værdata i database" 
+        <Button Text="Add weatherdata to database" 
                 FontSize="18" 
                 BackgroundColor="#a83277"
                 TextColor="White" 
