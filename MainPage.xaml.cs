@@ -3,14 +3,18 @@ using Energy_Prediction_System.Views;
 using Energy_Prediction_System.Services;
 using Energy_Prediction_System.Classes;
 using System.Runtime.CompilerServices;
+using System;
 
 namespace Energy_Prediction_System
 {
     public partial class MainPage : ContentPage
     {
+        private bool _isRunning = false;
         public MainPage()
         {
+            
             InitializeComponent();
+            writeGauge();
         }
         private async void OnLiveSensorData1ButtonClicked(object sender, EventArgs e) => await Navigation.PushAsync(new LiveSensorData());
         private async void OnLiveWeatherData1ButtonClicked(object sender, EventArgs e) => await Navigation.PushAsync(new LiveWheaterData());
@@ -37,6 +41,29 @@ namespace Energy_Prediction_System
                     break;
             }
             pageSelector.SelectedIndex = -1; // Resets the picker to no selection
+        }
+
+        private async void writeGauge()
+        {
+            while (_isRunning)
+            {
+                var random = new Random();
+                gauge.Value = random.Next(0, 101); // Random value between 0 and 100
+                await Task.Delay(3000);
+
+            }
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            _isRunning = true;
+            writeGauge();
+        }
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            _isRunning = false;
         }
 
         //public async void UpdateWeatherDatabaseAsync()
