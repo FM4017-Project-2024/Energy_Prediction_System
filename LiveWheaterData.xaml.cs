@@ -94,7 +94,7 @@ public partial class LiveWheaterData : ContentPage
 
     private async void ReadWeatherDataAPI()
     {
-        WeatherForecastItem weatherData = await _weatherService.GetWeatherDataAsync(59.7076562, 10.1559495, 90);
+        WeatherForecastItem weatherData = await _weatherService.GetWeatherDataAsync(59.7076562, 10.1559495, 124);
 
         value.currentDateTime = DateTime.Now;
         value.TTT = weatherData.Temperature.ToString();
@@ -139,7 +139,7 @@ public partial class LiveWheaterData : ContentPage
     {
         try
         {
-            string test = await _weatherService.AddWeatherDataToDatabase(59.7076562, 10.1559495, 90);
+            string test = await _weatherService.AddWeatherDataToDatabase(59.7076562, 10.1559495, 124);
             await DisplayAlert("Data Lagt til", "Værdata er lagt til i databasen.", "OK");
         }
         catch (Exception ex)
