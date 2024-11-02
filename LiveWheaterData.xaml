@@ -131,6 +131,14 @@
             </Border.StrokeShape>
         </Border>
 
+        <Button Text="Legg til værdata i database" 
+                FontSize="18" 
+                BackgroundColor="#a83277"
+                TextColor="White" 
+                VerticalOptions="End" 
+                HorizontalOptions="Center"
+                Clicked="OnAddWeatherDataButtonClicked" />
+
     </VerticalStackLayout>
 </ContentPage>
 

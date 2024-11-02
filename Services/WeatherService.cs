@@ -40,6 +40,7 @@ namespace Energy_Prediction_System.Classes
                     throw new Exception($"Error fetching data: {response.StatusCode} - {errorContent}");
                 }
 
+                var dateTimeReceived = DateTime.Now.ToString("o");
                 var responseContent = await response.Content.ReadAsStringAsync();
                 XDocument xmlDoc = XDocument.Parse(responseContent);
                 var timeseries = xmlDoc.Descendants("time").ToList();
@@ -54,20 +55,20 @@ namespace Energy_Prediction_System.Classes
                     if (fromAttribute == toAttribute)
                     {
                         // Parse each XML entry into a WeatherData instance
-                        var weatherData = new WeatherForecastItem(
-                        dateTime: DateTime.Now.ToString("o"),
-                        forecastTime: timeEntry.Attribute("to")?.Value ?? "",
-                        temperature: float.Parse(timeEntry.Descendants("temperature").FirstOrDefault()?.Attribute("value")?.Value ?? "0", CultureInfo.InvariantCulture),
-                        windDirection: float.Parse(timeEntry.Descendants("windDirection").FirstOrDefault()?.Attribute("deg")?.Value ?? "0", CultureInfo.InvariantCulture),
-                        windSpeed: float.Parse(timeEntry.Descendants("windSpeed").FirstOrDefault()?.Attribute("mps")?.Value ?? "0", CultureInfo.InvariantCulture),
-                        humidity: float.Parse(timeEntry.Descendants("humidity").FirstOrDefault()?.Attribute("value")?.Value ?? "0", CultureInfo.InvariantCulture),
-                        pressure: float.Parse(timeEntry.Descendants("pressure").FirstOrDefault()?.Attribute("value")?.Value ?? "0", CultureInfo.InvariantCulture),
-                        cloudiness: float.Parse(timeEntry.Descendants("cloudiness").FirstOrDefault()?.Attribute("percent")?.Value ?? "0", CultureInfo.InvariantCulture),
-                        lowClouds: float.Parse(timeEntry.Descendants("lowClouds").FirstOrDefault()?.Attribute("percent")?.Value ?? "0", CultureInfo.InvariantCulture),
-                        mediumClouds: float.Parse(timeEntry.Descendants("mediumClouds").FirstOrDefault()?.Attribute("percent")?.Value ?? "0", CultureInfo.InvariantCulture),
-                        highClouds: float.Parse(timeEntry.Descendants("highClouds").FirstOrDefault()?.Attribute("percent")?.Value ?? "0", CultureInfo.InvariantCulture),
-                        dewpointTemperature: float.Parse(timeEntry.Descendants("dewpointTemperature").FirstOrDefault()?.Attribute("value")?.Value ?? "0", CultureInfo.InvariantCulture)
-                    );
+                        var weatherData = new WeatherForecastItem {
+                        DateTime = dateTimeReceived,
+                        ForecastTime = timeEntry.Attribute("to")?.Value ?? "",
+                        Temperature = float.Parse(timeEntry.Descendants("temperature").FirstOrDefault()?.Attribute("value")?.Value ?? "0", CultureInfo.InvariantCulture),
+                        WindDirection = float.Parse(timeEntry.Descendants("windDirection").FirstOrDefault()?.Attribute("deg")?.Value ?? "0", CultureInfo.InvariantCulture),
+                        WindSpeed = float.Parse(timeEntry.Descendants("windSpeed").FirstOrDefault()?.Attribute("mps")?.Value ?? "0", CultureInfo.InvariantCulture),
+                        Humidity = float.Parse(timeEntry.Descendants("humidity").FirstOrDefault()?.Attribute("value")?.Value ?? "0", CultureInfo.InvariantCulture),
+                        Pressure = float.Parse(timeEntry.Descendants("pressure").FirstOrDefault()?.Attribute("value")?.Value ?? "0", CultureInfo.InvariantCulture),
+                        Cloudiness = float.Parse(timeEntry.Descendants("cloudiness").FirstOrDefault()?.Attribute("percent")?.Value ?? "0", CultureInfo.InvariantCulture),
+                        LowClouds = float.Parse(timeEntry.Descendants("lowClouds").FirstOrDefault()?.Attribute("percent")?.Value ?? "0", CultureInfo.InvariantCulture),
+                        MediumClouds = float.Parse(timeEntry.Descendants("mediumClouds").FirstOrDefault()?.Attribute("percent")?.Value ?? "0", CultureInfo.InvariantCulture),
+                        HighClouds = float.Parse(timeEntry.Descendants("highClouds").FirstOrDefault()?.Attribute("percent")?.Value ?? "0", CultureInfo.InvariantCulture),
+                        DewpointTemperature = float.Parse(timeEntry.Descendants("dewpointTemperature").FirstOrDefault()?.Attribute("value")?.Value ?? "0", CultureInfo.InvariantCulture)
+                        };
                         weatherDataList.Add(weatherData);
                     }
                 }

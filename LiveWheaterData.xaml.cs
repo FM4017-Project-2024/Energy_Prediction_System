@@ -62,7 +62,7 @@ public partial class LiveWheaterData : ContentPage
         MainThread.BeginInvokeOnMainThread(() =>
         {
             TTT_Label.Text = $"Temperature: {value.TTT:F2}" + " °C";
-            dd_Label.Text = $"Wind direction: {value.dd:F2}" + " degrees";
+            dd_Label.Text = $"Wind direction: {value.dd:F2}" + " deg";
             ff_Label.Text = $"Wind speed: {value.ff:F2}" + " m/s";
             NA_Label.Text = $"Humidity: {value.NA:F2}" + " %";
             pr_Label.Text = $"Pressure: {value.pr:F2}" + " hPa";
@@ -94,8 +94,7 @@ public partial class LiveWheaterData : ContentPage
 
     private async void ReadWeatherDataAPI()
     {
-        string test = await _weatherService.AddWeatherDataToDatabase(59.7076562, 10.1559495, 194); //Adding data automatically to database on opening LiveWeatherData. Will be removed. -Kim
-        WeatherForecastItem weatherData = await _weatherService.GetWeatherDataAsync(59.7076562, 10.1559495, 194);
+        WeatherForecastItem weatherData = await _weatherService.GetWeatherDataAsync(59.7076562, 10.1559495, 90);
 
         value.currentDateTime = DateTime.Now;
         value.TTT = weatherData.Temperature.ToString();
@@ -108,6 +107,7 @@ public partial class LiveWheaterData : ContentPage
         value.MEDIUM = weatherData.MediumClouds.ToString();
         value.HIGH = weatherData.HighClouds.ToString();
         value.TD = weatherData.DewpointTemperature.ToString();
+
 
         UpdateGUI();
     }
@@ -135,4 +135,16 @@ public partial class LiveWheaterData : ContentPage
     private async void OnLabelTapped_MEDIUM(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("MEDIUM"));
     private async void OnLabelTapped_HIGH(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("HIGH"));
     private async void OnLabelTapped_TD(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("TD"));
+    private async void OnAddWeatherDataButtonClicked(object sender, EventArgs e)
+    {
+        try
+        {
+            string test = await _weatherService.AddWeatherDataToDatabase(59.7076562, 10.1559495, 90);
+            await DisplayAlert("Data Lagt til", "Værdata er lagt til i databasen.", "OK");
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Feil", $"Kunne ikke legge til værdata: {ex.Message}", "OK");
+        }
+    }
 }
