@@ -36,22 +36,6 @@
             <Entry x:Name="EnergyPredictionUoMEntry" Placeholder="Unit of Measurement"/>
             <Button Text="Post Energy Prediction" Clicked="OnPostEnergyPredictionClicked"/>
 
-            <!-- Weather Forecast Item Section -->
-            <Label Text="Post Weather Forecast Data" FontAttributes="Bold" />
-            <Entry x:Name="DateTimeEntry" Placeholder="Date Time (yyyy-MM-dd HH:mm)" Keyboard="Text"/>
-            <Entry x:Name="ForecastTimeEntry" Placeholder="Forecast Time (yyyy-MM-dd HH:mm)"/>
-            <Entry x:Name="TemperatureEntry" Placeholder="Temperature" Keyboard="Numeric"/>
-            <Entry x:Name="WindDirectionEntry" Placeholder="Wind Direction" Keyboard="Numeric"/>
-            <Entry x:Name="WindSpeedEntry" Placeholder="Wind Speed" Keyboard="Numeric"/>
-            <Entry x:Name="HumidityEntry" Placeholder="Humidity" Keyboard="Numeric"/>
-            <Entry x:Name="PressureEntry" Placeholder="Pressure" Keyboard="Numeric"/>
-            <Entry x:Name="CloudinessEntry" Placeholder="Cloudiness" Keyboard="Numeric"/>
-            <Entry x:Name="LowCloudsEntry" Placeholder="Low Clouds" Keyboard="Numeric"/>
-            <Entry x:Name="MediumCloudsEntry" Placeholder="Medium Clouds" Keyboard="Numeric"/>
-            <Entry x:Name="HighCloudsEntry" Placeholder="High Clouds" Keyboard="Numeric"/>
-            <Entry x:Name="DewpointTemperatureEntry" Placeholder="Dewpoint Temperature" Keyboard="Numeric"/>
-            <Button Text="Post Weather Forecast" Clicked="OnPostWeatherForecastClicked"/>
-
             <!-- Weather Forecast UoM Section -->
             <Label Text="Post Weather Forecast Unit of Measure" FontAttributes="Bold" />
             <Entry x:Name="AttributeEntry" Placeholder="Attribute (e.g., Temperature)"/>

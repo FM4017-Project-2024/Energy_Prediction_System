@@ -94,7 +94,6 @@ public partial class LiveWheaterData : ContentPage
 
     private async void ReadWeatherDataAPI()
     {
-        string test = await _weatherService.AddWeatherDataToDatabase(59.7076562, 10.1559495, 90); //Adding data automatically to database on opening LiveWeatherData. Will be removed. -Kim
         WeatherForecastItem weatherData = await _weatherService.GetWeatherDataAsync(59.7076562, 10.1559495, 90);
 
         value.currentDateTime = DateTime.Now;
@@ -137,4 +136,16 @@ public partial class LiveWheaterData : ContentPage
     private async void OnLabelTapped_MEDIUM(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("MEDIUM"));
     private async void OnLabelTapped_HIGH(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("HIGH"));
     private async void OnLabelTapped_TD(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("TD"));
+    private async void OnAddWeatherDataButtonClicked(object sender, EventArgs e)
+    {
+        try
+        {
+            string test = await _weatherService.AddWeatherDataToDatabase(59.7076562, 10.1559495, 90);
+            await DisplayAlert("Data Lagt til", "Værdata er lagt til i databasen.", "OK");
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Feil", $"Kunne ikke legge til værdata: {ex.Message}", "OK");
+        }
+    }
 }

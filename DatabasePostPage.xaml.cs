@@ -115,38 +115,6 @@ namespace Energy_Prediction_System.Views
             }
         }
 
-        // Handle POST for weather forecast data
-        private async void OnPostWeatherForecastClicked(object sender, EventArgs e)
-        {
-            string apiUrl = $"{BaseApiUrl}WeatherForecastItems";
-
-            var weatherForecastItem = new WeatherForecastItem
-            {
-                DateTime = DateTime.ParseExact(DateTimeEntry.Text, "yyyy-MM-dd HH:mm", null).ToString(), //added .ToString to avoid error. Migth not be correct -Kim
-                ForecastTime = DateTime.Parse(ForecastTimeEntry.Text).ToString(),
-                Temperature = float.Parse(TemperatureEntry.Text),
-                WindDirection = float.Parse(WindDirectionEntry.Text),
-                WindSpeed = float.Parse(WindSpeedEntry.Text),
-                Humidity = float.Parse(HumidityEntry.Text),
-                Pressure = float.Parse(PressureEntry.Text),
-                Cloudiness = float.Parse(CloudinessEntry.Text),
-                LowClouds = float.Parse(LowCloudsEntry.Text),
-                MediumClouds = float.Parse(MediumCloudsEntry.Text),
-                HighClouds = float.Parse(HighCloudsEntry.Text),
-                DewpointTemperature = float.Parse(DewpointTemperatureEntry.Text)
-            };
-
-            try
-            {
-                var response = await _databaseWebAPIServices.PostWeatherForecastAsync(apiUrl, weatherForecastItem);
-                ApiResponseLabel.Text = "Success: " + response;
-            }
-            catch (Exception ex)
-            {
-                ApiResponseLabel.Text = "Error: " + ex.Message;
-            }
-        }
-
         // Handle POST for weather forecast unit of measure (UoM)
         private async void OnPostWeatherForecastUoMClicked(object sender, EventArgs e)
         {
