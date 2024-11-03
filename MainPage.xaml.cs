@@ -17,7 +17,28 @@ namespace Energy_Prediction_System
         private async void OnLiveWeatherData1ButtonClicked(object sender, EventArgs e) => await Navigation.PushAsync(new LiveWheaterData());
         private async void OnDatabaseViewPageButtonClicked(object sender, EventArgs e) => await Navigation.PushAsync(new DatabaseViewPage());
         private async void OnOpenDatabasePostPageClicked(object sender, EventArgs e) => await Navigation.PushAsync(new DatabasePostPage());
-
+        private async void OnPickerSelectedIndexChanged(object sender, EventArgs e)
+        {
+            int selectedIndex = pageSelector.SelectedIndex;
+            switch (selectedIndex)
+            {
+                case 0:
+                    await Navigation.PushAsync(new LiveSensorData());
+                    break;
+                case 1:
+                    await Navigation.PushAsync(new LiveWheaterData());
+                    break;
+                case 2:
+                    await Navigation.PushAsync(new DatabaseViewPage());
+                    break;
+                case 3:
+                    await Navigation.PushAsync(new DatabasePostPage());
+                    break;
+                default:
+                    break;
+            }
+            pageSelector.SelectedIndex = -1; // Resets the picker to no selection
+        }
 
         //public async void UpdateWeatherDatabaseAsync()
         //{

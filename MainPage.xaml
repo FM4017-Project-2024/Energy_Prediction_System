@@ -5,13 +5,27 @@
             Title="Energy Prediction System">
 
     <ScrollView>
+    
         <VerticalStackLayout  Padding="30,0" Spacing="10" BackgroundColor="WhiteSmoke">
+            <Picker x:Name="pageSelector" Title="Select an page"  SelectedIndexChanged="OnPickerSelectedIndexChanged">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Sensor data</x:String>
+                        <x:String>Weather data</x:String>
+                        <x:String>Database view</x:String>
+                        <x:String>Database post</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+
             <Image Source="eps.png"  Aspect="Center"    SemanticProperties.Description="Energy Prediction System EPS" />
             <Label Text="Live data" Style="{StaticResource Headline}" SemanticProperties.HeadingLevel="Level1" />
             <Button Text="Live sensor data"  Clicked="OnLiveSensorData1ButtonClicked" HorizontalOptions="Fill"/>
             <Button Text="Weather data"  Clicked="OnLiveWeatherData1ButtonClicked" HorizontalOptions="Fill"/>
             <Button Text="Database read test"  Clicked="OnDatabaseViewPageButtonClicked" HorizontalOptions="Fill"/>
             <Button Text="Database write test" Clicked="OnOpenDatabasePostPageClicked" HorizontalOptions="Fill"/>
+          
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

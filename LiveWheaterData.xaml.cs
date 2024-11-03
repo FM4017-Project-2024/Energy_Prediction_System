@@ -61,16 +61,16 @@ public partial class LiveWheaterData : ContentPage
     {
         MainThread.BeginInvokeOnMainThread(() =>
         {
-            TTT_Label.Text = $"Temperature: {value.TTT:F2}";
-            dd_Label.Text = $"Wind direction: {value.dd:F2}";
-            ff_Label.Text = $"Wind speed: {value.ff:F2}";
-            NA_Label.Text = $"Humidity: {value.NA:F2}";
-            pr_Label.Text = $"Pressure: {value.pr:F2}";
-            NN_Label.Text = $"Cloudiness: {value.NN:F2}";
-            LOW_Label.Text = $"Low clouds: {value.LOW:F2}";
-            MEDIUM_Label.Text = $"Medium clouds: {value.MEDIUM:F2}";
-            HIGH_Label.Text = $"High clouds: {value.HIGH:F2}";
-            TD_Label.Text = $"Dewpoint temperature: {value.TD:F2}";
+            TTT_Label.Text = $"Temperature: {value.TTT:F2}" + " °C";
+            dd_Label.Text = $"Wind direction: {value.dd:F2}" + " deg";
+            ff_Label.Text = $"Wind speed: {value.ff:F2}" + " m/s";
+            NA_Label.Text = $"Humidity: {value.NA:F2}" + " %";
+            pr_Label.Text = $"Pressure: {value.pr:F2}" + " hPa";
+            NN_Label.Text = $"Cloudiness: {value.NN:F2}" + " %";
+            LOW_Label.Text = $"Low clouds: {value.LOW:F2}" + " %";
+            MEDIUM_Label.Text = $"Medium clouds: {value.MEDIUM:F2}" + " %";
+            HIGH_Label.Text = $"High clouds: {value.HIGH:F2}" + " %";
+            TD_Label.Text = $"Dewpoint temperature: {value.TD:F2}" + " °C";
             DT_Label.Text = "Last update: " + value.currentDateTime;
         });
     }
@@ -94,7 +94,7 @@ public partial class LiveWheaterData : ContentPage
 
     private async void ReadWeatherDataAPI()
     {
-        WeatherForecastItem weatherData = await _weatherService.GetWeatherDataAsync(59.7076562, 10.1559495, 90);
+        WeatherForecastItem weatherData = await _weatherService.GetWeatherDataAsync(59.7076562, 10.1559495, 124);
 
         value.currentDateTime = DateTime.Now;
         value.TTT = weatherData.Temperature.ToString();
@@ -127,7 +127,6 @@ public partial class LiveWheaterData : ContentPage
     private async void OnLabelTapped_TTT(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("TTT"));
     private async void OnLabelTapped_dd(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("dd"));
     private async void OnLabelTapped_ff(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("ff"));
-    private async void OnLabelTapped_ff_gust(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("ff_gust"));
     private async void OnLabelTapped_NA(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("NA"));
     private async void OnLabelTapped_pr(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("NN"));
     private async void OnLabelTapped_NN(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("TD"));
@@ -140,7 +139,7 @@ public partial class LiveWheaterData : ContentPage
     {
         try
         {
-            string test = await _weatherService.AddWeatherDataToDatabase(59.7076562, 10.1559495, 90);
+            string test = await _weatherService.AddWeatherDataToDatabase(59.7076562, 10.1559495, 194);
             await DisplayAlert("Data Lagt til", "Værdata er lagt til i databasen.", "OK");
         }
         catch (Exception ex)
