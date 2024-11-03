@@ -6,9 +6,9 @@
              Title="Energy Prediction System">
 
     <ScrollView>
-        <VerticalStackLayout  Padding="1,0" Spacing="11" BackgroundColor="#DADADA">
+        <VerticalStackLayout  Padding="1,0" Spacing="11" BackgroundColor="WhiteSmoke">
             <Image Source="eps.png"  Aspect="Center"    SemanticProperties.Description="Energy Prediction System EPS"/>
-            <Picker x:Name="pageSelector" Title="Select an page"  SelectedIndexChanged="OnPickerSelectedIndexChanged">
+            <Picker x:Name="pageSelector" Title="Select an page" FontSize="30" HorizontalOptions="CenterAndExpand" TextColor="#7E909A"  SelectedIndexChanged="OnPickerSelectedIndexChanged">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>Sensor data</x:String>
@@ -18,34 +18,33 @@
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>
-            <Label Text="" />
-            <Label Text="Average" Style="{StaticResource Headline}" SemanticProperties.HeadingLevel="Level1" />
-            <Border Padding="5.0" HorizontalOptions="Center" StrokeThickness="2" Stroke="#a83277" Grid.Row="0" Grid.Column="0">
-                    <Label x:Name="TempAvg_Label" FontSize="20" Text="Temperature:">
+            <Label Text="Average" FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#202020" />
+            <Border Padding="5.0" HorizontalOptions="Center" StrokeThickness="3" Stroke="#0091D5" Grid.Row="0" Grid.Column="0">
+                <Label x:Name="TempAvg_Label" FontSize="20" Text="Temperature:" TextColor="#202020"  FontAttributes="Bold">
                     </Label>
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="10,10,10,10" />
                     </Border.StrokeShape>
                 </Border>
 
-            <Border Padding="5.0" HorizontalOptions="Center" StrokeThickness="2" Stroke="#a83277" Grid.Row="0" Grid.Column="1">
-                <Label x:Name="HumpAvg_Label" FontSize="20" Text="Humidity:">
+            <Border Padding="5.0" HorizontalOptions="Center" StrokeThickness="3" Stroke="#0091D5" Grid.Row="0" Grid.Column="1">
+                <Label x:Name="HumpAvg_Label" FontSize="20" Text="Humidity:" TextColor="#202020" FontAttributes="Bold">
                 </Label>
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10,10,10,10" />
                 </Border.StrokeShape>
             </Border>
-            <Label Text="Outside temperature" Style="{StaticResource Headline}" SemanticProperties.HeadingLevel="Level1" />
-            <Border Padding="5.0" HorizontalOptions="Center" StrokeThickness="2" Stroke="#a83277">
-                <Label x:Name="OutsideTemp_Label" FontSize="20" Text="temperature:" HorizontalOptions="Center">
+            <Label Text="Outside temperature" FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#202020" />
+            <Border Padding="5.0" HorizontalOptions="Center" StrokeThickness="3" Stroke="#0091D5">
+                <Label x:Name="OutsideTemp_Label" FontSize="20" Text="temperature:" HorizontalOptions="Center" TextColor="#202020"  FontAttributes="Bold">
                 </Label>
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="10,10,10,10" />
                     </Border.StrokeShape>
                 </Border>
-            <Label Text="Predicted energy usage" Style="{StaticResource Headline}" SemanticProperties.HeadingLevel="Level1" />
-            <Border Padding="5.0" HorizontalOptions="Center" StrokeThickness="2" Stroke="#a83277">
-                <Label x:Name="PredEnergy_Label" FontSize="20" Text="Predicted energy:" HorizontalOptions="Center">
+            <Label Text="Predicted energy usage" FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#202020" />
+            <Border Padding="5.0" HorizontalOptions="Center" StrokeThickness="3" Stroke="#0091D5">
+                <Label x:Name="PredEnergy_Label" FontSize="20" Text="Predicted energy:" HorizontalOptions="Center" TextColor="#202020"  FontAttributes="Bold">
                 </Label>
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10,10,10,10" />

@@ -7,9 +7,19 @@
     Shell.FlyoutBehavior="Disabled"
     Title="Energy_Prediction_System">
 
+    <!-- ShellContent with TitleView -->
     <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        Route="MainPage">
 
+        <!-- Move Shell.TitleView inside ShellContent -->
+        <Shell.TitleView>
+            <Label Text="Energy Prediction System"
+                   TextColor="#202020"
+                   FontSize="30"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center" />
+        </Shell.TitleView>
+    </ShellContent>
 </Shell>
