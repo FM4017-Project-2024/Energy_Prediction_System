@@ -2,94 +2,68 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Energy_Prediction_System.LiveSensorData"
-             Title="LiveSensorData">
+             Title="Live Sensor Data">
 
-    <VerticalStackLayout Padding="20" Spacing="10" BackgroundColor="WhiteSmoke">
-        <Label Text="Temperature sensors" VerticalOptions="Center"  HorizontalOptions="Center" FontSize="20" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
+    <VerticalStackLayout Padding="1,0" Spacing="5"  BackgroundColor="WhiteSmoke">
+        <Label Text="Temperature" FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#202020"/>
 
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5" Grid.Row="0" Grid.Column="0">
+            <Label x:Name="TT01_Label" FontSize="22" Text="TT01:">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnLabelTapped_TT01" />
+                </Label.GestureRecognizers>
+            </Label>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
+            <Label x:Name="TT02_Label" FontSize="22" Text="TT02:">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnLabelTapped_TT02" />
+                </Label.GestureRecognizers>
+            </Label>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
 
-            <Border Padding="5.0" HorizontalOptions="Center" StrokeThickness="2" Stroke="#a83277" Grid.Row="0" Grid.Column="0">
-                <Label x:Name="TT01_Label" FontSize="20" Text="TT01:">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnLabelTapped_TT01" />
-                    </Label.GestureRecognizers>
-                </Label>
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="10,10,10,10" />
-                </Border.StrokeShape>
-            </Border>
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
+            <Label x:Name="TT03_Label" FontSize="22" Text="TT03:">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnLabelTapped_TT03" />
+                </Label.GestureRecognizers>
+            </Label>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
 
-            <Border Padding="5.0" HorizontalOptions="Center" StrokeThickness="2" Stroke="#a83277" Grid.Row="0" Grid.Column="1">
-                <Label x:Name="TT02_Label" FontSize="20" Text="TT02:">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnLabelTapped_TT02" />
-                    </Label.GestureRecognizers>
-                </Label>
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="10,10,10,10" />
-                </Border.StrokeShape>
-            </Border>
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
+            <Label x:Name="TT04_Label" FontSize="22" Text="TT04:">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnLabelTapped_TT04" />
+                </Label.GestureRecognizers>
+            </Label>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
+            <Label x:Name="TT05_Label" FontSize="22" Text="TT05: ">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnLabelTapped_TT05" />
+                </Label.GestureRecognizers>
+            </Label>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
 
-            <Border Padding="5.0" HorizontalOptions="Center" StrokeThickness="2" Stroke="#a83277" Grid.Row="1" Grid.Column="0">
-                <Label x:Name="TT03_Label" FontSize="20" Text="TT03:">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnLabelTapped_TT03" />
-                    </Label.GestureRecognizers>
-                </Label>
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="10,10,10,10" />
-                </Border.StrokeShape>
-            </Border>
-
-            <Border Padding="5.0" HorizontalOptions="StartAndExpand" StrokeThickness="2" Stroke="#a83277" Grid.Row="1" Grid.Column="1">
-                <Label x:Name="TT04_Label" FontSize="20" Text="TT04:">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnLabelTapped_TT04" />
-                    </Label.GestureRecognizers>
-                </Label>
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="10,10,10,10" />
-                </Border.StrokeShape>
-            </Border>
-
-
-            <Border Padding="5.0" HorizontalOptions="StartAndExpand" StrokeThickness="2" Stroke="#a83277" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
-                <Label x:Name="TT05_Label" FontSize="20" Text="TT05: ">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnLabelTapped_TT05" />
-                    </Label.GestureRecognizers>
-                </Label>
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="10,10,10,10" />
-                </Border.StrokeShape>
-            </Border>
-        </Grid>
-        
-        <Label Text="Relative humidity sensors" VerticalOptions="Center"  HorizontalOptions="Center" FontSize="20" FontAttributes="Bold"/>
-
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            
-            <Border Padding="5.0" HorizontalOptions="Center" StrokeThickness="2" Stroke="#a83277"  Grid.Row="0" Grid.Column="0">
-                <Label x:Name="RHT01_Label" FontSize="20" Text="RHT01: ">
+        <Label Text="Relative humidity" FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#202020"/>
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5"  Grid.Row="0" Grid.Column="0">
+            <Label x:Name="RHT01_Label" FontSize="22" Text="RHT01: ">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnLabelTapped_RHT01" />
                     </Label.GestureRecognizers>
@@ -99,43 +73,42 @@
             </Border.StrokeShape>
         </Border>
 
-            <Border Padding="5.0" HorizontalOptions="Center" StrokeThickness="2" Stroke="#a83277"  Grid.Row="0" Grid.Column="1">
-                <Label x:Name="RHT02_Label" FontSize="20" Text="RHT02: ">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnLabelTapped_RHT02" />
-                    </Label.GestureRecognizers>
-                </Label>
-                <Border.StrokeShape>
-                <RoundRectangle CornerRadius="10,10,10,10" />
-            </Border.StrokeShape>
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5"  Grid.Row="0" Grid.Column="1">
+            <Label x:Name="RHT02_Label" FontSize="22" Text="RHT02: ">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnLabelTapped_RHT02" />
+                </Label.GestureRecognizers>
+            </Label>
+            <Border.StrokeShape>
+            <RoundRectangle CornerRadius="10,10,10,10" />
+        </Border.StrokeShape>
 
-        </Border>
-            <Border Padding="5.0" HorizontalOptions="Center" StrokeThickness="2" Stroke="#a83277"  Grid.Row="1" Grid.Column="0">
-                <Label x:Name="RHT03_Label" FontSize="20" Text="RHT03: ">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnLabelTapped_RHT03" />
-                    </Label.GestureRecognizers>
-                </Label>
-                <Border.StrokeShape>
+    </Border>
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5"  Grid.Row="1" Grid.Column="0">
+            <Label x:Name="RHT03_Label" FontSize="22" Text="RHT03: ">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnLabelTapped_RHT03" />
+                </Label.GestureRecognizers>
+            </Label>
+            <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10,10,10,10" />
             </Border.StrokeShape>
         </Border>
 
-            <Border Padding="5.0" HorizontalOptions="Center" StrokeThickness="2" Stroke="#a83277"  Grid.Row="1" Grid.Column="1">
-                <Label x:Name="RHT04_Label" FontSize="20" Text="RHT04: ">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnLabelTapped_RHT04" />
-                    </Label.GestureRecognizers>
-                </Label>
-                <Border.StrokeShape>
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5"  Grid.Row="1" Grid.Column="1">
+            <Label x:Name="RHT04_Label" FontSize="22" Text="RHT04: ">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnLabelTapped_RHT04" />
+                </Label.GestureRecognizers>
+            </Label>
+            <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10,10,10,10" />
             </Border.StrokeShape>
         </Border>
-    </Grid>
-        
-        <Label Text="Energy usage" VerticalOptions="Center"  HorizontalOptions="Center" FontSize="20" FontAttributes="Bold"/>
-        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
-            <Label x:Name="KWH_Label" FontSize="20" Text="KWH01: ">
+
+        <Label Text="Energy usage" FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#202020"/>
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
+            <Label x:Name="KWH_Label" FontSize="22" Text="KWH01: ">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnLabelTapped_KWH01" />
                 </Label.GestureRecognizers>
@@ -144,6 +117,5 @@
                 <RoundRectangle CornerRadius="10,10,10,10" />
             </Border.StrokeShape>
         </Border>
-        
     </VerticalStackLayout>
 </ContentPage>

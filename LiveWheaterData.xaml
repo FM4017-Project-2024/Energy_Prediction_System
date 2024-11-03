@@ -2,12 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Energy_Prediction_System.LiveWheaterData"
-             Title="LiveWheaterData">
-    <VerticalStackLayout>
-        <Label Text="Wheater API data" VerticalOptions="Center"  HorizontalOptions="Center" FontSize="20" FontAttributes="Bold" />
+             Title="Current Weather">
+    <VerticalStackLayout Padding="1,0" Spacing="5"  BackgroundColor="WhiteSmoke">
+        <Label Text="Weather" FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#202020" />
 
-        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
-            <Label x:Name="TTT_Label" FontSize="26" Text="TTT: ">
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
+            <Label x:Name="TTT_Label" FontSize="22" Text="TTT: ">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnLabelTapped_TTT" />
                 </Label.GestureRecognizers>
@@ -17,8 +17,8 @@
             </Border.StrokeShape>
         </Border>
 
-        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
-            <Label x:Name="dd_Label" FontSize="26" Text="dd: ">
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
+            <Label x:Name="dd_Label" FontSize="22" Text="dd: ">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnLabelTapped_dd" />
                 </Label.GestureRecognizers>
@@ -29,8 +29,8 @@
         </Border>
 
 
-        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
-            <Label x:Name="ff_Label" FontSize="26" Text="ff: ">
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
+            <Label x:Name="ff_Label" FontSize="22" Text="ff: ">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnLabelTapped_ff" />
                 </Label.GestureRecognizers>
@@ -40,8 +40,8 @@
             </Border.StrokeShape>
         </Border>
 
-        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
-            <Label x:Name="NA_Label" FontSize="26" Text="NA: ">
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
+            <Label x:Name="NA_Label" FontSize="22" Text="NA: ">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnLabelTapped_NA" />
                 </Label.GestureRecognizers>
@@ -51,8 +51,8 @@
             </Border.StrokeShape>
         </Border>
 
-        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
-            <Label x:Name="pr_Label" FontSize="26" Text="pr: ">
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
+            <Label x:Name="pr_Label" FontSize="22" Text="pr: ">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnLabelTapped_pr" />
                 </Label.GestureRecognizers>
@@ -62,8 +62,8 @@
             </Border.StrokeShape>
         </Border>
 
-        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
-            <Label x:Name="NN_Label" FontSize="26" Text="NN: ">
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
+            <Label x:Name="NN_Label" FontSize="22" Text="NN: ">
             <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnLabelTapped_NN" />
                 </Label.GestureRecognizers>
@@ -73,15 +73,15 @@
             </Border.StrokeShape>
         </Border>
 
-        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
-            <Label x:Name="FOG_Label" FontSize="26" Text="FOG: "/>
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
+            <Label x:Name="FOG_Label" FontSize="22" Text="FOG: "/>
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10,10,10,10" />
             </Border.StrokeShape>
         </Border>
 
-        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
-            <Label x:Name="LOW_Label" FontSize="26" Text="LOW: ">
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
+            <Label x:Name="LOW_Label" FontSize="22" Text="LOW: ">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnLabelTapped_LOW" />
                 </Label.GestureRecognizers>
@@ -90,9 +90,9 @@
                 <RoundRectangle CornerRadius="10,10,10,10" />
             </Border.StrokeShape>
         </Border>
-        
-        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
-            <Label x:Name="MEDIUM_Label" FontSize="26" Text="MEDIUM: ">
+
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
+            <Label x:Name="MEDIUM_Label" FontSize="22" Text="MEDIUM: ">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnLabelTapped_MEDIUM" />
                 </Label.GestureRecognizers>
@@ -102,8 +102,8 @@
             </Border.StrokeShape>
         </Border>
 
-        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
-            <Label x:Name="HIGH_Label" FontSize="26" Text="HIGH: ">
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
+            <Label x:Name="HIGH_Label" FontSize="22" Text="HIGH: ">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnLabelTapped_HIGH" />
                 </Label.GestureRecognizers>
@@ -113,8 +113,8 @@
             </Border.StrokeShape>
         </Border>
 
-        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
-            <Label x:Name="TD_Label" FontSize="26" Text="TD: ">
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
+            <Label x:Name="TD_Label" FontSize="22" Text="TD: ">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnLabelTapped_TD" />
                 </Label.GestureRecognizers>
@@ -124,8 +124,8 @@
             </Border.StrokeShape>
         </Border>
 
-        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="2" Stroke="#a83277">
-            <Label x:Name="DT_Label" FontSize="26" Text="Date time: "/>
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
+            <Label x:Name="DT_Label" FontSize="22" Text="Date time: "/>
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10,10,10,10" />
             </Border.StrokeShape>
@@ -133,12 +133,11 @@
 
         <Button Text="Add weatherdata to database" 
                 FontSize="18" 
-                BackgroundColor="#a83277"
+                BackgroundColor="#1C4E80"
                 TextColor="White" 
                 VerticalOptions="End" 
                 HorizontalOptions="Center"
                 Clicked="OnAddWeatherDataButtonClicked" />
-
     </VerticalStackLayout>
 </ContentPage>
 

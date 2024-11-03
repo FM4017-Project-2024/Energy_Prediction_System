@@ -1,140 +1,216 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Energy_Prediction_System.Views.DatabaseViewPage">
+             x:Class="Energy_Prediction_System.Views.DatabaseViewPage"
+             Title="View database data">
+    <ScrollView>
+        <VerticalStackLayout Padding="1,0" Spacing="5"  BackgroundColor="WhiteSmoke">
+            <!-- Buttons to fetch temperature data -->
+            <Button Text="Get All Building Temperatures"
+                    FontSize="12"
+                    BackgroundColor="#1C4E80"
+                    TextColor="White" 
+                    VerticalOptions="End" 
+                    HorizontalOptions="FillAndExpand"
+                    Clicked="OnGetAllBuildingTempsClicked"/>
+            
+            <Button Text="Get Latest Building Temperature"
+                    FontSize="12"
+                    BackgroundColor="#1C4E80"
+                    TextColor="White" 
+                    VerticalOptions="End" 
+                    HorizontalOptions="FillAndExpand"
+                    Clicked="OnGetLatestBuildingTempClicked"/>
 
-    <StackLayout Padding="20">
-        <!-- Buttons to fetch temperature data -->
-        <Button Text="Get All Building Temperatures" Clicked="OnGetAllBuildingTempsClicked"/>
-        <Button Text="Get Latest Building Temperature" Clicked="OnGetLatestBuildingTempClicked"/>
+            <!-- List view for temperature data -->
+            <ListView x:Name="TemperatureListView">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="10">
+                                <Label Text="{Binding TempDateTime, StringFormat='Date: {0:dd-MM-yyyy HH:mm}'}" />
+                                <Label Text="{Binding Temp1, StringFormat='Temp1: {0}'}" />
+                                <Label Text="{Binding Temp2, StringFormat='Temp2: {0}'}" />
+                                <Label Text="{Binding Temp3, StringFormat='Temp3: {0}'}" />
+                                <Label Text="{Binding Temp4, StringFormat='Temp4: {0}'}" />
+                                <Label Text="{Binding Temp5, StringFormat='Temp5: {0}'}" />
+                                <Label Text="{Binding TempUoM, StringFormat='Unit: {0}'}" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
-        <!-- List view for temperature data -->
-        <ListView x:Name="TemperatureListView">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Padding="10">
-                            <Label Text="{Binding TempDateTime, StringFormat='Date: {0:dd-MM-yyyy HH:mm}'}" />
-                            <Label Text="{Binding Temp1, StringFormat='Temp1: {0}'}" />
-                            <Label Text="{Binding Temp2, StringFormat='Temp2: {0}'}" />
-                            <Label Text="{Binding Temp3, StringFormat='Temp3: {0}'}" />
-                            <Label Text="{Binding Temp4, StringFormat='Temp4: {0}'}" />
-                            <Label Text="{Binding Temp5, StringFormat='Temp5: {0}'}" />
-                            <Label Text="{Binding TempUoM, StringFormat='Unit: {0}'}" />
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            <!-- Buttons to fetch humidity data -->
+            <Button Text="Get All Building Relative Humidity"
+                    FontSize="12"
+                    BackgroundColor="#1C4E80"
+                    TextColor="White" 
+                    VerticalOptions="End" 
+                    HorizontalOptions="FillAndExpand"
+                    Clicked="OnGetAllBuildingRelHumidityClicked"/>
+            
+            <Button Text="Get Latest Building Relative Humidity"
+                    FontSize="12"
+                    BackgroundColor="#1C4E80"
+                    TextColor="White" 
+                    VerticalOptions="End" 
+                    HorizontalOptions="FillAndExpand"
+                    Clicked="OnGetLatestBuildingRelHumidityClicked"/>
 
-        <!-- Buttons to fetch humidity data -->
-        <Button Text="Get All Building Relative Humidity" Clicked="OnGetAllBuildingRelHumidityClicked"/>
-        <Button Text="Get Latest Building Relative Humidity" Clicked="OnGetLatestBuildingRelHumidityClicked"/>
+            <!-- List view for humidity data -->
+            <ListView x:Name="HumidityListView">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="10">
+                                <Label Text="{Binding RelHumidityDateTime, StringFormat='Date: {0:dd-MM-yyyy HH:mm}'}" />
+                                <Label Text="{Binding RelHumidity1, StringFormat='Humidity1: {0}'}" />
+                                <Label Text="{Binding RelHumidity2, StringFormat='Humidity2: {0}'}" />
+                                <Label Text="{Binding RelHumidity3, StringFormat='Humidity3: {0}'}" />
+                                <Label Text="{Binding RelHumidity4, StringFormat='Humidity4: {0}'}" />
+                                <Label Text="{Binding RelHumidityUoM, StringFormat='Unit: {0}'}" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
-        <!-- List view for humidity data -->
-        <ListView x:Name="HumidityListView">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Padding="10">
-                            <Label Text="{Binding RelHumidityDateTime, StringFormat='Date: {0:dd-MM-yyyy HH:mm}'}" />
-                            <Label Text="{Binding RelHumidity1, StringFormat='Humidity1: {0}'}" />
-                            <Label Text="{Binding RelHumidity2, StringFormat='Humidity2: {0}'}" />
-                            <Label Text="{Binding RelHumidity3, StringFormat='Humidity3: {0}'}" />
-                            <Label Text="{Binding RelHumidity4, StringFormat='Humidity4: {0}'}" />
-                            <Label Text="{Binding RelHumidityUoM, StringFormat='Unit: {0}'}" />
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            <!-- Buttons to fetch energy meter data -->
+            <Button Text="Get All Building Energy Meter Data"
+                    FontSize="12"
+                    BackgroundColor="#1C4E80"
+                    TextColor="White" 
+                    VerticalOptions="End" 
+                    HorizontalOptions="FillAndExpand"
+                    Clicked="OnGetAllEnergyMeterDataClicked"/>
+            
+            <Button Text="Get Latest Building Energy Meter Data"
+                    FontSize="12"
+                    BackgroundColor="#1C4E80"
+                    TextColor="White" 
+                    VerticalOptions="End" 
+                    HorizontalOptions="FillAndExpand"
+                    Clicked="OnGetLatestEnergyMeterDataClicked"/>
 
-        <!-- Buttons to fetch energy meter data -->
-        <Button Text="Get All Building Energy Meter Data" Clicked="OnGetAllEnergyMeterDataClicked"/>
-        <Button Text="Get Latest Building Energy Meter Data" Clicked="OnGetLatestEnergyMeterDataClicked"/>
+            <!-- List view for energy meter data -->
+            <ListView x:Name="EnergyMeterListView">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="10">
+                                <Label Text="{Binding EnergyMeterDateTime, StringFormat='Date: {0:dd-MM-yyyy HH:mm}'}" />
+                                <Label Text="{Binding EnergyMeter1, StringFormat='Energy: {0}'}" />
+                                <Label Text="{Binding EnergyMeterUoM, StringFormat='Unit: {0}'}" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
-        <!-- List view for energy meter data -->
-        <ListView x:Name="EnergyMeterListView">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Padding="10">
-                            <Label Text="{Binding EnergyMeterDateTime, StringFormat='Date: {0:dd-MM-yyyy HH:mm}'}" />
-                            <Label Text="{Binding EnergyMeter1, StringFormat='Energy: {0}'}" />
-                            <Label Text="{Binding EnergyMeterUoM, StringFormat='Unit: {0}'}" />
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            <!-- Buttons to fetch energy predictions -->
+            <Button Text="Get All Energy Predictions"
+                     FontSize="12"
+                     BackgroundColor="#1C4E80"
+                     TextColor="White" 
+                     VerticalOptions="End" 
+                     HorizontalOptions="FillAndExpand"
+                    Clicked="OnGetAllEnergyPredictionsClicked"/>
+            
+            <Button Text="Get Latest Energy Prediction"
+                    FontSize="12"
+                    BackgroundColor="#1C4E80"
+                    TextColor="White" 
+                    VerticalOptions="End" 
+                    HorizontalOptions="FillAndExpand"
+                    Clicked="OnGetLatestEnergyPredictionClicked"/>
 
-        <!-- Buttons to fetch energy predictions -->
-        <Button Text="Get All Energy Predictions" Clicked="OnGetAllEnergyPredictionsClicked"/>
-        <Button Text="Get Latest Energy Prediction" Clicked="OnGetLatestEnergyPredictionClicked"/>
+            <!-- List view for energy predictions -->
+            <ListView x:Name="EnergyPredictionListView">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="10">
+                                <Label Text="{Binding DateTime, StringFormat='Date: {0:dd-MM-yyyy HH:mm}'}" />
+                                <Label Text="{Binding EnergyPrediction, StringFormat='Prediction: {0} kWh'}" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
-        <!-- List view for energy predictions -->
-        <ListView x:Name="EnergyPredictionListView">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Padding="10">
-                            <Label Text="{Binding DateTime, StringFormat='Date: {0:dd-MM-yyyy HH:mm}'}" />
-                            <Label Text="{Binding EnergyPrediction, StringFormat='Prediction: {0} kWh'}" />
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            <!-- Buttons to fetch weather forecasts -->
+            <Button Text="Get All Weather Forecasts"
+                     FontSize="12"
+                     BackgroundColor="#1C4E80"
+                     TextColor="White" 
+                     VerticalOptions="End" 
+                     HorizontalOptions="FillAndExpand"
+                    Clicked="OnGetAllWeatherForecastsClicked"/>
+            <Button Text="Get Latest Weather Forecasts"
+                     FontSize="12"
+                     BackgroundColor="#1C4E80"
+                     TextColor="White" 
+                     VerticalOptions="End" 
+                     HorizontalOptions="FillAndExpand"
+                    Clicked="OnGetLatestWeatherForecastClicked"/>
 
-        <!-- Buttons to fetch weather forecasts -->
-        <Button Text="Get All Weather Forecasts" Clicked="OnGetAllWeatherForecastsClicked"/>
-        <Button Text="Get Latest Weather Forecasts" Clicked="OnGetLatestWeatherForecastClicked"/>
+            <!-- List view for weather forecasts, displaying all fields -->
+            <ListView x:Name="WeatherForecastListView">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="10">
+                                <Label Text="{Binding DateTime, StringFormat='Data Time: {0:dd-MM-yyyy HH:mm}'}" />
+                                <Label Text="{Binding ForecastTime, StringFormat='Forecast Time: {0:dd-MM-yyyy HH:mm}'}" />
+                                <Label Text="{Binding Temperature, StringFormat='Temperature: {0} °C'}" />
+                                <Label Text="{Binding WindDirection, StringFormat='Wind Direction: {0}'}" />
+                                <Label Text="{Binding WindSpeed, StringFormat='Wind Speed: {0} m/s'}" />
+                                <Label Text="{Binding Humidity, StringFormat='Humidity: {0}%'}" />
+                                <Label Text="{Binding Pressure, StringFormat='Pressure: {0} hPa'}" />
+                                <Label Text="{Binding Cloudiness, StringFormat='Cloudiness: {0}%'}" />
+                                <Label Text="{Binding LowClouds, StringFormat='Low Clouds: {0}%'}" />
+                                <Label Text="{Binding MediumClouds, StringFormat='Medium Clouds: {0}%'}" />
+                                <Label Text="{Binding HighClouds, StringFormat='High Clouds: {0}%'}" />
+                                <Label Text="{Binding DewpointTemperature, StringFormat='Dewpoint Temperature: {0} °C'}" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
-        <!-- List view for weather forecasts, displaying all fields -->
-        <ListView x:Name="WeatherForecastListView">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Padding="10">
-                            <Label Text="{Binding DateTime, StringFormat='Data Time: {0:dd-MM-yyyy HH:mm}'}" />
-                            <Label Text="{Binding ForecastTime, StringFormat='Forecast Time: {0:dd-MM-yyyy HH:mm}'}" />
-                            <Label Text="{Binding Temperature, StringFormat='Temperature: {0} °C'}" />
-                            <Label Text="{Binding WindDirection, StringFormat='Wind Direction: {0}'}" />
-                            <Label Text="{Binding WindSpeed, StringFormat='Wind Speed: {0} m/s'}" />
-                            <Label Text="{Binding Humidity, StringFormat='Humidity: {0}%'}" />
-                            <Label Text="{Binding Pressure, StringFormat='Pressure: {0} hPa'}" />
-                            <Label Text="{Binding Cloudiness, StringFormat='Cloudiness: {0}%'}" />
-                            <Label Text="{Binding LowClouds, StringFormat='Low Clouds: {0}%'}" />
-                            <Label Text="{Binding MediumClouds, StringFormat='Medium Clouds: {0}%'}" />
-                            <Label Text="{Binding HighClouds, StringFormat='High Clouds: {0}%'}" />
-                            <Label Text="{Binding DewpointTemperature, StringFormat='Dewpoint Temperature: {0} °C'}" />
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            <!-- Button to fetch weather forecast UoMs -->
+            <Button Text="Get All Weather Forecast UoM"
+                    FontSize="12"
+                    BackgroundColor="#1C4E80"
+                    TextColor="White" 
+                    VerticalOptions="End" 
+                    HorizontalOptions="FillAndExpand"
+                    Clicked="OnGetAllWeatherForecastUoMsClicked"/>
+            <Label Text="Get UoM for Attribute" FontAttributes="Bold" />
+            <Entry x:Name="AttributeEntry" Placeholder="Enter Attribute Name"/>
+            <Button Text="Get for attributeUoM"
+                    FontSize="12"
+                    BackgroundColor="#1C4E80"
+                    TextColor="White" 
+                    VerticalOptions="End" 
+                    HorizontalOptions="FillAndExpand"
+                    Clicked="OnGetUoMForAttributeClicked"/>
+            <Label x:Name="ApiResponseLabel" TextColor="Green" FontAttributes="Italic" />
 
-        <!-- Button to fetch weather forecast UoMs -->
-        <Button Text="Get All Weather Forecast UoM" Clicked="OnGetAllWeatherForecastUoMsClicked"/>
-        <Label Text="Get UoM for Attribute" FontAttributes="Bold" />
-        <Entry x:Name="AttributeEntry" Placeholder="Enter Attribute Name"/>
-        <Button Text="Get for attributeUoM" Clicked="OnGetUoMForAttributeClicked"/>
-        <Label x:Name="ApiResponseLabel" TextColor="Green" FontAttributes="Italic" />
-
-        <!-- List view for weather forecast UoMs -->
-        <ListView x:Name="WeatherForecastUoMListView">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Padding="10">
-                            <Label Text="{Binding Attribute, StringFormat='Attribute: {0}'}" />
-                            <Label Text="{Binding UoM, StringFormat='Unit: {0}'}" />
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-
-    </StackLayout>
-
+            <!-- List view for weather forecast UoMs -->
+            <ListView x:Name="WeatherForecastUoMListView">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="10">
+                                <Label Text="{Binding Attribute, StringFormat='Attribute: {0}'}" />
+                                <Label Text="{Binding UoM, StringFormat='Unit: {0}'}" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

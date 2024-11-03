@@ -17,7 +17,7 @@ namespace Energy_Prediction_System
         {
             
             InitializeComponent();
-            writeData();
+            WriteData();
         }
 
         private async void OnLiveSensorData1ButtonClicked(object sender, EventArgs e) => await Navigation.PushAsync(new LiveSensorData());
@@ -44,7 +44,7 @@ namespace Energy_Prediction_System
                 default:
                     break;
             }
-            pageSelector.SelectedIndex = -1; // Resets the picker to no selection
+            pageSelector.SelectedIndex = -1;
         }
 
         private void UpdateGUI(float rand)
@@ -58,7 +58,7 @@ namespace Energy_Prediction_System
             });
         }
 
-        private async void writeData()
+        private async void WriteData()
         {
             while (_isRunning)
             {
@@ -72,7 +72,7 @@ namespace Energy_Prediction_System
         {
             base.OnAppearing();
             _isRunning = true;
-            writeData();
+            WriteData();
         }
         protected override void OnDisappearing()
         {
