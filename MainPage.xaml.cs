@@ -53,8 +53,11 @@ namespace Energy_Prediction_System
             {
                 TempAvg_Label.Text = $"Temperature: {rand:F2}" + " °C";
                 HumpAvg_Label.Text = $"Humidity: {rand:F2}" + " %";
-                OutsideTemp_Label.Text = $" {rand:F2}" + " °C";
-                PredEnergy_Label.Text = $" {rand:F2}" + " kWh";
+                OutsideTemp_Label.Text = $"Temperature {rand:F2}" + " °C";
+                OutsideHum_Label.Text = $"Humidity: {rand:F2}" + " %";
+                PredEnergy_Label.Text = $"Predicted {rand:F2}" + " kWh";
+                CurrEnergy_Label.Text = $"Current {rand:F2}" + " kWh";
+
             });
         }
 
@@ -79,6 +82,10 @@ namespace Energy_Prediction_System
             base.OnDisappearing();
             _isRunning = false;
         }
+        private async void OnLabelTapped_AvgTemp(object sender, EventArgs e) => await Navigation.PushAsync(new LiveSensorData());
+        private async void OnLabelTapped_AvgHum(object sender, EventArgs e) => await Navigation.PushAsync(new LiveSensorData()); 
+        private async void OnLabelTapped_OutTemp(object sender, EventArgs e) => await Navigation.PushAsync(new LiveWheaterData());
+        private async void OnLabelTapped_OutHum(object sender, EventArgs e) => await Navigation.PushAsync(new LiveWheaterData());
     }
 }
 
