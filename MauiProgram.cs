@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Syncfusion.Maui.Core.Hosting;
 using Energy_Prediction_System.Services;
-using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace Energy_Prediction_System
 {
@@ -12,7 +11,6 @@ namespace Energy_Prediction_System
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
-                .UseSkiaSharp()
                 .ConfigureSyncfusionCore()
                 .ConfigureFonts(fonts =>
                 {
