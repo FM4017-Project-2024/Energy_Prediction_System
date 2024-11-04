@@ -41,6 +41,9 @@ namespace Energy_Prediction_System
                 case 3:
                     await Navigation.PushAsync(new DatabasePostPage());
                     break;
+                case 4:
+                    await Navigation.PushAsync(new Energy());
+                    break;
                 default:
                     break;
             }
@@ -77,15 +80,18 @@ namespace Energy_Prediction_System
             _isRunning = true;
             WriteData();
         }
+
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
             _isRunning = false;
         }
+
         private async void OnLabelTapped_AvgTemp(object sender, EventArgs e) => await Navigation.PushAsync(new LiveSensorData());
         private async void OnLabelTapped_AvgHum(object sender, EventArgs e) => await Navigation.PushAsync(new LiveSensorData()); 
         private async void OnLabelTapped_OutTemp(object sender, EventArgs e) => await Navigation.PushAsync(new LiveWheaterData());
         private async void OnLabelTapped_OutHum(object sender, EventArgs e) => await Navigation.PushAsync(new LiveWheaterData());
+        private async void OnLabelTapped_Energy(object sender, EventArgs e) => await Navigation.PushAsync(new Energy()); 
     }
 }
 
