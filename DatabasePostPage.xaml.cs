@@ -8,7 +8,6 @@ namespace Energy_Prediction_System.Views
     public partial class DatabasePostPage : ContentPage
     {
         private readonly DatabaseWebAPIServices _databaseWebAPIServices;
-        private const string BaseApiUrl = "https://localhost:7107/api/";
 
         public DatabasePostPage()
         {
@@ -19,7 +18,7 @@ namespace Energy_Prediction_System.Views
         // Handle POST for temperature data
         private async void OnPostTemperatureClicked(object sender, EventArgs e)
         {
-            string apiUrl = $"{BaseApiUrl}BuildingTemperatureItems";
+            string apiUrl = "/api/BuildingTemperatureItems";  // Bruker relativ URL
 
             var temperatureItem = new BuildingTemperatureItem
             {
@@ -46,7 +45,7 @@ namespace Energy_Prediction_System.Views
         // Handle POST for humidity data
         private async void OnPostHumidityClicked(object sender, EventArgs e)
         {
-            string apiUrl = $"{BaseApiUrl}BuildingRelativeHumidityItems";
+            string apiUrl = "/api/BuildingRelativeHumidityItems";  // Bruker relativ URL
 
             var humidityItem = new BuildingRelativeHumidityItem
             {
@@ -72,7 +71,7 @@ namespace Energy_Prediction_System.Views
         // Handle POST for energy meter data
         private async void OnPostEnergyMeterClicked(object sender, EventArgs e)
         {
-            string apiUrl = $"{BaseApiUrl}BuildingEnergyMeterItems";
+            string apiUrl = "/api/BuildingEnergyMeterItems";  // Bruker relativ URL
 
             var energyMeterItem = new BuildingEnergyMeterItem
             {
@@ -95,7 +94,7 @@ namespace Energy_Prediction_System.Views
         // Handle POST for energy predictions
         private async void OnPostEnergyPredictionClicked(object sender, EventArgs e)
         {
-            string apiUrl = $"{BaseApiUrl}EnergyPredictionItems";
+            string apiUrl = "/api/EnergyPredictionItems";  // Bruker relativ URL
 
             var energyPredictionItem = new EnergyPredictionItem
             {
@@ -118,7 +117,7 @@ namespace Energy_Prediction_System.Views
         // Handle POST for weather forecast unit of measure (UoM)
         private async void OnPostWeatherForecastUoMClicked(object sender, EventArgs e)
         {
-            string apiUrl = $"{BaseApiUrl}WeatherForecastUoMItems";
+            string apiUrl = "/api/WeatherForecastUoMItems";  // Bruker relativ URL
 
             var weatherForecastUoMItem = new WeatherForecastUoMItem
             {

@@ -8,6 +8,29 @@
         <Button Text="Get All Building Temperatures" Clicked="OnGetAllBuildingTempsClicked"/>
         <Button Text="Get Latest Building Temperature" Clicked="OnGetLatestBuildingTempClicked"/>
 
+        <!-- Buttons to fetch humidity data -->
+        <Button Text="Get All Building Relative Humidity" Clicked="OnGetAllBuildingRelHumidityClicked"/>
+        <Button Text="Get Latest Building Relative Humidity" Clicked="OnGetLatestBuildingRelHumidityClicked"/>
+
+        <!-- Buttons to fetch energy meter data -->
+        <Button Text="Get All Building Energy Meter Data" Clicked="OnGetAllEnergyMeterDataClicked"/>
+        <Button Text="Get Latest Building Energy Meter Data" Clicked="OnGetLatestEnergyMeterDataClicked"/>
+
+        <!-- Buttons to fetch energy predictions -->
+        <Button Text="Get All Energy Predictions" Clicked="OnGetAllEnergyPredictionsClicked"/>
+        <Button Text="Get Latest Energy Prediction" Clicked="OnGetLatestEnergyPredictionClicked"/>
+
+        <!-- Buttons to fetch weather forecasts -->
+        <Button Text="Get All Weather Forecasts" Clicked="OnGetAllWeatherForecastsClicked"/>
+        <Button Text="Get Latest Weather Forecasts" Clicked="OnGetLatestWeatherForecastClicked"/>
+
+        <!-- Button to fetch weather forecast UoMs -->
+        <Button Text="Get All Weather Forecast UoM" Clicked="OnGetAllWeatherForecastUoMsClicked"/>
+        <Label Text="Get UoM for Attribute" FontAttributes="Bold" />
+        <Entry x:Name="AttributeEntry" Placeholder="Enter Attribute Name"/>
+        <Button Text="Get for attributeUoM" Clicked="OnGetUoMForAttributeClicked"/>
+        <Label x:Name="ApiResponseLabel" TextColor="Green" FontAttributes="Italic" />
+        
         <!-- List view for temperature data -->
         <ListView x:Name="TemperatureListView">
             <ListView.ItemTemplate>
@@ -27,10 +50,6 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <!-- Buttons to fetch humidity data -->
-        <Button Text="Get All Building Relative Humidity" Clicked="OnGetAllBuildingRelHumidityClicked"/>
-        <Button Text="Get Latest Building Relative Humidity" Clicked="OnGetLatestBuildingRelHumidityClicked"/>
-
         <!-- List view for humidity data -->
         <ListView x:Name="HumidityListView">
             <ListView.ItemTemplate>
@@ -49,10 +68,6 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <!-- Buttons to fetch energy meter data -->
-        <Button Text="Get All Building Energy Meter Data" Clicked="OnGetAllEnergyMeterDataClicked"/>
-        <Button Text="Get Latest Building Energy Meter Data" Clicked="OnGetLatestEnergyMeterDataClicked"/>
-
         <!-- List view for energy meter data -->
         <ListView x:Name="EnergyMeterListView">
             <ListView.ItemTemplate>
@@ -68,10 +83,6 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <!-- Buttons to fetch energy predictions -->
-        <Button Text="Get All Energy Predictions" Clicked="OnGetAllEnergyPredictionsClicked"/>
-        <Button Text="Get Latest Energy Prediction" Clicked="OnGetLatestEnergyPredictionClicked"/>
-
         <!-- List view for energy predictions -->
         <ListView x:Name="EnergyPredictionListView">
             <ListView.ItemTemplate>
@@ -85,10 +96,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
-        <!-- Buttons to fetch weather forecasts -->
-        <Button Text="Get All Weather Forecasts" Clicked="OnGetAllWeatherForecastsClicked"/>
-        <Button Text="Get Latest Weather Forecasts" Clicked="OnGetLatestWeatherForecastClicked"/>
 
         <!-- List view for weather forecasts, displaying all fields -->
         <ListView x:Name="WeatherForecastListView">
@@ -113,13 +120,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
-        <!-- Button to fetch weather forecast UoMs -->
-        <Button Text="Get All Weather Forecast UoM" Clicked="OnGetAllWeatherForecastUoMsClicked"/>
-        <Label Text="Get UoM for Attribute" FontAttributes="Bold" />
-        <Entry x:Name="AttributeEntry" Placeholder="Enter Attribute Name"/>
-        <Button Text="Get for attributeUoM" Clicked="OnGetUoMForAttributeClicked"/>
-        <Label x:Name="ApiResponseLabel" TextColor="Green" FontAttributes="Italic" />
 
         <!-- List view for weather forecast UoMs -->
         <ListView x:Name="WeatherForecastUoMListView">

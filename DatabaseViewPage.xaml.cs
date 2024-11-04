@@ -10,7 +10,6 @@ namespace Energy_Prediction_System.Views
     public partial class DatabaseViewPage : ContentPage
     {
         private readonly DatabaseWebAPIServices _databaseWebAPIServices;
-        private const string BaseApiUrl = "https://localhost:7107/api/";
 
         public DatabaseViewPage()
         {
@@ -21,7 +20,7 @@ namespace Energy_Prediction_System.Views
         // Methods to retrieve temperature data
         private async void OnGetAllBuildingTempsClicked(object sender, EventArgs e)
         {
-            string apiUrl = $"{BaseApiUrl}BuildingTemperatureItems";
+            string apiUrl = "/api/BuildingTemperatureItems";
             try
             {
                 var temperatureItems = await _databaseWebAPIServices.GetBuildingTempsAsync(apiUrl);
@@ -35,7 +34,7 @@ namespace Energy_Prediction_System.Views
 
         private async void OnGetLatestBuildingTempClicked(object sender, EventArgs e)
         {
-            string apiUrl = $"{BaseApiUrl}BuildingTemperatureItems/latest";
+            string apiUrl = "/api/BuildingTemperatureItems/latest";
             try
             {
                 var latestTemp = await _databaseWebAPIServices.GetLatestBuildingTempAsync(apiUrl);
@@ -50,7 +49,7 @@ namespace Energy_Prediction_System.Views
         // Methods to retrieve humidity data
         private async void OnGetAllBuildingRelHumidityClicked(object sender, EventArgs e)
         {
-            string apiUrl = $"{BaseApiUrl}BuildingRelativeHumidityItems";
+            string apiUrl = "/api/BuildingRelativeHumidityItems";
             try
             {
                 var humidityItems = await _databaseWebAPIServices.GetBuildingRelHumidityAsync(apiUrl);
@@ -64,7 +63,7 @@ namespace Energy_Prediction_System.Views
 
         private async void OnGetLatestBuildingRelHumidityClicked(object sender, EventArgs e)
         {
-            string apiUrl = $"{BaseApiUrl}BuildingRelativeHumidityItems/latest";
+            string apiUrl = "/api/BuildingRelativeHumidityItems/latest";
             try
             {
                 var latestHumidity = await _databaseWebAPIServices.GetLatestBuildingRelHumidityAsync(apiUrl);
@@ -79,7 +78,7 @@ namespace Energy_Prediction_System.Views
         // Methods to retrieve energy meter data
         private async void OnGetAllEnergyMeterDataClicked(object sender, EventArgs e)
         {
-            string apiUrl = $"{BaseApiUrl}BuildingEnergyMeterItems";
+            string apiUrl = "/api/BuildingEnergyMeterItems";
             try
             {
                 var energyMeterItems = await _databaseWebAPIServices.GetBuildingEnergyMeterAsync(apiUrl);
@@ -93,7 +92,7 @@ namespace Energy_Prediction_System.Views
 
         private async void OnGetLatestEnergyMeterDataClicked(object sender, EventArgs e)
         {
-            string apiUrl = $"{BaseApiUrl}BuildingEnergyMeterItems/latest";
+            string apiUrl = "/api/BuildingEnergyMeterItems/latest";
             try
             {
                 var latestEnergyMeter = await _databaseWebAPIServices.GetLatestBuildingEnergyMeterAsync(apiUrl);
@@ -108,7 +107,7 @@ namespace Energy_Prediction_System.Views
         // Methods to retrieve energy prediction data
         private async void OnGetAllEnergyPredictionsClicked(object sender, EventArgs e)
         {
-            string apiUrl = $"{BaseApiUrl}EnergyPredictionItems";
+            string apiUrl = "/api/EnergyPredictionItems";
             try
             {
                 var energyPredictionItems = await _databaseWebAPIServices.GetEnergyPredictionsAsync(apiUrl);
@@ -122,7 +121,7 @@ namespace Energy_Prediction_System.Views
 
         private async void OnGetLatestEnergyPredictionClicked(object sender, EventArgs e)
         {
-            string apiUrl = $"{BaseApiUrl}EnergyPredictionItems/latest";
+            string apiUrl = "/api/EnergyPredictionItems/latest";
             try
             {
                 var latestPrediction = await _databaseWebAPIServices.GetLatestEnergyPredictionAsync(apiUrl);
@@ -137,7 +136,7 @@ namespace Energy_Prediction_System.Views
         // Methods to retrieve weather forecast data
         private async void OnGetAllWeatherForecastsClicked(object sender, EventArgs e)
         {
-            string apiUrl = $"{BaseApiUrl}WeatherForecastItems";
+            string apiUrl = "/api/WeatherForecastItems";
             try
             {
                 var weatherForecastItems = await _databaseWebAPIServices.GetWeatherForecastsAsync(apiUrl);
@@ -151,7 +150,7 @@ namespace Energy_Prediction_System.Views
 
         private async void OnGetLatestWeatherForecastClicked(object sender, EventArgs e)
         {
-            string apiUrl = $"{BaseApiUrl}WeatherForecastItems/latest";
+            string apiUrl = "/api/WeatherForecastItems/latest";
             try
             {
                 var latestForecast = await _databaseWebAPIServices.GetLatestWeatherForecastsAsync(apiUrl);
@@ -166,7 +165,7 @@ namespace Energy_Prediction_System.Views
         // Methods to retrieve weather forecast units of measurement (UoM)
         private async void OnGetAllWeatherForecastUoMsClicked(object sender, EventArgs e)
         {
-            string apiUrl = $"{BaseApiUrl}WeatherForecastUoMItems";
+            string apiUrl = "/api/WeatherForecastUoMItems";
             try
             {
                 var uomItems = await _databaseWebAPIServices.GetWeatherForecastUoMsAsync(apiUrl);
@@ -181,7 +180,7 @@ namespace Energy_Prediction_System.Views
         // Retrieve UoM for a specific attribute
         private async void OnGetUoMForAttributeClicked(object sender, EventArgs e)
         {
-            string apiUrl = $"{BaseApiUrl}WeatherForecastUoMItems";
+            string apiUrl = "/api/WeatherForecastUoMItems/uom/";
 
             try
             {
