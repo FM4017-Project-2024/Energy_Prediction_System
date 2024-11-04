@@ -46,16 +46,16 @@ public partial class LiveSensorData : ContentPage
     {
         MainThread.BeginInvokeOnMainThread(() =>
         {
-            TT01_Label.Text = $"TT01: {sensor.TT01:F2}";
-            TT02_Label.Text = $"TT02: {sensor.TT02:F2}";
-            TT03_Label.Text = $"TT03: {sensor.TT03:F2}";
-            TT04_Label.Text = $"TT04: {sensor.TT04:F2}";
-            TT05_Label.Text = $"TT05: {sensor.TT05:F2}";
-            RHT01_Label.Text = $"RHT01: {sensor.RHT01:F2}";
-            RHT02_Label.Text = $"RHT02: {sensor.RHT02:F2}";
-            RHT03_Label.Text = $"RHT03: {sensor.RHT03:F2}";
-            RHT04_Label.Text = $"RHT04: {sensor.RHT04:F2}";
-            KWH_Label.Text = $"KWH01: {sensor.KWH01:F2}";
+            TT01_Label.Text = $"TT01: {sensor.TT01:F2}" + " °C";
+            TT02_Label.Text = $"TT02: {sensor.TT02:F2}" + " °C";
+            TT03_Label.Text = $"TT03: {sensor.TT03:F2}" + " °C";
+            TT04_Label.Text = $"TT04: {sensor.TT04:F2}" + " °C";
+            TT05_Label.Text = $"TT05: {sensor.TT05:F2}" + " °C";
+            RHT01_Label.Text = $"RHT01: {sensor.RHT01:F2}" + " %";
+            RHT02_Label.Text = $"RHT02: {sensor.RHT02:F2}" + " %";
+            RHT03_Label.Text = $"RHT03: {sensor.RHT03:F2}" + " %";
+            RHT04_Label.Text = $"RHT04: {sensor.RHT04:F2}" + " %";
+            KWH_Label.Text = $"KWH01: {sensor.KWH01:F2}" + " kWh";
         });
     }
 

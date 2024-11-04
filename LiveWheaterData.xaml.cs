@@ -71,7 +71,7 @@ public partial class LiveWheaterData : ContentPage
             MEDIUM_Label.Text = $"Medium clouds: {value.MEDIUM:F2}" + " %";
             HIGH_Label.Text = $"High clouds: {value.HIGH:F2}" + " %";
             TD_Label.Text = $"Dewpoint temperature: {value.TD:F2}" + " °C";
-            DT_Label.Text = "Last update: " + value.currentDateTime;
+            DT_Label.Text = value.currentDateTime.ToString();
         });
     }
 

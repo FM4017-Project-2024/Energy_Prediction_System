@@ -3,14 +3,21 @@ using Energy_Prediction_System.Views;
 using Energy_Prediction_System.Services;
 using Energy_Prediction_System.Classes;
 using System.Runtime.CompilerServices;
+using System;
+using Microsoft.Maui.Controls.Shapes;
+
 
 namespace Energy_Prediction_System
 {
     public partial class MainPage : ContentPage
     {
+        private float _gaugeValue;
+        private bool _isRunning = false;
         public MainPage()
         {
+            
             InitializeComponent();
+            WriteData();
         }
 
         private async void OnLiveSensorData1ButtonClicked(object sender, EventArgs e) => await Navigation.PushAsync(new LiveSensorData());
@@ -37,49 +44,41 @@ namespace Energy_Prediction_System
                 default:
                     break;
             }
-            pageSelector.SelectedIndex = -1; // Resets the picker to no selection
+            pageSelector.SelectedIndex = -1;
         }
 
-        //public async void UpdateWeatherDatabaseAsync()
-        //{
-        //    try
-        //    {
-        //        private readonly DatabaseWebAPIServices _webAPIService = new();
-        //        private readonly WeatherService _weatherService = new();
-        //        string databaseWeatherDataUrl = "https://localhost:7107/api/WeatherForecastItems/latest";
+        private void UpdateGUI(float rand)
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                TempAvg_Label.Text = $"Temperature: {rand:F2}" + " °C";
+                HumpAvg_Label.Text = $"Humidity: {rand:F2}" + " %";
+                OutsideTemp_Label.Text = $" {rand:F2}" + " °C";
+                PredEnergy_Label.Text = $" {rand:F2}" + " kWh";
+            });
+        }
 
-        //        WeatherForecastItem latestForecast = await _webAPIService.GetLatestWeatherForecastsAsync(databaseWeatherDataUrl);
+        private async void WriteData()
+        {
+            while (_isRunning)
+            {
+                var random = new Random();
+                UpdateGUI(random.Next(0, 100));
+                await Task.Delay(3000);
+            }
+        }
 
-        //        // Get the latest weather data entry from the database
-        //        List<WeatherForecastItem> databaseWeatherDataList = await GetLatestWeatherForecastsAsync(databaseWeatherDataUrl);
-        //        WeatherForecastItem latestDatabaseWeatherData = databaseWeatherDataList.OrderByDescending(data => data.DateTime).FirstOrDefault();
-
-        //        // Check if the database contains any entries
-        //        if (latestDatabaseWeatherData == null)
-        //        {
-        //            // If no data in the database, add the latest from API
-        //            await AddWeatherDataToDatabase(latestApiWeatherData);
-        //            Console.WriteLine("Database was empty. Added new weather data.");
-        //            return;
-        //        }
-
-        //        // Compare the DateTime values
-        //        if (latestApiWeatherData.ForecastTime != latestDatabaseWeatherData.ForecastTime)
-        //        {
-        //            // If the latest data from the API is more recent, add it to the database
-        //            await AddWeatherDataToDatabase(latestApiWeatherData);
-        //            Console.WriteLine("New weather data added to the database.");
-        //        }
-        //        else
-        //        {
-        //            Console.WriteLine("Database is up to date. No new data added.");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine($"Error updating weather data: {ex.Message}");
-        //    }
-        //}
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            _isRunning = true;
+            WriteData();
+        }
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            _isRunning = false;
+        }
     }
 }
 

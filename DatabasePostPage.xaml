@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Energy_Prediction_System.Views.DatabasePostPage">
+             x:Class="Energy_Prediction_System.Views.DatabasePostPage"
+             Title="Write to database">
 
     <ScrollView>
         <StackLayout Padding="20">
@@ -13,7 +14,13 @@
             <Entry x:Name="TempEntry4" Placeholder="Temperature 4" Keyboard="Numeric"/>
             <Entry x:Name="TempEntry5" Placeholder="Temperature 5" Keyboard="Numeric"/>
             <Entry x:Name="TempUoMEntry" Placeholder="Unit of Measurement"/>
-            <Button Text="Post Building Temperature" Clicked="OnPostTemperatureClicked"/>
+            <Button Text="Post Building Temperature"
+                    FontSize="12"
+                    BackgroundColor="#1C4E80"
+                    TextColor="White" 
+                    VerticalOptions="End" 
+                    HorizontalOptions="FillAndExpand"
+                    Clicked="OnPostTemperatureClicked"/>
 
             <!-- Building Relative Humidity Item Section -->
             <Label Text="Post Building Relative Humidity Data" FontAttributes="Bold" />
@@ -22,25 +29,49 @@
             <Entry x:Name="HumidityEntry3" Placeholder="Relative Humidity 3" Keyboard="Numeric"/>
             <Entry x:Name="HumidityEntry4" Placeholder="Relative Humidity 4" Keyboard="Numeric"/>
             <Entry x:Name="HumidityUoMEntry" Placeholder="Unit of Measurement"/>
-            <Button Text="Post Building Relative Humidity" Clicked="OnPostHumidityClicked"/>
+            <Button Text="Post Building Relative Humidity"
+                    FontSize="12"
+                    BackgroundColor="#1C4E80"
+                    TextColor="White" 
+                    VerticalOptions="End" 
+                    HorizontalOptions="FillAndExpand"
+                    Clicked="OnPostHumidityClicked"/>
 
             <!-- Building Energy Meter Item Section -->
             <Label Text="Post Building Energy Meter Data" FontAttributes="Bold" />
             <Entry x:Name="EnergyMeterEntry1" Placeholder="Energy Meter 1" Keyboard="Numeric"/>
             <Entry x:Name="EnergyMeterUoMEntry" Placeholder="Unit of Measurement"/>
-            <Button Text="Post Building Energy Meter" Clicked="OnPostEnergyMeterClicked"/>
+            <Button Text="Post Building Energy Meter"
+                    FontSize="12"
+                    BackgroundColor="#1C4E80"
+                    TextColor="White" 
+                    VerticalOptions="End" 
+                    HorizontalOptions="FillAndExpand"
+                    Clicked="OnPostEnergyMeterClicked"/>
 
             <!-- Energy Prediction Item Section -->
             <Label Text="Post Energy Prediction Data" FontAttributes="Bold" />
             <Entry x:Name="EnergyPredictionEntry" Placeholder="Energy Prediction" Keyboard="Numeric"/>
             <Entry x:Name="EnergyPredictionUoMEntry" Placeholder="Unit of Measurement"/>
-            <Button Text="Post Energy Prediction" Clicked="OnPostEnergyPredictionClicked"/>
+            <Button Text="Post Energy Prediction"
+                    FontSize="12"
+                    BackgroundColor="#1C4E80"
+                    TextColor="White" 
+                    VerticalOptions="End" 
+                    HorizontalOptions="FillAndExpand"
+                    Clicked="OnPostEnergyPredictionClicked"/>
 
             <!-- Weather Forecast UoM Section -->
             <Label Text="Post Weather Forecast Unit of Measure" FontAttributes="Bold" />
             <Entry x:Name="AttributeEntry" Placeholder="Attribute (e.g., Temperature)"/>
             <Entry x:Name="UoMEntry" Placeholder="Unit of Measurement"/>
-            <Button Text="Post Weather Forecast UoM" Clicked="OnPostWeatherForecastUoMClicked"/>
+            <Button Text="Post Weather Forecast UoM"
+                    FontSize="12"
+                    BackgroundColor="#1C4E80"
+                    TextColor="White" 
+                    VerticalOptions="End" 
+                    HorizontalOptions="FillAndExpand"
+                    Clicked="OnPostWeatherForecastUoMClicked"/>
 
             <!-- Label for API response confirmation -->
             <Label x:Name="ApiResponseLabel" TextColor="Green" FontAttributes="Italic" />

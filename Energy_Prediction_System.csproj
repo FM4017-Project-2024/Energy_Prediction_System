@@ -57,10 +57,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Classes\GaugeView.cs" />
+	  <Compile Remove="Classes\VerticalGauge.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.92" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.92" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0-rc.2.24473.5" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="SkiaSharp.Views" Version="2.88.8" />
+		<PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.8" />
+		<PackageReference Include="SkiaSharp.Views.Maui.Core" Version="2.88.8" />
 		<PackageReference Include="Syncfusion.Maui.Charts" Version="27.1.53" />
 	</ItemGroup>
 
