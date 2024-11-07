@@ -17,5 +17,8 @@ namespace Energy_Prediction_System.Classes
 
         [Required]
         public DateTime DateTime { get; set; }
+
+        [Required]
+        public DateTime ExecuteTime { get; set; } = DateTime.Now;
     }
 }

@@ -9,15 +9,19 @@ using Newtonsoft.Json;
 using RestSharp;
 using Microsoft.Maui.Storage;
 using Microsoft.Extensions.Configuration;
+using Energy_Prediction_System.Classes;
+using System.Data;
 
 namespace Energy_Prediction_System.Services
 {
     public class PredictionService
     {
-        private readonly string apiKey;
+        private readonly string? apiKey;
+        private readonly DatabaseWebAPIServices _databaseWebAPIServices;
 
         public PredictionService()
         {
+            _databaseWebAPIServices = new DatabaseWebAPIServices();
             apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY_Project24");
 
             if (string.IsNullOrEmpty(apiKey))
@@ -28,11 +32,16 @@ namespace Energy_Prediction_System.Services
 
         private static readonly string endpoint = "https://24240-m1ksp369-westeurope.openai.azure.com/openai/deployments/gpt-35-turbo/chat/completions?api-version=2024-05-01-preview";
 
-        public async Task<string> GetEnergyConsumptionPredictionAsync()//string filename
+        public async Task<string> GetEnergyConsumptionPredictionAsync(DateTime day)
         {
-            // Read CSV content from the embedded resource
-            //string promptData = await PrepareInputDataFromFile();
-            string promptData = await GetFormattedWeatherData();
+            /*
+                Method that returns predicted energy consumption for a given input day
+                Day must be within range of api (typically 10 days ahead)
+             */
+
+
+            string promptData = await GetAPITrainingData();
+            string predictData = await GetInputDataForPrediction(day);
 
             // Prepare the JSON payload for the request
             var data = new
@@ -40,8 +49,18 @@ namespace Energy_Prediction_System.Services
                 messages = new[]
                 {
                     new { role = "system", content = "You are a prediction model that predicts energy consumption based on previous data" },
-                    new { role = "user", content = $"Predict future energy consumption when Temperature is 20, Humidity is 80, Wind Speed is 11 based on the following data:\n{promptData}. I don't want any explanation or text, only a number. Answer in this format 'xxx kWh'" }
-                    //new { role = "user", content = $"Predict energy consumption for 2024-10-04 based on the previous data: {promptData}. I want you to answer in this format only: 'xxx kWh' that is the only thing you answer. No 'ok' or 'sure'" }
+                    new
+                    {
+                        role = "user",
+                        content = $@"
+                        Predict the energy consumption for the following conditions:
+                        {predictData}
+
+                        Based on the historical training data:
+                        {promptData}
+
+                        Respond with only the predicted energy consumption as a single number without any units, explanation, or extra text. Format: just the number (e.g., '123')."
+                    }
                 },
                 max_tokens = 800,
                 temperature = 0.7,
@@ -63,7 +82,7 @@ namespace Energy_Prediction_System.Services
             {
                 var result = JsonConvert.DeserializeObject<dynamic>(response.Content);
                 string assistantResponse = result.choices[0].message.content;
-                return assistantResponse;
+                return assistantResponse + " kWh";
             }
             else
             {
@@ -71,14 +90,62 @@ namespace Energy_Prediction_System.Services
             }
         }
 
-        public async Task<string> PrepareInputDataFromList(List<WeatherEnergyData> weatherDataList)
+        private async void PushPredictedToDatabase(DateTime day, float consumption)
         {
+            /*
+                Method that uploads predicted energy consumption to database
+             */
+
+            string apiUrl = "/api/EnergyPredictionItems";
+
+            var energyPredictionItem = new EnergyPredictionItem
+            {
+                EnergyPrediction = consumption,
+                EnergyPredictionUoM = "°C",
+                DateTime = day,
+                ExecuteTime = DateTime.Now
+            };
+
+            try
+            {
+                var response = await _databaseWebAPIServices.PostEnergyPredictionAsync(apiUrl, energyPredictionItem);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public string ConstructAPIString(List<WeatherForecastItem> weatherForecastList, List<BuildingEnergyMeterItem> buildingEnergyMeterList)
+        {
+            /*
+                Method that returns a string with date, temperature and energy consumption on the same line
+             */
+
+
             // Use StringBuilder to construct the input string
             StringBuilder promptData = new StringBuilder();
 
-            foreach (var record in weatherDataList)
+            foreach (var forecast in weatherForecastList)
             {
-                promptData.AppendLine($"Date: {record.Date}, Temperature: {record.Temperature}°C, Humidity: {record.Humidity}%, Wind Speed: {record.WindSpeed} km/h, Energy Consumption: {record.EnergyConsumption} kWh");
+                // Try to parse ForecastTime as DateTime
+                if (DateTime.TryParse(forecast.ForecastTime, out DateTime forecastDate))
+                {
+                    // Find the first energy meter entry with the same day
+                    var matchingEnergyMeter = buildingEnergyMeterList
+                        .FirstOrDefault(meter => meter.EnergyMeterDateTime.Date == forecastDate.Date);
+
+                    // If a matching energy meter entry is found, add the data to the string
+                    if (matchingEnergyMeter != null)
+                    {
+                        promptData.AppendLine($"Date: {forecastDate:yyyy-MM-dd}, Temperature: {forecast.Temperature}°C, Energy Consumption: {matchingEnergyMeter.EnergyMeter1} kWh");
+                    }
+                }
+                else
+                {
+                    // Handle parsing failure if necessary (optional)
+                    Console.WriteLine($"Warning: Could not parse ForecastTime '{forecast.ForecastTime}'");
+                }
             }
 
             return promptData.ToString();
@@ -94,21 +161,66 @@ namespace Energy_Prediction_System.Services
             public int EnergyConsumption { get; set; }
         }
 
-        // Example usage with dummy data
-        public async Task<string> GetFormattedWeatherData()
-        {
-            // Create a list of dummy WeatherEnergyData instances
-            var weatherDataList = new List<WeatherEnergyData>
-                {
-                    new WeatherEnergyData { Date = "2024-10-01", Temperature = 15, Humidity = 70, WindSpeed = 10, EnergyConsumption = 200 },
-                    new WeatherEnergyData { Date = "2024-10-02", Temperature = 18, Humidity = 65, WindSpeed = 12, EnergyConsumption = 210 },
-                    new WeatherEnergyData { Date = "2024-10-03", Temperature = 20, Humidity = 60, WindSpeed = 8, EnergyConsumption = 220 }
-                };
 
-            // Pass the list to PrepareInputDataFromList to get the formatted string
-            return await PrepareInputDataFromList(weatherDataList);
+        public async Task<string> GetAPITrainingData()
+        {
+            /*
+                Method that returns a string with training data for all available energy consumptions in database
+             */
+
+            string weatherApiUrl = "/api/WeatherForecastItems";
+            string energyApiUrl = "/api/BuildingEnergyMeterItems";
+            string apiString = "";
+            List<WeatherForecastItem> weatherForecastList;
+            List<BuildingEnergyMeterItem> buildingEnergyMeterList;
+
+            try
+            {
+                weatherForecastList = await _databaseWebAPIServices.GetWeatherForecastsAsync(weatherApiUrl);
+                buildingEnergyMeterList = await _databaseWebAPIServices.GetBuildingEnergyMeterAsync(energyApiUrl);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            apiString = ConstructAPIString(weatherForecastList, buildingEnergyMeterList);
+            return apiString;
         }
 
+        public async Task<string> GetInputDataForPrediction(DateTime day)
+        {
+            /*
+                Method that returns average temperature for given input day
+             */
+
+            List<WeatherForecastItem> weatherForecastList;
+            string weatherApiUrl = "/api/WeatherForecastItems";
+            try
+            {
+                weatherForecastList = await _databaseWebAPIServices.GetWeatherForecastsAsync(weatherApiUrl);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            // Filter records where the date matches the specified day
+            var matchingRecords = weatherForecastList
+                .Where(record => DateTime.TryParse(record.ForecastTime, out DateTime forecastDate) && forecastDate.Date == day.Date)
+                .ToList();
+
+            // Check if there are any matching records
+            if (!matchingRecords.Any())
+            {
+                return $"No data available for {day:yyyy-MM-dd}.";
+            }
+
+            // Calculate the average temperature
+            double averageTemperature = matchingRecords.Average(record => record.Temperature);
+
+            // Return the formatted result
+            return $"Date: {day:yyyy-MM-dd}, Average Temperature: {averageTemperature:F2}°C";
+        }
     }
 }
 

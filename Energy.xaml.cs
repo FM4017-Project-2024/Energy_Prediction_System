@@ -15,7 +15,8 @@ public partial class Energy : ContentPage
         try
         {
             // Pass the path of the CSV file
-            string prediction = await _predictionService.GetEnergyConsumptionPredictionAsync();
+            DateTime today = DateTime.Now.Date;
+            string prediction = await _predictionService.GetEnergyConsumptionPredictionAsync(today);
             predictionLabel.Text = prediction;
         }
         catch (Exception ex)

@@ -100,7 +100,8 @@ namespace Energy_Prediction_System.Views
             {
                 EnergyPrediction = float.Parse(EnergyPredictionEntry.Text),
                 EnergyPredictionUoM = EnergyPredictionUoMEntry.Text,
-                DateTime = DateTime.Now
+                DateTime = DateTime.Now,
+                ExecuteTime = DateTime.Now
             };
 
             try
