@@ -11,6 +11,7 @@ using Microsoft.Maui.Storage;
 using Microsoft.Extensions.Configuration;
 using Energy_Prediction_System.Classes;
 using System.Data;
+using Newtonsoft.Json.Linq;
 
 namespace Energy_Prediction_System.Services
 {
@@ -32,7 +33,7 @@ namespace Energy_Prediction_System.Services
 
         private static readonly string endpoint = "https://24240-m1ksp369-westeurope.openai.azure.com/openai/deployments/gpt-35-turbo/chat/completions?api-version=2024-05-01-preview";
 
-        public async Task<string> GetEnergyConsumptionPredictionAsync(DateTime day)
+        public async Task<string> GetEnergyConsumptionPredictionAsync(List<DateTime> days)
         {
             /*
                 Method that returns predicted energy consumption for a given input day
@@ -41,25 +42,45 @@ namespace Energy_Prediction_System.Services
 
 
             string promptData = await GetAPITrainingData();
-            string predictData = await GetInputDataForPrediction(day);
+            StringBuilder predictData = new StringBuilder();
+            foreach (var day in days) { predictData.AppendLine(await GetInputDataForPrediction(day)); }
+            //string predictData = await GetInputDataForPrediction(day);
 
             // Prepare the JSON payload for the request
             var data = new
             {
                 messages = new[]
                 {
-                    new { role = "system", content = "You are a prediction model that predicts energy consumption based on previous data" },
+                    new { role = "system", content = "You are an AI model that strictly provides JSON-formatted predictions based on provided data, with no additional text or explanations." },
                     new
                     {
                         role = "user",
                         content = $@"
-                        Predict the energy consumption for the following conditions:
-                        {predictData}
+                            Predict the daily energy consumption for the following days based on the following conditions:
+                            {predictData}
 
-                        Based on the historical training data:
-                        {promptData}
+                            Based on the historical training data:
+                            {promptData}
 
-                        Respond with only the predicted energy consumption as a single number without any units, explanation, or extra text. Format: just the number (e.g., '123')."
+                            Respond only in JSON format with an array of predictions for each day, where each entry includes the date and the predicted energy consumption. Use the following exact format and do not include any other text:
+
+                            {{
+                                ""predictions"": [
+                                    {{ ""date"": ""YYYY-MM-DD"", ""consumption"": predicted_value }},
+                                    {{ ""date"": ""YYYY-MM-DD"", ""consumption"": predicted_value }},
+                                    ...
+                                ]
+                            }}
+                            Note: Introduce minor differences in consumption values each day, within a realistic range."
+
+                        //content = $@"
+                        //Predict the energy consumption for the following conditions:
+                        //{predictData}
+
+                        //Based on the historical training data:
+                        //{promptData}
+
+                        //Respond with only the predicted energy consumption as a single number without any units, explanation, or extra text. Format: just the number (e.g., '123')."
                     }
                 },
                 max_tokens = 800,
@@ -82,14 +103,68 @@ namespace Energy_Prediction_System.Services
             {
                 var result = JsonConvert.DeserializeObject<dynamic>(response.Content);
                 string assistantResponse = result.choices[0].message.content;
-                return assistantResponse + " kWh";
+                return assistantResponse;
             }
             else
             {
                 throw new Exception($"API call failed with status code: {response.StatusCode}\n{response.Content}");
             }
         }
+        public async Task<bool> IsDatabaseUpdatedAsync()
+        {
+            /*
+                Method that checks if the prediction api has been run today
+             */
+            DateTime today = DateTime.Now;
+            EnergyPredictionItem energyPredictionItem;
+            string apiUrl = "/api/EnergyPredictionItems/latest";
+            try
+            {
+                energyPredictionItem = await _databaseWebAPIServices.GetLatestEnergyPredictionAsync(apiUrl);
+                // Check if the ExecuteTime date matches today's date (ignoring time)
+                if (energyPredictionItem != null && energyPredictionItem.ExecuteTime.Date == today.Date)
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
 
+
+            return false;
+        }
+        public async void UpdateDatabaseWithPredictions(int numberOfDays)
+        {
+            DateTime today = DateTime.Now.Date;
+            var predictionDays = Enumerable.Range(0, numberOfDays)
+                          .Select(offset => today.AddDays(offset))
+                          .ToList();
+            string jsonPredictions = await GetEnergyConsumptionPredictionAsync(predictionDays);
+            try
+            {
+                // Attempt to parse response as JSON to ignore non-JSON text
+                var jsonResponse = JObject.Parse(jsonPredictions);
+                if (jsonResponse["predictions"] is JArray predictionsArray)
+                {
+                    foreach (var prediction in predictionsArray)
+                    {
+                        // Parse date and consumption from each prediction entry
+                        DateTime day = DateTime.Parse(prediction["date"].ToString());
+                        float consumption = float.Parse(prediction["consumption"].ToString());
+
+                        // Call the method to push data to the database
+                        PushPredictedToDatabase(day, consumption);
+                    }
+                }
+            }
+            catch (JsonException)
+            {
+                throw;
+            }
+
+        }
         private async void PushPredictedToDatabase(DateTime day, float consumption)
         {
             /*
@@ -151,15 +226,15 @@ namespace Energy_Prediction_System.Services
             return promptData.ToString();
         }
 
-        // Define a class to map weather data
-        public class WeatherEnergyData
-        {
-            public string Date { get; set; }
-            public int Temperature { get; set; }
-            public int Humidity { get; set; }
-            public int WindSpeed { get; set; }
-            public int EnergyConsumption { get; set; }
-        }
+        //// Define a class to map weather data
+        //public class WeatherEnergyData
+        //{
+        //    public string Date { get; set; }
+        //    public int Temperature { get; set; }
+        //    public int Humidity { get; set; }
+        //    public int WindSpeed { get; set; }
+        //    public int EnergyConsumption { get; set; }
+        //}
 
 
         public async Task<string> GetAPITrainingData()
