@@ -176,7 +176,7 @@ namespace Energy_Prediction_System.Services
             var energyPredictionItem = new EnergyPredictionItem
             {
                 EnergyPrediction = consumption,
-                EnergyPredictionUoM = "°C",
+                EnergyPredictionUoM = "kWh",
                 DateTime = day,
                 ExecuteTime = DateTime.Now
             };
