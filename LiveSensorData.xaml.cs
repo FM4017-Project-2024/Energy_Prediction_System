@@ -20,11 +20,14 @@ public partial class LiveSensorData : ContentPage
         public double TT03 { get; set; }
         public double TT04 { get; set; }
         public double TT05 { get; set; }
+        public DateTime? TT_DT { get; set; }
         public double RHT01 { get; set; }
         public double RHT02 { get; set; }
         public double RHT03 { get; set; }
         public double RHT04 { get; set; }
+        public DateTime? RHT_DT { get; set; }
         public double KWH01 { get; set; }
+        public DateTime? KWH_DT { get; set; }
     }
     Livesensors sensor = new Livesensors();
 
@@ -60,16 +63,20 @@ public partial class LiveSensorData : ContentPage
     {
         MainThread.BeginInvokeOnMainThread(() =>
         {
+
             TT01_Label.Text = $"TT01: {sensor.TT01:F2}" + " °C";
             TT02_Label.Text = $"TT02: {sensor.TT02:F2}" + " °C";
             TT03_Label.Text = $"TT03: {sensor.TT03:F2}" + " °C";
             TT04_Label.Text = $"TT04: {sensor.TT04:F2}" + " °C";
             TT05_Label.Text = $"TT05: {sensor.TT05:F2}" + " °C";
+            TTDT_Label.Text = sensor.TT_DT.ToString();
             RHT01_Label.Text = $"RHT01: {sensor.RHT01:F2}" + " %";
             RHT02_Label.Text = $"RHT02: {sensor.RHT02:F2}" + " %";
             RHT03_Label.Text = $"RHT03: {sensor.RHT03:F2}" + " %";
             RHT04_Label.Text = $"RHT04: {sensor.RHT04:F2}" + " %";
+            RHTDT_Label.Text = sensor.RHT_DT.ToString();
             KWH_Label.Text = $"KWH01: {sensor.KWH01:F2}" + " kWh";
+            KWHDT_Label.Text = sensor.KWH_DT.ToString();
         });
     }
 
@@ -130,7 +137,7 @@ public partial class LiveSensorData : ContentPage
             sensor.TT03 = latestTemp.Temp3;
             sensor.TT04 = latestTemp.Temp4;
             sensor.TT05 = latestTemp.Temp5;
-
+            sensor.TT_DT = latestTemp.TempDateTime;
             Debug.WriteLine($"Id: {latestTemp.Id}");
             Debug.WriteLine($"Temp1: {latestTemp.Temp1}");
             Debug.WriteLine($"Temp2: {latestTemp.Temp2}");
@@ -156,6 +163,7 @@ public partial class LiveSensorData : ContentPage
             sensor.RHT02 = latestHumidity.RelHumidity2;
             sensor.RHT03 = latestHumidity.RelHumidity3;
             sensor.RHT04 = latestHumidity.RelHumidity4;
+            sensor.RHT_DT = latestHumidity.RelHumidityDateTime;
             Debug.WriteLine($"Id: {latestHumidity.Id}");
             Debug.WriteLine($"RelHumidity1: {latestHumidity.RelHumidity1}");
             Debug.WriteLine($"RelHumidity2: {latestHumidity.RelHumidity2}");
@@ -177,6 +185,7 @@ public partial class LiveSensorData : ContentPage
         {
             var latestEnergyMeter = await _databaseWebAPIServices.GetLatestBuildingEnergyMeterAsync(apiUrl);
             sensor.KWH01 = latestEnergyMeter.EnergyMeter1;
+            sensor.KWH_DT = latestEnergyMeter.EnergyMeterDateTime;
             Debug.WriteLine($"Id: {latestEnergyMeter.Id}");
             Debug.WriteLine($"EnergyMeter1: {latestEnergyMeter.EnergyMeter1}");
             Debug.WriteLine($"Unit of Measure: {latestEnergyMeter.EnergyMeterUoM}");

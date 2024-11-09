@@ -60,8 +60,15 @@
                 <RoundRectangle CornerRadius="10,10,10,10" />
             </Border.StrokeShape>
         </Border>
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
+                <Label x:Name="TTDT_Label" FontSize="22" Text="Date time:" TextColor="#202020" FontAttributes="Bold"></Label>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
 
-        <Label Text="Relative humidity" FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#202020"/>
+
+            <Label Text="Relative humidity" FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#202020"/>
         <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5"  Grid.Row="0" Grid.Column="0">
                 <Label x:Name="RHT01_Label" FontSize="22" Text="RHT01: " TextColor="#202020" FontAttributes="Bold">
                     <Label.GestureRecognizers>
@@ -105,14 +112,28 @@
                 <RoundRectangle CornerRadius="10,10,10,10" />
             </Border.StrokeShape>
         </Border>
+        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
+        <Label x:Name="RHTDT_Label" FontSize="22" Text="Date time:" TextColor="#202020" FontAttributes="Bold"></Label>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+        </Border>
 
-        <Label Text="Energy usage" FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#202020"/>
+
+
+            <Label Text="Energy usage" FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#202020"/>
             <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
                 <Label x:Name="KWH_Label" FontSize="22" Text="KWH01: " TextColor="#202020" FontAttributes="Bold">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnLabelTapped_KWH01" />
                     </Label.GestureRecognizers>
                 </Label>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10,10,10,10" />
+                </Border.StrokeShape>
+            </Border>
+            <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
+                <Label x:Name="KWHDT_Label" FontSize="22" Text="Date time:" TextColor="#202020" FontAttributes="Bold"></Label>
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10,10,10,10" />
                 </Border.StrokeShape>
