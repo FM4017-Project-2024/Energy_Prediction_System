@@ -50,7 +50,7 @@ namespace Energy_Prediction_System
             pageSelector.SelectedIndex = -1;
         }
 
-        private void UpdateGUI(double TT_AVG, double RHT_AVG, string TT_OUT, string RH_OUT)
+        private void UpdateGUI(double TT_AVG, double RHT_AVG, string TT_OUT, string RH_OUT, double KWH_CURR)
         {
 
             MainThread.BeginInvokeOnMainThread(() =>
@@ -61,7 +61,7 @@ namespace Energy_Prediction_System
                 OutsideHum_Label.Text = $"Humidity: {RH_OUT:F2}" + " %";
 
                 PredEnergy_Label.Text = $"Predicted {TT_AVG:F2}" + " kWh";
-                CurrEnergy_Label.Text = $"Current {TT_AVG:F2}" + " kWh";
+                CurrEnergy_Label.Text = $"Current {KWH_CURR:F2}" + " kWh";
 
             });
         }
@@ -75,10 +75,12 @@ namespace Energy_Prediction_System
 
                 double TT_AVG = sensorData.sensor.TT_AVG;
                 double RHT_AVG = sensorData.sensor.RHT_AVG;
+                double KWH_CURR = sensorData.sensor.KWH01;
                 string TT_out = weatherData.weather.TTT;
                 string RH_out = weatherData.weather.NA;
 
-                UpdateGUI(TT_AVG, RHT_AVG, TT_out, RH_out);
+
+                UpdateGUI(TT_AVG, RHT_AVG, TT_out, RH_out, KWH_CURR);
 
                 await Task.Delay(3000);
             }
