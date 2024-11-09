@@ -1,12 +1,15 @@
+using Energy_Prediction_System.Services;
 using Energy_Prediction_System.Classes;
+using System.Diagnostics;
 
 namespace Energy_Prediction_System;
 
 public partial class LiveSensorData : ContentPage
 {
     private readonly SensorSim rndVal = new();
+    private readonly DatabaseWebAPIServices _databaseWebAPIServices;
 
-    private bool _simulate = true;
+    private bool _simulate = false;
     private bool _simulationStarted = false;
     private bool _isRunning = false;
 
@@ -28,16 +31,27 @@ public partial class LiveSensorData : ContentPage
     public LiveSensorData()
     {
         InitializeComponent();
+        _databaseWebAPIServices = new DatabaseWebAPIServices();
         getSensorData();
     }
     private async void getSensorData()
     {
         while (_isRunning)
         {
-            await Task.Delay(3000);
+            
             if (_simulate)
             {
+                await Task.Delay(3000);
                 StartSimulatingSensorData();
+            }
+            else
+            {
+                
+                GetLatestBuildingTemp();
+                GetLatestBuildingRelHumidity();
+                GetLatestEnergyMeterData();
+                UpdateGUI();
+                await Task.Delay(20000);
             }
         }
     }
@@ -103,4 +117,81 @@ public partial class LiveSensorData : ContentPage
     private async void OnLabelTapped_RHT03(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("RHT03"));
     private async void OnLabelTapped_RHT04(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("RHT04"));
     private async void OnLabelTapped_KWH01(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("KWH01"));
+
+    // Method to retrieve temperature data
+    private async void GetLatestBuildingTemp()
+    {
+        string apiUrl = "/api/BuildingTemperatureItems/latest";
+        try
+        {
+            var latestTemp = await _databaseWebAPIServices.GetLatestBuildingTempAsync(apiUrl);
+            sensor.TT01 = latestTemp.Temp1;
+            sensor.TT02 = latestTemp.Temp2;
+            sensor.TT03 = latestTemp.Temp3;
+            sensor.TT04 = latestTemp.Temp4;
+            sensor.TT05 = latestTemp.Temp5;
+
+            Debug.WriteLine($"Id: {latestTemp.Id}");
+            Debug.WriteLine($"Temp1: {latestTemp.Temp1}");
+            Debug.WriteLine($"Temp2: {latestTemp.Temp2}");
+            Debug.WriteLine($"Temp3: {latestTemp.Temp3}");
+            Debug.WriteLine($"Temp4: {latestTemp.Temp4}");
+            Debug.WriteLine($"Temp5: {latestTemp.Temp5}");
+            Debug.WriteLine($"Unit of Measure: {latestTemp.TempUoM}");
+            Debug.WriteLine($"DateTime: {latestTemp.TempDateTime}");
+        }
+        catch (Exception ex)
+        {
+            await HandleError(ex, "Failed to fetch temperature data");
+        }
+    }
+
+    private async void GetLatestBuildingRelHumidity()
+    {
+        string apiUrl = "/api/BuildingRelativeHumidityItems/latest";
+        try
+        {
+            var latestHumidity = await _databaseWebAPIServices.GetLatestBuildingRelHumidityAsync(apiUrl);
+            sensor.RHT01 = latestHumidity.RelHumidity1;
+            sensor.RHT02 = latestHumidity.RelHumidity2;
+            sensor.RHT03 = latestHumidity.RelHumidity3;
+            sensor.RHT04 = latestHumidity.RelHumidity4;
+            Debug.WriteLine($"Id: {latestHumidity.Id}");
+            Debug.WriteLine($"RelHumidity1: {latestHumidity.RelHumidity1}");
+            Debug.WriteLine($"RelHumidity2: {latestHumidity.RelHumidity2}");
+            Debug.WriteLine($"RelHumidity3: {latestHumidity.RelHumidity3}");
+            Debug.WriteLine($"RelHumidity4: {latestHumidity.RelHumidity4}");
+            Debug.WriteLine($"Unit of Measure: {latestHumidity.RelHumidityUoM}");
+            Debug.WriteLine($"DateTime: {latestHumidity.RelHumidityDateTime}");
+        }
+        catch (Exception ex)
+        {
+            await HandleError(ex, "Failed to fetch latest humidity");
+        }
+    }
+
+    private async void GetLatestEnergyMeterData()
+    {
+        string apiUrl = "/api/BuildingEnergyMeterItems/latest";
+        try
+        {
+            var latestEnergyMeter = await _databaseWebAPIServices.GetLatestBuildingEnergyMeterAsync(apiUrl);
+            sensor.KWH01 = latestEnergyMeter.EnergyMeter1;
+            Debug.WriteLine($"Id: {latestEnergyMeter.Id}");
+            Debug.WriteLine($"EnergyMeter1: {latestEnergyMeter.EnergyMeter1}");
+            Debug.WriteLine($"Unit of Measure: {latestEnergyMeter.EnergyMeterUoM}");
+            Debug.WriteLine($"DateTime: {latestEnergyMeter.EnergyMeterDateTime}");
+        }
+        catch (Exception ex)
+        {
+            await HandleError(ex, "Failed to fetch latest energy meter data");
+        }
+    }
+
+    // Error handling method
+    private async Task HandleError(Exception ex, string message)
+    {
+        await DisplayAlert("Error", $"{message}: {ex.Message}", "OK");
+    }
+
 }
