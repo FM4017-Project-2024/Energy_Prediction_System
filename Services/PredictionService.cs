@@ -148,6 +148,7 @@ namespace Energy_Prediction_System.Services
                 var jsonResponse = JObject.Parse(jsonPredictions);
                 if (jsonResponse["predictions"] is JArray predictionsArray)
                 {
+                    var executeTime = DateTime.Now;
                     foreach (var prediction in predictionsArray)
                     {
                         // Parse date and consumption from each prediction entry
@@ -155,7 +156,7 @@ namespace Energy_Prediction_System.Services
                         float consumption = float.Parse(prediction["consumption"].ToString());
 
                         // Call the method to push data to the database
-                        PushPredictedToDatabase(day, consumption);
+                        PushPredictedToDatabase(day, consumption, executeTime);
                     }
                 }
             }
@@ -165,7 +166,7 @@ namespace Energy_Prediction_System.Services
             }
 
         }
-        private async void PushPredictedToDatabase(DateTime day, float consumption)
+        private async void PushPredictedToDatabase(DateTime day, float consumption, DateTime executeTime)
         {
             /*
                 Method that uploads predicted energy consumption to database
@@ -178,7 +179,7 @@ namespace Energy_Prediction_System.Services
                 EnergyPrediction = consumption,
                 EnergyPredictionUoM = "kWh",
                 DateTime = day,
-                ExecuteTime = DateTime.Now
+                ExecuteTime = executeTime
             };
 
             try
