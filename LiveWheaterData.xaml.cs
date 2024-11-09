@@ -4,28 +4,11 @@ namespace Energy_Prediction_System;
 
 public partial class LiveWheaterData : ContentPage
 {
-    private readonly WeatherService _weatherService = new();
     private readonly SensorSim _rndVal = new();
 
     private bool _isRunning = true;
     private bool _simulate = false;
     private int _taskDelay = 2000;
-
-    private struct weatherData
-    {
-        public string TTT { get; set; }
-        public string dd { get; set; }
-        public string ff { get; set; }
-        public string NA { get; set; }
-        public string pr { get; set; }
-        public string NN { get; set; }
-        public string LOW { get; set; }
-        public string MEDIUM { get; set; }
-        public string HIGH { get; set; }
-        public string TD { get; set; }
-        public DateTime currentDateTime { get; set; }
-    }
-    weatherData value = new weatherData();
 
     public LiveWheaterData()
     {
@@ -46,70 +29,46 @@ public partial class LiveWheaterData : ContentPage
     {
         while (_isRunning)
         {
-            if (_simulate)
-            {
-                StartSimulatingSensorData();
-            }
-            else
-            {
-                ReadWeatherDataAPI();
-            }
+            UpdateGUI();
             await Task.Delay(_taskDelay);
         }
     }
+
     private void UpdateGUI()
     {
-        MainThread.BeginInvokeOnMainThread(() =>
+        var weatherValues = App.WeatherValues;
+
+        if(_simulate)
         {
-            TTT_Label.Text = $"Temperature: {value.TTT:F2}" + " °C";
-            dd_Label.Text = $"Wind direction: {value.dd:F2}" + " deg";
-            ff_Label.Text = $"Wind speed: {value.ff:F2}" + " m/s";
-            NA_Label.Text = $"Humidity: {value.NA:F2}" + " %";
-            pr_Label.Text = $"Pressure: {value.pr:F2}" + " hPa";
-            NN_Label.Text = $"Cloudiness: {value.NN:F2}" + " %";
-            LOW_Label.Text = $"Low clouds: {value.LOW:F2}" + " %";
-            MEDIUM_Label.Text = $"Medium clouds: {value.MEDIUM:F2}" + " %";
-            HIGH_Label.Text = $"High clouds: {value.HIGH:F2}" + " %";
-            TD_Label.Text = $"Dewpoint temperature: {value.TD:F2}" + " °C";
-            DT_Label.Text = value.currentDateTime.ToString();
-        });
-    }
-
-    private void StartSimulatingSensorData()
-    {
-        value.TTT = _rndVal.GetRandomDouble(0, 20).ToString();
-        value.dd = _rndVal.GetRandomDouble(0, 10).ToString();
-        value.ff = _rndVal.GetRandomDouble(0, 30).ToString();
-        value.NA = _rndVal.GetRandomDouble(0, 30).ToString();
-        value.pr = _rndVal.GetRandomDouble(0, 30).ToString();
-        value.NN = _rndVal.GetRandomDouble(0, 30).ToString();
-        value.LOW = _rndVal.GetRandomDouble(0, 30).ToString();
-        value.MEDIUM = _rndVal.GetRandomDouble(0, 30).ToString();
-        value.HIGH = _rndVal.GetRandomDouble(0, 30).ToString();
-        value.TD = _rndVal.GetRandomDouble(0, 30).ToString();
-        value.currentDateTime = DateTime.Now;
-
-        UpdateGUI();
-    }
-
-    private async void ReadWeatherDataAPI()
-    {
-        WeatherForecastItem weatherData = await _weatherService.GetWeatherDataAsync(59.7076562, 10.1559495, 200);
-
-        value.currentDateTime = DateTime.Now;
-        value.TTT = weatherData.Temperature.ToString();
-        value.dd = weatherData.WindDirection.ToString();
-        value.ff = weatherData.WindSpeed.ToString();
-        value.NA = weatherData.Humidity.ToString();
-        value.pr = weatherData.Pressure.ToString();
-        value.NN = weatherData.Cloudiness.ToString();
-        value.LOW = weatherData.LowClouds.ToString();
-        value.MEDIUM = weatherData.MediumClouds.ToString();
-        value.HIGH = weatherData.HighClouds.ToString();
-        value.TD = weatherData.DewpointTemperature.ToString();
-
-
-        UpdateGUI();
+            TTT_Label.Text = _rndVal.GetRandomDouble(0, 20).ToString();
+            dd_Label.Text = _rndVal.GetRandomDouble(0, 10).ToString();
+            ff_Label.Text = _rndVal.GetRandomDouble(0, 30).ToString();
+            NA_Label.Text = _rndVal.GetRandomDouble(0, 30).ToString();
+            pr_Label.Text = _rndVal.GetRandomDouble(0, 30).ToString();
+            NN_Label.Text = _rndVal.GetRandomDouble(0, 30).ToString();
+            LOW_Label.Text = _rndVal.GetRandomDouble(0, 30).ToString();
+            MEDIUM_Label.Text = _rndVal.GetRandomDouble(0, 30).ToString();
+            HIGH_Label.Text = _rndVal.GetRandomDouble(0, 30).ToString();
+            TD_Label.Text = _rndVal.GetRandomDouble(0, 30).ToString();
+            DT_Label.Text = DateTime.Now.ToString();
+        }
+        else
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                TTT_Label.Text = $"Temperature: {weatherValues.weather.TTT:F2}" + " °C";
+                dd_Label.Text = $"Wind direction: {weatherValues.weather.dd:F2}" + " deg";
+                ff_Label.Text = $"Wind speed: {weatherValues.weather.ff:F2}" + " m/s";
+                NA_Label.Text = $"Humidity: {weatherValues.weather.NA:F2}" + " %";
+                pr_Label.Text = $"Pressure: {weatherValues.weather.pr:F2}" + " hPa";
+                NN_Label.Text = $"Cloudiness: {weatherValues.weather.NN:F2}" + " %";
+                LOW_Label.Text = $"Low clouds: {weatherValues.weather.LOW:F2}" + " %";
+                MEDIUM_Label.Text = $"Medium clouds: {weatherValues.weather.MEDIUM:F2}" + " %";
+                HIGH_Label.Text = $"High clouds: {weatherValues.weather.HIGH:F2}" + " %";
+                TD_Label.Text = $"Dewpoint temperature: {weatherValues.weather.TD:F2}" + " °C";
+                DT_Label.Text = weatherValues.weather.currentDateTime.ToString();
+            });
+        }
     }
 
     protected override void OnDisappearing()
@@ -135,8 +94,11 @@ public partial class LiveWheaterData : ContentPage
     private async void OnLabelTapped_MEDIUM(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("MEDIUM"));
     private async void OnLabelTapped_HIGH(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("HIGH"));
     private async void OnLabelTapped_TD(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("TD"));
+    
     private async void OnAddWeatherDataButtonClicked(object sender, EventArgs e)
     {
+        int a = 0;
+        /*
         try
         {
             string test = await _weatherService.AddWeatherDataToDatabase(59.7076562, 10.1559495, 200);
@@ -146,5 +108,7 @@ public partial class LiveWheaterData : ContentPage
         {
             await DisplayAlert("Feil", $"Kunne ikke legge til værdata: {ex.Message}", "OK");
         }
+        */
     }
+    
 }

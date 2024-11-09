@@ -50,15 +50,16 @@ namespace Energy_Prediction_System
             pageSelector.SelectedIndex = -1;
         }
 
-        private void UpdateGUI(double TT_AVG, double RHT_AVG)
+        private void UpdateGUI(double TT_AVG, double RHT_AVG, string TT_OUT, string RH_OUT)
         {
 
             MainThread.BeginInvokeOnMainThread(() =>
             {
                 TempAvg_Label.Text = $"Temperature: {TT_AVG:F2}" + " °C";
                 HumpAvg_Label.Text = $"Humidity: {RHT_AVG:F2}" + " %";
-                OutsideTemp_Label.Text = $"Temperature {TT_AVG:F2}" + " °C";
-                OutsideHum_Label.Text = $"Humidity: {TT_AVG:F2}" + " %";
+                OutsideTemp_Label.Text = $"Temperature {TT_OUT:F2}" + " °C";
+                OutsideHum_Label.Text = $"Humidity: {RH_OUT:F2}" + " %";
+
                 PredEnergy_Label.Text = $"Predicted {TT_AVG:F2}" + " kWh";
                 CurrEnergy_Label.Text = $"Current {TT_AVG:F2}" + " kWh";
 
@@ -70,11 +71,14 @@ namespace Energy_Prediction_System
             while (_isRunning)
             {
                 var sensorData = App.SensorValues;
+                var weatherData = App.WeatherValues;
 
                 double TT_AVG = sensorData.sensor.TT_AVG;
                 double RHT_AVG = sensorData.sensor.RHT_AVG;
+                string TT_out = weatherData.weather.TTT;
+                string RH_out = weatherData.weather.NA;
 
-                UpdateGUI(TT_AVG, RHT_AVG);
+                UpdateGUI(TT_AVG, RHT_AVG, TT_out, RH_out);
 
                 await Task.Delay(3000);
             }

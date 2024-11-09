@@ -12,6 +12,7 @@ namespace Energy_Prediction_System
     {
         private readonly WeatherService _weatherService = new(); // Start weather service
         public static ReadSensors SensorValues { get; set; } = new ReadSensors();
+        public static ReadWeatherData WeatherValues { get; set; } = new ReadWeatherData();
 
 
         private bool _isRunning = true; // Variable to check if application is running
@@ -22,11 +23,26 @@ namespace Energy_Prediction_System
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NDaF5cWWtCf1NpR2NGfV5ycEVDal9YTndcUiweQnxTdEFiWX5dcHFWT2FfWER3Xg==");
             MainPage = new NavigationPage(new MainPage());
 
-            // Start background task to update weather data in database every hour
+            
+            StartReadWeatherDataBackgroundTask();
             StartWeatherDataBackgroundTask();
             StartReadSensorDataBackgroundTask();
         }
+        // Background taks to read sensor data from API
+        private void StartReadWeatherDataBackgroundTask()
+        {
+            Task.Run(async () =>
+            {
+                while (_isRunning)
+                {
+                    // Call the function to get sensor data
+                    WeatherValues.getWeatherData();
 
+                    // Wait for 30 seconds before the next execution
+                    await Task.Delay(TimeSpan.FromMinutes(60));
+                }
+            });
+        }
         // Background taks to read sensor data from API
         private void StartReadSensorDataBackgroundTask()
         {
@@ -34,8 +50,6 @@ namespace Energy_Prediction_System
             {
                 while (_isRunning)
                 {
-                    // Call the function to get sensor data
-                    Debug.WriteLine($"Calling GetSensorData");
                     SensorValues.getSensorData();
 
                     // Wait for 30 seconds before the next execution
