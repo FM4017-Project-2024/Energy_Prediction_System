@@ -50,16 +50,17 @@ namespace Energy_Prediction_System
             pageSelector.SelectedIndex = -1;
         }
 
-        private void UpdateGUI(float rand)
+        private void UpdateGUI(double TT_AVG, double RHT_AVG)
         {
+
             MainThread.BeginInvokeOnMainThread(() =>
             {
-                TempAvg_Label.Text = $"Temperature: {rand:F2}" + " °C";
-                HumpAvg_Label.Text = $"Humidity: {rand:F2}" + " %";
-                OutsideTemp_Label.Text = $"Temperature {rand:F2}" + " °C";
-                OutsideHum_Label.Text = $"Humidity: {rand:F2}" + " %";
-                PredEnergy_Label.Text = $"Predicted {rand:F2}" + " kWh";
-                CurrEnergy_Label.Text = $"Current {rand:F2}" + " kWh";
+                TempAvg_Label.Text = $"Temperature: {TT_AVG:F2}" + " °C";
+                HumpAvg_Label.Text = $"Humidity: {RHT_AVG:F2}" + " %";
+                OutsideTemp_Label.Text = $"Temperature {TT_AVG:F2}" + " °C";
+                OutsideHum_Label.Text = $"Humidity: {TT_AVG:F2}" + " %";
+                PredEnergy_Label.Text = $"Predicted {TT_AVG:F2}" + " kWh";
+                CurrEnergy_Label.Text = $"Current {TT_AVG:F2}" + " kWh";
 
             });
         }
@@ -68,8 +69,13 @@ namespace Energy_Prediction_System
         {
             while (_isRunning)
             {
-                var random = new Random();
-                UpdateGUI(random.Next(0, 100));
+                var sensorData = App.SensorValues;
+
+                double TT_AVG = sensorData.sensor.TT_AVG;
+                double RHT_AVG = sensorData.sensor.RHT_AVG;
+
+                UpdateGUI(TT_AVG, RHT_AVG);
+
                 await Task.Delay(3000);
             }
         }

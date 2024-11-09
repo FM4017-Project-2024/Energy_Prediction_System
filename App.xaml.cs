@@ -4,12 +4,16 @@ using System.Threading.Tasks;
 using Energy_Prediction_System.Services;
 using Energy_Prediction_System.Classes;
 using Microsoft.Maui.Controls;
+using System.Diagnostics;
 
 namespace Energy_Prediction_System
 {
     public partial class App : Application
     {
         private readonly WeatherService _weatherService = new(); // Start weather service
+        public static ReadSensors SensorValues { get; set; } = new ReadSensors();
+
+
         private bool _isRunning = true; // Variable to check if application is running
         private DateTime _lastUpdate = DateTime.MinValue; // Variable for last update
         public App()
@@ -20,6 +24,24 @@ namespace Energy_Prediction_System
 
             // Start background task to update weather data in database every hour
             StartWeatherDataBackgroundTask();
+            StartReadSensorDataBackgroundTask();
+        }
+
+        // Background taks to read sensor data from API
+        private void StartReadSensorDataBackgroundTask()
+        {
+            Task.Run(async () =>
+            {
+                while (_isRunning)
+                {
+                    // Call the function to get sensor data
+                    Debug.WriteLine($"Calling GetSensorData");
+                    SensorValues.getSensorData();
+
+                    // Wait for 30 seconds before the next execution
+                    await Task.Delay(TimeSpan.FromSeconds(60));
+                }
+            });
         }
 
         // Background taks to update weather data in database every hour
