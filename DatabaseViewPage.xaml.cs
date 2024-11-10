@@ -125,7 +125,7 @@ namespace Energy_Prediction_System.Views
             try
             {
                 var latestPrediction = await _databaseWebAPIServices.GetLatestEnergyPredictionAsync(apiUrl);
-                EnergyPredictionListView.ItemsSource = new List<EnergyPredictionItem> { latestPrediction };
+                EnergyPredictionListView.ItemsSource = latestPrediction;
             }
             catch (Exception ex)
             {

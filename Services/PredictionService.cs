@@ -113,25 +113,26 @@ namespace Energy_Prediction_System.Services
         public async Task<bool> IsDatabaseUpdatedAsync()
         {
             /*
-                Method that checks if the prediction api has been run today
+                Method that checks if the prediction API has been run today
              */
             DateTime today = DateTime.Now;
-            EnergyPredictionItem energyPredictionItem;
             string apiUrl = "/api/EnergyPredictionItems/latest";
             try
             {
-                energyPredictionItem = await _databaseWebAPIServices.GetLatestEnergyPredictionAsync(apiUrl);
-                // Check if the ExecuteTime date matches today's date (ignoring time)
-                if (energyPredictionItem != null && energyPredictionItem.ExecuteTime.Date == today.Date)
+                // Receive a list and retrieve the latest item
+                var energyPredictions = await _databaseWebAPIServices.GetLatestEnergyPredictionAsync(apiUrl);
+                var latestPrediction = energyPredictions?.FirstOrDefault();
+
+                // Check if the ExecuteTime date matches today's date
+                if (latestPrediction != null && latestPrediction.ExecuteTime.Date == today.Date)
                 {
                     return true;
                 }
             }
             catch (Exception ex)
             {
-                return false;
+                throw;
             }
-
 
             return false;
         }

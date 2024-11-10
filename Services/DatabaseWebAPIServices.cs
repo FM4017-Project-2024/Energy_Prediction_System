@@ -31,7 +31,7 @@ namespace Energy_Prediction_System.Services
             }
             else if (DeviceInfo.Platform == DevicePlatform.WinUI)
             {
-                _baseApiAddress = "https://localhost:7107";
+                _baseApiAddress = "https://10.0.2.2:7107";
             }
             else if (DeviceInfo.Platform == DevicePlatform.iOS)
             {
@@ -109,7 +109,7 @@ namespace Energy_Prediction_System.Services
         public Task<List<BuildingEnergyMeterItem>> GetBuildingEnergyMeterAsync(string url) => GetAsync<List<BuildingEnergyMeterItem>>(url);
         public Task<BuildingEnergyMeterItem> GetLatestBuildingEnergyMeterAsync(string url) => GetAsync<BuildingEnergyMeterItem>(url);
         public Task<List<EnergyPredictionItem>> GetEnergyPredictionsAsync(string url) => GetAsync<List<EnergyPredictionItem>>(url);
-        public Task<EnergyPredictionItem> GetLatestEnergyPredictionAsync(string url) => GetAsync<EnergyPredictionItem>(url);
+        public Task<List<EnergyPredictionItem>> GetLatestEnergyPredictionAsync(string url) => GetAsync<List<EnergyPredictionItem>>(url);
         public Task<List<WeatherForecastItem>> GetWeatherForecastsAsync(string url) => GetAsync<List<WeatherForecastItem>>(url);
         public Task<List<WeatherForecastItem>> GetLatestWeatherForecastsAsync(string url) => GetAsync<List<WeatherForecastItem>>(url);
         public Task<List<WeatherForecastUoMItem>> GetWeatherForecastUoMsAsync(string url) => GetAsync<List<WeatherForecastUoMItem>>(url);
