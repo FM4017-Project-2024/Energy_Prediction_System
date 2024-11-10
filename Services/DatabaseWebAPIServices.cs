@@ -31,7 +31,7 @@ namespace Energy_Prediction_System.Services
             }
             else if (DeviceInfo.Platform == DevicePlatform.WinUI)
             {
-                _baseApiAddress = "https://10.0.2.2:7107";
+                _baseApiAddress = "https://localhost:7107";
             }
             else if (DeviceInfo.Platform == DevicePlatform.iOS)
             {
