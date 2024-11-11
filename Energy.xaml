@@ -13,6 +13,59 @@
                FontSize="18"
                HorizontalOptions="Center"
                VerticalOptions="CenterAndExpand" />
+
+            <Label Text="Predicted energy consumption" FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#AAAAAA"/>
+            
+            <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
+                <Label x:Name="Day01_Label" FontSize="22" Text="Day1: " TextColor="#AAAAAA" FontAttributes="Bold"/>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10,10,10,10" />
+                </Border.StrokeShape>
+            </Border>
+
+            <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
+                <Label x:Name="Day02_Label" FontSize="22" Text="Day2: " TextColor="#AAAAAA" FontAttributes="Bold"/>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10,10,10,10" />
+                </Border.StrokeShape>
+            </Border>
+
+            <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
+                <Label x:Name="Day03_Label" FontSize="22" Text="Day3: " TextColor="#AAAAAA" FontAttributes="Bold"/>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10,10,10,10" />
+                </Border.StrokeShape>
+            </Border>
+
+            <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
+                <Label x:Name="Day04_Label" FontSize="22" Text="Day4: " TextColor="#AAAAAA" FontAttributes="Bold"/>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10,10,10,10" />
+                </Border.StrokeShape>
+            </Border>
+
+            <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
+                <Label x:Name="Day05_Label" FontSize="22" Text="Day5: " TextColor="#AAAAAA" FontAttributes="Bold"/>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10,10,10,10" />
+                </Border.StrokeShape>
+            </Border>
+
+            <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
+                <Label x:Name="Day06_Label" FontSize="22" Text="Day6: " TextColor="#AAAAAA" FontAttributes="Bold"/>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10,10,10,10" />
+                </Border.StrokeShape>
+            </Border>
+
+            <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
+                <Label x:Name="Day07_Label" FontSize="22" Text="Day7: " TextColor="#AAAAAA" FontAttributes="Bold"/>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10,10,10,10" />
+                </Border.StrokeShape>
+            </Border>
+
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

@@ -10,7 +10,7 @@ public partial class Energy : ContentPage
     public Energy()
 	{
 		InitializeComponent();
-        UpdatePredictions();
+        //UpdatePredictions();
     }
 
     private async void UpdatePredictions()
