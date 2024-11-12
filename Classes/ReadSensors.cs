@@ -47,6 +47,7 @@ namespace Energy_Prediction_System.Classes
             public float[] RHT02 { get; set; }
             public float[] RHT03 { get; set; }
             public float[] RHT04 { get; set; }
+            public float[] KWH01 { get; set; }
         }
 
 
@@ -57,8 +58,25 @@ namespace Energy_Prediction_System.Classes
             GetLatestEnergyMeterData();
             GetAllBuildingTemp();
             GetAllBuildingRelHum();
+            GetAllBuildingKwh();
         }
-        // Methods to retrieve temperature data
+
+        private async void GetAllBuildingKwh()
+        {
+            string apiUrl = "/api/BuildingEnergyMeterItems";
+            try
+            {
+                List<BuildingEnergyMeterItem> kwhItems = await _databaseWebAPIServices.GetBuildingEnergyMeterAsync(apiUrl);
+                // Last 14 days
+                List<BuildingEnergyMeterItem> last14Items = kwhItems.OrderByDescending(item => item.Id).Take(14).ToList();
+                historical.KWH01 = last14Items.Select(item => item.EnergyMeter1).ToArray();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex + " Failed to fetch kwh data");
+            }
+        }
+
         private async void GetAllBuildingRelHum()
         {
             string apiUrl = "/api/BuildingRelativeHumidityItems";
@@ -78,8 +96,6 @@ namespace Energy_Prediction_System.Classes
             }
         }
 
-
-        // Methods to retrieve temperature data
         private async void GetAllBuildingTemp()
         {
             string apiUrl = "/api/BuildingTemperatureItems";
@@ -120,14 +136,6 @@ namespace Energy_Prediction_System.Classes
                 sensor.TT05 = latestTemp.Temp5;
                 sensor.TT_AVG = (latestTemp.Temp1 + latestTemp.Temp2 + latestTemp.Temp3 + latestTemp.Temp4 + latestTemp.Temp5) / 5.0;
                 sensor.TT_DT = latestTemp.TempDateTime;
-                //Debug.WriteLine($"Id: {latestTemp.Id}");
-                //Debug.WriteLine($"Temp1: {latestTemp.Temp1}");
-                //Debug.WriteLine($"Temp2: {latestTemp.Temp2}");
-                //Debug.WriteLine($"Temp3: {latestTemp.Temp3}");
-                //Debug.WriteLine($"Temp4: {latestTemp.Temp4}");
-                //Debug.WriteLine($"Temp5: {latestTemp.Temp5}");
-                //Debug.WriteLine($"Unit of Measure: {latestTemp.TempUoM}");
-                //Debug.WriteLine($"DateTime: {latestTemp.TempDateTime}");
             }
             catch (Exception ex)
             {
@@ -148,13 +156,6 @@ namespace Energy_Prediction_System.Classes
                 sensor.RHT04 = latestHumidity.RelHumidity4;
                 sensor.RHT_AVG = (latestHumidity.RelHumidity1 + latestHumidity.RelHumidity2 + latestHumidity.RelHumidity3 + latestHumidity.RelHumidity4) / 4.0;
                 sensor.RHT_DT = latestHumidity.RelHumidityDateTime;
-                //Debug.WriteLine($"Id: {latestHumidity.Id}");
-                //Debug.WriteLine($"RelHumidity1: {latestHumidity.RelHumidity1}");
-                //Debug.WriteLine($"RelHumidity2: {latestHumidity.RelHumidity2}");
-                //Debug.WriteLine($"RelHumidity3: {latestHumidity.RelHumidity3}");
-                //Debug.WriteLine($"RelHumidity4: {latestHumidity.RelHumidity4}");
-                //Debug.WriteLine($"Unit of Measure: {latestHumidity.RelHumidityUoM}");
-                //Debug.WriteLine($"DateTime: {latestHumidity.RelHumidityDateTime}");
             }
             catch (Exception ex)
             {
@@ -171,10 +172,6 @@ namespace Energy_Prediction_System.Classes
                 var latestEnergyMeter = await _databaseWebAPIServices.GetLatestBuildingEnergyMeterAsync(apiUrl);
                 sensor.KWH01 = latestEnergyMeter.EnergyMeter1;
                 sensor.KWH_DT = latestEnergyMeter.EnergyMeterDateTime;
-                //Debug.WriteLine($"Id: {latestEnergyMeter.Id}");
-                //Debug.WriteLine($"EnergyMeter1: {latestEnergyMeter.EnergyMeter1}");
-                // Debug.WriteLine($"Unit of Measure: {latestEnergyMeter.EnergyMeterUoM}");
-                //Debug.WriteLine($"DateTime: {latestEnergyMeter.EnergyMeterDateTime}");
             }
             catch (Exception ex)
             {

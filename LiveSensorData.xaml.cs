@@ -99,5 +99,5 @@ public partial class LiveSensorData : ContentPage
     private async void OnLabelTapped_RHT02(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Second floor", "%", App.SensorValues.historical.RHT02, App.SensorValues.sensor.RHT_DT));
     private async void OnLabelTapped_RHT03(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Guestroom", "%", App.SensorValues.historical.RHT03, App.SensorValues.sensor.RHT_DT));
     private async void OnLabelTapped_RHT04(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Office", "%", App.SensorValues.historical.RHT04, App.SensorValues.sensor.RHT_DT));
-    private async void OnLabelTapped_KWH01(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Energymeter", "kWh", App.SensorValues.historical.TT01, App.SensorValues.sensor.RHT_DT));
+    private async void OnLabelTapped_KWH01(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Energymeter", "kWh", App.SensorValues.historical.KWH01, App.SensorValues.sensor.KWH_DT));
 }
