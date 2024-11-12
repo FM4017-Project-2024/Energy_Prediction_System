@@ -12,7 +12,6 @@ public partial class LiveSensorData : ContentPage
     private bool _simulationStarted = false;
     private bool _isRunning = false;
 
-
     public LiveSensorData()
     {
         InitializeComponent();
@@ -91,14 +90,14 @@ public partial class LiveSensorData : ContentPage
         }
     }
 
-    private async void OnLabelTapped_TT01(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("TT01"));
-    private async void OnLabelTapped_TT02(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("TT02"));
-    private async void OnLabelTapped_TT03(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("TT03"));
-    private async void OnLabelTapped_TT04(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("TT04"));
-    private async void OnLabelTapped_TT05(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("TT05"));
-    private async void OnLabelTapped_RHT01(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("RHT01"));
-    private async void OnLabelTapped_RHT02(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("RHT02"));
-    private async void OnLabelTapped_RHT03(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("RHT03"));
-    private async void OnLabelTapped_RHT04(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("RHT04"));
-    private async void OnLabelTapped_KWH01(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("KWH01"));
+    private async void OnLabelTapped_TT01(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("First floor", "°C", App.SensorValues.historical.TT01, App.SensorValues.sensor.TT_DT));
+    private async void OnLabelTapped_TT02(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Second floor", "°C", App.SensorValues.historical.TT02, App.SensorValues.sensor.TT_DT));
+    private async void OnLabelTapped_TT03(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Office", "°C", App.SensorValues.historical.TT03, App.SensorValues.sensor.TT_DT));
+    private async void OnLabelTapped_TT04(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Guestroom", "°C", App.SensorValues.historical.TT04, App.SensorValues.sensor.TT_DT));
+    private async void OnLabelTapped_TT05(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Kitchen", "°C", App.SensorValues.historical.TT05, App.SensorValues.sensor.TT_DT));
+    private async void OnLabelTapped_RHT01(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("First floor", "%", App.SensorValues.historical.TT01, App.SensorValues.sensor.TT_DT));
+    private async void OnLabelTapped_RHT02(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Second floor", "%", App.SensorValues.historical.TT01, App.SensorValues.sensor.TT_DT));
+    private async void OnLabelTapped_RHT03(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Guestroom", "%", App.SensorValues.historical.TT01, App.SensorValues.sensor.TT_DT));
+    private async void OnLabelTapped_RHT04(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Office", "%", App.SensorValues.historical.TT01, App.SensorValues.sensor.TT_DT));
+    private async void OnLabelTapped_KWH01(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Energymeter", "kWh", App.SensorValues.historical.TT01, App.SensorValues.sensor.TT_DT));
 }
