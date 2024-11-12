@@ -64,7 +64,7 @@
 
         <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
             <Label x:Name="NN_Label" FontSize="22" Text="NN: " TextColor="#202020" FontAttributes="Bold">
-            <Label.GestureRecognizers>
+                <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnLabelTapped_NN" />
                 </Label.GestureRecognizers>
             </Label>
@@ -72,14 +72,6 @@
                 <RoundRectangle CornerRadius="10,10,10,10" />
             </Border.StrokeShape>
         </Border>
-
-        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
-            <Label x:Name="FOG_Label" FontSize="22" Text="FOG: " TextColor="#202020" FontAttributes="Bold"/>
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="10,10,10,10" />
-            </Border.StrokeShape>
-        </Border>
-
         <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
             <Label x:Name="LOW_Label" FontSize="22" Text="LOW: " TextColor="#202020" FontAttributes="Bold">
                 <Label.GestureRecognizers>
@@ -130,14 +122,6 @@
                 <RoundRectangle CornerRadius="10,10,10,10" />
             </Border.StrokeShape>
         </Border>
-
-        <Button Text="Add weatherdata to database" 
-                FontSize="18" 
-                BackgroundColor="#1C4E80"
-                TextColor="White" 
-                VerticalOptions="End" 
-                HorizontalOptions="Center"
-                Clicked="OnAddWeatherDataButtonClicked" />
     </VerticalStackLayout>
 </ContentPage>
 

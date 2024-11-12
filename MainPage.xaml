@@ -12,15 +12,13 @@
                     <x:Array Type="{x:Type x:String}">
                         <x:String>Sensor data</x:String>
                         <x:String>Weather data</x:String>
-                        <x:String>Database view</x:String>
-                        <x:String>Database post</x:String>
                         <x:String>Energy</x:String>
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>
             <Image Source="eps.jpg"  Aspect="Center" SemanticProperties.Description="Energy Prediction System EPS"/>
 
-            <Label Text="Average indoor " FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#202020" />
+            <Label Text="Indoor " FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#202020" />
             <Border Padding="5.0" HorizontalOptions="Center" StrokeThickness="3" Stroke="#0091D5" Grid.Row="0" Grid.Column="0">
                 <Label x:Name="TempAvg_Label" FontSize="20" Text="Temperature:" TextColor="#202020"  FontAttributes="Bold">
                     <Label.GestureRecognizers>

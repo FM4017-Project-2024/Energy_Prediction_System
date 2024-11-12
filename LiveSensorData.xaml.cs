@@ -56,18 +56,18 @@ public partial class LiveSensorData : ContentPage
             }
             else
             {
-                TT01_Label.Text = $"TT01: {sensorData.sensor.TT01:F2}" + " °C";
-                TT02_Label.Text = $"TT02: {sensorData.sensor.TT02:F2}" + " °C";
-                TT03_Label.Text = $"TT03: {sensorData.sensor.TT03:F2}" + " °C";
-                TT04_Label.Text = $"TT04: {sensorData.sensor.TT04:F2}" + " °C";
-                TT05_Label.Text = $"TT05: {sensorData.sensor.TT05:F2}" + " °C";
+                TT01_Label.Text = $"First floor: {sensorData.sensor.TT01:F2}" + " °C";
+                TT02_Label.Text = $"Second floor: {sensorData.sensor.TT02:F2}" + " °C";
+                TT03_Label.Text = $"Office: {sensorData.sensor.TT03:F2}" + " °C";
+                TT04_Label.Text = $"Guestroom: {sensorData.sensor.TT04:F2}" + " °C";
+                TT05_Label.Text = $"Kitchen: {sensorData.sensor.TT05:F2}" + " °C";
                 TTDT_Label.Text = sensorData.sensor.TT_DT.ToString();
-                RHT01_Label.Text = $"RHT01: {sensorData.sensor.RHT01:F2}" + " %";
-                RHT02_Label.Text = $"RHT02: {sensorData.sensor.RHT02:F2}" + " %";
-                RHT03_Label.Text = $"RHT03: {sensorData.sensor.RHT03:F2}" + " %";
-                RHT04_Label.Text = $"RHT04: {sensorData.sensor.RHT04:F2}" + " %";
+                RHT01_Label.Text = $"First floor: {sensorData.sensor.RHT01:F2}" + " %";
+                RHT02_Label.Text = $"Second floor: {sensorData.sensor.RHT02:F2}" + " %";
+                RHT03_Label.Text = $"Guestroom: {sensorData.sensor.RHT03:F2}" + " %";
+                RHT04_Label.Text = $"Office: {sensorData.sensor.RHT04:F2}" + " %";
                 RHTDT_Label.Text = sensorData.sensor.RHT_DT.ToString();
-                KWH_Label.Text = $"KWH01: {sensorData.sensor.KWH01:F2}" + " kWh";
+                KWH_Label.Text = $"Energymeter: {sensorData.sensor.KWH01:F2}" + " kWh";
                 KWHDT_Label.Text = sensorData.sensor.KWH_DT.ToString();
             }
         });

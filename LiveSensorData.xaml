@@ -8,7 +8,7 @@
         <Label Text="Temperature" FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#202020"/>
 
         <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5" Grid.Row="0" Grid.Column="0">
-                <Label x:Name="TT01_Label" FontSize="22" Text="TT01:" TextColor="#202020" FontAttributes="Bold">
+                <Label x:Name="TT01_Label" FontSize="22" Text="First floor:" TextColor="#202020" FontAttributes="Bold">
                     <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnLabelTapped_TT01" />
                 </Label.GestureRecognizers>
@@ -19,7 +19,7 @@
         </Border>
 
         <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
-                <Label x:Name="TT02_Label" FontSize="22" Text="TT02:" TextColor="#202020" FontAttributes="Bold">
+                <Label x:Name="TT02_Label" FontSize="22" Text="Second floor:" TextColor="#202020" FontAttributes="Bold">
                     <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnLabelTapped_TT02" />
                 </Label.GestureRecognizers>
@@ -30,7 +30,7 @@
         </Border>
 
         <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
-                <Label x:Name="TT03_Label" FontSize="22" Text="TT03:" TextColor="#202020" FontAttributes="Bold">
+                <Label x:Name="TT03_Label" FontSize="22" Text="Office:" TextColor="#202020" FontAttributes="Bold">
                     <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnLabelTapped_TT03" />
                 </Label.GestureRecognizers>
@@ -41,7 +41,7 @@
         </Border>
 
         <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
-                <Label x:Name="TT04_Label" FontSize="22" Text="TT04:" TextColor="#202020" FontAttributes="Bold">
+                <Label x:Name="TT04_Label" FontSize="22" Text="Guestroom:" TextColor="#202020" FontAttributes="Bold">
                     <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnLabelTapped_TT04" />
                 </Label.GestureRecognizers>
@@ -51,7 +51,7 @@
             </Border.StrokeShape>
         </Border>
         <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
-                <Label x:Name="TT05_Label" FontSize="22" Text="TT05:" TextColor="#202020" FontAttributes="Bold">
+                <Label x:Name="TT05_Label" FontSize="22" Text="Kitchen:" TextColor="#202020" FontAttributes="Bold">
                     <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnLabelTapped_TT05" />
                 </Label.GestureRecognizers>
@@ -70,7 +70,7 @@
 
             <Label Text="Relative humidity" FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#202020"/>
         <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5"  Grid.Row="0" Grid.Column="0">
-                <Label x:Name="RHT01_Label" FontSize="22" Text="RHT01: " TextColor="#202020" FontAttributes="Bold">
+                <Label x:Name="RHT01_Label" FontSize="22" Text="First floor: " TextColor="#202020" FontAttributes="Bold">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnLabelTapped_RHT01" />
                     </Label.GestureRecognizers>
@@ -81,7 +81,7 @@
         </Border>
 
         <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5"  Grid.Row="0" Grid.Column="1">
-                <Label x:Name="RHT02_Label" FontSize="22" Text="RHT02: " TextColor="#202020" FontAttributes="Bold">
+                <Label x:Name="RHT02_Label" FontSize="22" Text="Second floor: " TextColor="#202020" FontAttributes="Bold">
                     <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnLabelTapped_RHT02" />
                 </Label.GestureRecognizers>
@@ -92,7 +92,7 @@
 
     </Border>
         <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5"  Grid.Row="1" Grid.Column="0">
-                <Label x:Name="RHT03_Label" FontSize="22" Text="RHT03: " TextColor="#202020" FontAttributes="Bold">
+                <Label x:Name="RHT03_Label" FontSize="22" Text="Guestroom: " TextColor="#202020" FontAttributes="Bold">
                     <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnLabelTapped_RHT03" />
                 </Label.GestureRecognizers>
@@ -103,7 +103,7 @@
         </Border>
 
         <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5"  Grid.Row="1" Grid.Column="1">
-                <Label x:Name="RHT04_Label" FontSize="22" Text="RHT04: " TextColor="#202020" FontAttributes="Bold">
+                <Label x:Name="RHT04_Label" FontSize="22" Text="Office: " TextColor="#202020" FontAttributes="Bold">
                     <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnLabelTapped_RHT04" />
                 </Label.GestureRecognizers>
@@ -123,7 +123,7 @@
 
             <Label Text="Energy usage" FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#202020"/>
             <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
-                <Label x:Name="KWH_Label" FontSize="22" Text="KWH01: " TextColor="#202020" FontAttributes="Bold">
+                <Label x:Name="KWH_Label" FontSize="22" Text="Energymeter: " TextColor="#202020" FontAttributes="Bold">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnLabelTapped_KWH01" />
                     </Label.GestureRecognizers>

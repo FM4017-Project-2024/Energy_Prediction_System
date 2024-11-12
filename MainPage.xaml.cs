@@ -36,12 +36,6 @@ namespace Energy_Prediction_System
                     await Navigation.PushAsync(new LiveWheaterData());
                     break;
                 case 2:
-                    await Navigation.PushAsync(new DatabaseViewPage());
-                    break;
-                case 3:
-                    await Navigation.PushAsync(new DatabasePostPage());
-                    break;
-                case 4:
                     await Navigation.PushAsync(new Energy());
                     break;
                 default:
@@ -59,7 +53,6 @@ namespace Energy_Prediction_System
                 HumpAvg_Label.Text = $"Humidity: {RHT_AVG:F2}" + " %";
                 OutsideTemp_Label.Text = $"Temperature {TT_OUT:F2}" + " °C";
                 OutsideHum_Label.Text = $"Humidity: {RH_OUT:F2}" + " %";
-
                 PredEnergy_Label.Text = $"Predicted {TT_AVG:F2}" + " kWh";
                 CurrEnergy_Label.Text = $"Current {KWH_CURR:F2}" + " kWh";
 
