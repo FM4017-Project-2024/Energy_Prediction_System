@@ -7,7 +7,7 @@
 
     <ScrollView>
         <VerticalStackLayout  Padding="1,0" Spacing="11" BackgroundColor="WhiteSmoke">
-            <Picker x:Name="pageSelector" Title="Select page" FontSize="30" HorizontalOptions="CenterAndExpand" TextColor="#7E909A"  SelectedIndexChanged="OnPickerSelectedIndexChanged">
+            <Picker x:Name="pageSelector" Title="Select page" FontSize="25" HorizontalOptions="CenterAndExpand" TextColor="#7E909A"  SelectedIndexChanged="OnPickerSelectedIndexChanged">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>Sensor data</x:String>
