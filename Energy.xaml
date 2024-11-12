@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Energy_Prediction_System.Energy"
              Title="Energy">
-
+    
     <ScrollView>
-        <VerticalStackLayout>
+        <VerticalStackLayout  Padding="1,0" Spacing="11" BackgroundColor="WhiteSmoke">
             <Label Text="Energy" FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#202020" />
             <Button Text="Get Prediction"
                 Clicked="OnGetPredictionClicked" />
@@ -14,52 +14,52 @@
                HorizontalOptions="Center"
                VerticalOptions="CenterAndExpand" />
 
-            <Label Text="Predicted energy consumption" FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#AAAAAA"/>
+            <Label Text="Predicted energy consumption" FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#202020"/>
             
             <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
-                <Label x:Name="Day01_Label" FontSize="22" Text="Day1: " TextColor="#AAAAAA" FontAttributes="Bold"/>
+                <Label x:Name="Day01_Label" FontSize="22" Text="Day1: " TextColor="#202020" FontAttributes="Bold"/>
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10,10,10,10" />
                 </Border.StrokeShape>
             </Border>
 
             <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
-                <Label x:Name="Day02_Label" FontSize="22" Text="Day2: " TextColor="#AAAAAA" FontAttributes="Bold"/>
+                <Label x:Name="Day02_Label" FontSize="22" Text="Day2: " TextColor="#202020" FontAttributes="Bold"/>
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10,10,10,10" />
                 </Border.StrokeShape>
             </Border>
 
             <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
-                <Label x:Name="Day03_Label" FontSize="22" Text="Day3: " TextColor="#AAAAAA" FontAttributes="Bold"/>
+                <Label x:Name="Day03_Label" FontSize="22" Text="Day3: " TextColor="#202020" FontAttributes="Bold"/>
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10,10,10,10" />
                 </Border.StrokeShape>
             </Border>
 
             <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
-                <Label x:Name="Day04_Label" FontSize="22" Text="Day4: " TextColor="#AAAAAA" FontAttributes="Bold"/>
+                <Label x:Name="Day04_Label" FontSize="22" Text="Day4: " TextColor="#202020" FontAttributes="Bold"/>
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10,10,10,10" />
                 </Border.StrokeShape>
             </Border>
 
             <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
-                <Label x:Name="Day05_Label" FontSize="22" Text="Day5: " TextColor="#AAAAAA" FontAttributes="Bold"/>
+                <Label x:Name="Day05_Label" FontSize="22" Text="Day5: " TextColor="#202020" FontAttributes="Bold"/>
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10,10,10,10" />
                 </Border.StrokeShape>
             </Border>
 
             <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
-                <Label x:Name="Day06_Label" FontSize="22" Text="Day6: " TextColor="#AAAAAA" FontAttributes="Bold"/>
+                <Label x:Name="Day06_Label" FontSize="22" Text="Day6: " TextColor="#202020" FontAttributes="Bold"/>
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10,10,10,10" />
                 </Border.StrokeShape>
             </Border>
 
             <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
-                <Label x:Name="Day07_Label" FontSize="22" Text="Day7: " TextColor="#AAAAAA" FontAttributes="Bold"/>
+                <Label x:Name="Day07_Label" FontSize="22" Text="Day7: " TextColor="#202020" FontAttributes="Bold"/>
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10,10,10,10" />
                 </Border.StrokeShape>

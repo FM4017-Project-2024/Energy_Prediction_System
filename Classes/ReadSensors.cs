@@ -102,14 +102,9 @@ namespace Energy_Prediction_System.Classes
             try
             {
                 List<BuildingTemperatureItem> temperatureItems = await _databaseWebAPIServices.GetBuildingTempsAsync(apiUrl);
-               
                 // Last 14 days
                 List<BuildingTemperatureItem> last14Items = temperatureItems.OrderByDescending(item => item.Id).Take(14).ToList();
 
-                foreach (var item in last14Items)
-                {
-                    Debug.WriteLine($"Temp1: {item.Temp1}, DateTime: {item.TempDateTime}");
-                }
                 historical.TT01 = last14Items.Select(item => item.Temp1).ToArray();
                 historical.TT02 = last14Items.Select(item => item.Temp2).ToArray();
                 historical.TT03 = last14Items.Select(item => item.Temp3).ToArray();
