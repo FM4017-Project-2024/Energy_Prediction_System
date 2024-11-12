@@ -43,6 +43,10 @@ namespace Energy_Prediction_System.Classes
             public float[] TT03 { get; set; }
             public float[] TT04 { get; set; }
             public float[] TT05 { get; set; }
+            public float[] RHT01 { get; set; }
+            public float[] RHT02 { get; set; }
+            public float[] RHT03 { get; set; }
+            public float[] RHT04 { get; set; }
         }
 
 
@@ -52,7 +56,29 @@ namespace Energy_Prediction_System.Classes
             GetLatestBuildingRelHumidity();
             GetLatestEnergyMeterData();
             GetAllBuildingTemp();
+            GetAllBuildingRelHum();
         }
+        // Methods to retrieve temperature data
+        private async void GetAllBuildingRelHum()
+        {
+            string apiUrl = "/api/BuildingRelativeHumidityItems";
+            try
+            {
+                List<BuildingRelativeHumidityItem> relHumItems = await _databaseWebAPIServices.GetBuildingRelHumidityAsync(apiUrl);
+                // Last 14 days
+                List<BuildingRelativeHumidityItem> last14Items = relHumItems.OrderByDescending(item => item.Id).Take(14).ToList();
+                historical.RHT01 = last14Items.Select(item => item.RelHumidity1).ToArray();
+                historical.RHT02 = last14Items.Select(item => item.RelHumidity1).ToArray();
+                historical.RHT03 = last14Items.Select(item => item.RelHumidity1).ToArray();
+                historical.RHT04 = last14Items.Select(item => item.RelHumidity1).ToArray();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex + " Failed to fetch rel hum data");
+            }
+        }
+
+
         // Methods to retrieve temperature data
         private async void GetAllBuildingTemp()
         {
@@ -62,17 +88,17 @@ namespace Energy_Prediction_System.Classes
                 List<BuildingTemperatureItem> temperatureItems = await _databaseWebAPIServices.GetBuildingTempsAsync(apiUrl);
                
                 // Last 14 days
-                List<BuildingTemperatureItem> last14TemperatureItems = temperatureItems.OrderByDescending(item => item.Id).Take(14).ToList();
+                List<BuildingTemperatureItem> last14Items = temperatureItems.OrderByDescending(item => item.Id).Take(14).ToList();
 
-                foreach (var item in last14TemperatureItems)
+                foreach (var item in last14Items)
                 {
                     Debug.WriteLine($"Temp1: {item.Temp1}, DateTime: {item.TempDateTime}");
                 }
-                historical.TT01 = last14TemperatureItems.Select(item => item.Temp1).ToArray();
-                historical.TT02 = last14TemperatureItems.Select(item => item.Temp2).ToArray();
-                historical.TT03 = last14TemperatureItems.Select(item => item.Temp3).ToArray();
-                historical.TT04 = last14TemperatureItems.Select(item => item.Temp4).ToArray();
-                historical.TT05 = last14TemperatureItems.Select(item => item.Temp5).ToArray();
+                historical.TT01 = last14Items.Select(item => item.Temp1).ToArray();
+                historical.TT02 = last14Items.Select(item => item.Temp2).ToArray();
+                historical.TT03 = last14Items.Select(item => item.Temp3).ToArray();
+                historical.TT04 = last14Items.Select(item => item.Temp4).ToArray();
+                historical.TT05 = last14Items.Select(item => item.Temp5).ToArray();
             }
             catch (Exception ex)
             {
