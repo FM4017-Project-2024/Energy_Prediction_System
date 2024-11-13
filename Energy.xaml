@@ -7,15 +7,11 @@
     <ScrollView>
         <VerticalStackLayout>
             <Label Text="Energy" FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#202020" />
-            <Button Text="Get Prediction"
-                Clicked="OnGetPredictionClicked" />
-            <Label x:Name="predictionLabel"
-               FontSize="18"
-               HorizontalOptions="Center"
-               VerticalOptions="CenterAndExpand" />
+
+
 
             <Label Text="Predicted energy consumption" FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#AAAAAA"/>
-            
+
             <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
                 <Label x:Name="Day01_Label" FontSize="22" Text="Day1: " TextColor="#AAAAAA" FontAttributes="Bold"/>
                 <Border.StrokeShape>
@@ -65,6 +61,11 @@
                 </Border.StrokeShape>
             </Border>
 
+            <Label x:Name="predictionLabel"
+               FontSize="18"
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand" 
+               TextColor="#AAAAAA"/>
 
         </VerticalStackLayout>
     </ScrollView>

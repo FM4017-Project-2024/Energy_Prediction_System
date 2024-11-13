@@ -10,7 +10,7 @@ public partial class Energy : ContentPage
     public Energy()
 	{
 		InitializeComponent();
-        //UpdatePredictions();
+        UpdatePredictions();
     }
 
     private async void UpdatePredictions()
@@ -19,14 +19,9 @@ public partial class Energy : ContentPage
         {
             
             bool updated = await _predictionService.IsDatabaseUpdatedAsync();
-            if (updated)
-            {
-                predictionLabel.Text = $"Database already up to date";
-            }
-            else
+            if (updated == false)
             {
                 _predictionService.UpdateDatabaseWithPredictions(7);
-                predictionLabel.Text = $"Database updated";
             }
         }
         catch (Exception ex)
@@ -34,15 +29,5 @@ public partial class Energy : ContentPage
             predictionLabel.Text = $"Error: {ex.Message}";
         }
     }
-    private async void OnGetPredictionClicked(object sender, EventArgs e)
-    {
-        try
-        {
-            _predictionService.UpdateDatabaseWithPredictions(7);
-        }
-        catch (Exception ex)
-        {
-            predictionLabel.Text = $"Error: {ex.Message}";
-        }
-    }
+   
 }

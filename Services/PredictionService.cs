@@ -129,9 +129,9 @@ namespace Energy_Prediction_System.Services
                     return true;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw;
+                return false;
             }
 
             return false;
