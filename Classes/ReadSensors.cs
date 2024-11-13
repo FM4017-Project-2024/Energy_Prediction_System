@@ -36,6 +36,7 @@ namespace Energy_Prediction_System.Classes
             public DateTime? RHT_DT { get; set; }
             public double KWH01 { get; set; }
             public DateTime? KWH_DT { get; set; }
+            public float Current_Prediciton { get; set; }
         }
         public class HistoricData
         {
@@ -74,6 +75,7 @@ namespace Energy_Prediction_System.Classes
             GetAllBuildingRelHum();
             GetAllBuildingKwh();
             GetAllWeatherForecasts();
+            GetLatestEnergyPrediction();
         }
 
         // Methods to retrieve weather forecast data
@@ -111,6 +113,23 @@ namespace Energy_Prediction_System.Classes
                 Debug.WriteLine(ex + " Failed to fetch weather data");
             }
         }
+
+        private async void GetLatestEnergyPrediction()
+        {
+            string apiUrl = "/api/EnergyPredictionItems/latest";
+            try
+            {
+                List<EnergyPredictionItem> latestPrediction = await _databaseWebAPIServices.GetLatestEnergyPredictionAsync(apiUrl);
+                EnergyPredictionItem newestPrediction = latestPrediction.OrderByDescending(prediction => prediction.DateTime).LastOrDefault();
+                sensor.Current_Prediciton = newestPrediction.EnergyPrediction;
+            }
+
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex + " Failed to fetch latest energy prediction");
+            }
+        }
+
 
 
         private async void GetAllBuildingKwh()
