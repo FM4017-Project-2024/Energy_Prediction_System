@@ -19,11 +19,12 @@ namespace Energy_Prediction_System.Services
     {
         private readonly string? apiKey;
         private readonly DatabaseWebAPIServices _databaseWebAPIServices;
+        private readonly Env env = new Env();
 
         public PredictionService()
         {
             _databaseWebAPIServices = new DatabaseWebAPIServices();
-            apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY_Project24");
+            apiKey = env.PredictionApiKey;
 
             if (string.IsNullOrEmpty(apiKey))
             {
@@ -72,15 +73,6 @@ namespace Energy_Prediction_System.Services
                                 ]
                             }}
                             Note: Introduce minor differences in consumption values each day, within a realistic range."
-
-                        //content = $@"
-                        //Predict the energy consumption for the following conditions:
-                        //{predictData}
-
-                        //Based on the historical training data:
-                        //{promptData}
-
-                        //Respond with only the predicted energy consumption as a single number without any units, explanation, or extra text. Format: just the number (e.g., '123')."
                     }
                 },
                 max_tokens = 800,
@@ -249,17 +241,6 @@ namespace Energy_Prediction_System.Services
 
             return promptData.ToString();
         }
-
-        //// Define a class to map weather data
-        //public class WeatherEnergyData
-        //{
-        //    public string Date { get; set; }
-        //    public int Temperature { get; set; }
-        //    public int Humidity { get; set; }
-        //    public int WindSpeed { get; set; }
-        //    public int EnergyConsumption { get; set; }
-        //}
-
 
         public async Task<string> GetAPITrainingData()
         {
