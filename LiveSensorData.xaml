@@ -112,15 +112,13 @@
                 <RoundRectangle CornerRadius="10,10,10,10" />
             </Border.StrokeShape>
         </Border>
-        <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
-        <Label x:Name="RHTDT_Label" FontSize="22" Text="Date time:" TextColor="#202020" FontAttributes="Bold"></Label>
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="10,10,10,10" />
-            </Border.StrokeShape>
-        </Border>
-
-
-
+            <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
+                <Label x:Name="RHTDT_Label" FontSize="22" Text="Date time:" TextColor="#202020" FontAttributes="Bold"></Label>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10,10,10,10" />
+                </Border.StrokeShape>
+            </Border>
+            
             <Label Text="Energy usage" FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#202020"/>
             <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
                 <Label x:Name="KWH_Label" FontSize="22" Text="Energymeter: " TextColor="#202020" FontAttributes="Bold">

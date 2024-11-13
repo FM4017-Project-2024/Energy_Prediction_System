@@ -4,24 +4,26 @@
              xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
              x:Class="Energy_Prediction_System.HistoricalData_1">
 
-    <Grid>
+    <Grid BackgroundColor="WhiteSmoke">
+
         <Label Text="{Binding SensorName}"
                FontSize="20"
                HorizontalOptions="Center"
                VerticalOptions="Start"
-               Margin="10" />
+               Margin="10"
+               TextColor="Black"/>
 
 
         <chart:SfCartesianChart>
             <chart:SfCartesianChart.Series>
-                <chart:LineSeries ItemsSource="{Binding Data}" XBindingPath="Time" YBindingPath="Value" Label="Sensor Data" StrokeWidth="2">
+                <chart:LineSeries ItemsSource="{Binding Data}" XBindingPath="Time" YBindingPath="Value" Label="Sensor Data" StrokeWidth="2" >
                 </chart:LineSeries>
             </chart:SfCartesianChart.Series>
 
             <chart:SfCartesianChart.XAxes >
                 <chart:CategoryAxis>
                     <chart:CategoryAxis.Title>
-                        <chart:ChartAxisTitle Text="Time"/>
+                        <chart:ChartAxisTitle Text="Time" FontSize="20" TextColor="Black"/>
                     </chart:CategoryAxis.Title>
                 </chart:CategoryAxis>
             </chart:SfCartesianChart.XAxes>
@@ -29,11 +31,12 @@
             <chart:SfCartesianChart.YAxes>
                 <chart:NumericalAxis>
                     <chart:NumericalAxis.Title>
-                        <chart:ChartAxisTitle Text="Temperature"/>
+                        <chart:ChartAxisTitle x:Name="AxisTitle" Text="Unit" TextColor="Black" FontSize="20"/>
                     </chart:NumericalAxis.Title>
                 </chart:NumericalAxis>
             </chart:SfCartesianChart.YAxes>
         </chart:SfCartesianChart>
+        
     </Grid>
 </ContentPage>
     

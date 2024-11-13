@@ -136,7 +136,29 @@ namespace Energy_Prediction_System.Services
 
             return false;
         }
-        public async void UpdateDatabaseWithPredictions(int numberOfDays)
+
+        public async Task<List<EnergyPredictionItem>?> GetDatabaseStoredPredictions(int numberOfPredictions)
+        {
+            /*
+                Method that returns latest predictions
+             */
+            string apiUrl = "/api/EnergyPredictionItems/latest";
+            try
+            {
+                // Receive a list and retrieve the latest item
+                var energyPredictions = await _databaseWebAPIServices.GetLatestEnergyPredictionAsync(apiUrl);
+                //var latestPrediction = energyPredictions?.FirstOrDefault();
+                var latestPredictions = energyPredictions?.Take(numberOfPredictions).ToList();
+
+
+                return latestPredictions;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public async Task UpdateDatabaseWithPredictions(int numberOfDays)
         {
             DateTime today = DateTime.Now.Date;
             var predictionDays = Enumerable.Range(0, numberOfDays)

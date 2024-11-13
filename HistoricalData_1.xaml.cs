@@ -1,6 +1,8 @@
 using Energy_Prediction_System.Classes;
+using Newtonsoft.Json.Linq;
 using Syncfusion.Maui.Charts;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace Energy_Prediction_System;
 
@@ -18,44 +20,32 @@ public partial class HistoricalData_1 : ContentPage
     private int _counter;
     public string SensorName { get; set; }
 
-    public HistoricalData_1(string sensorName)
+    public HistoricalData_1(string sensorName, string unit, float[] values, DateTime? dt)
     {
+
         InitializeComponent();
         SensorName = sensorName;
+        AxisTitle.Text = unit;
 
-        Data = new ObservableCollection<ChartModel>
+        string[] TimeStamps = new string[values.Length];
+        DateTime? currentDate = dt;
+        for (int i = 0; i < values.Length; i++)
         {
-            new ChartModel { Time = "10:00", Value = 20.5 },
-            new ChartModel { Time = "10:30", Value = 21.2 },
-            new ChartModel { Time = "11:00", Value = 19.8 },
-            new ChartModel { Time = "11:30", Value = 22.1 },
-            new ChartModel { Time = "12:00", Value = 23.4 },
-            new ChartModel { Time = "12:30", Value = 24.0 },
-            new ChartModel { Time = "13:00", Value = 22.8 }
-        };
-        _counter = 8; // Start counter after initial data points
-        BindingContext = this;
-
-        StartSimulatingSensorData();
-    }
-
-    private async void StartSimulatingSensorData()
-    {
-        while (_isRunning)
-        {
-            string newTime = $"13:{_counter * 5:00}";
-            double newValue = rndVal.GetRandomDouble(0, 20);
-            MainThread.BeginInvokeOnMainThread(() =>
-            {
-                Data.Add(new ChartModel { Time = newTime, Value = newValue });
-                _counter++;
-                if (Data.Count > 10)
-                {
-                    Data.RemoveAt(0);
-                }
-            });
-            await Task.Delay(3000);
+            DateTime date = currentDate.Value.AddDays(-i);
+            TimeStamps[i] = date.ToString("dd/MM/yyyy");
         }
+
+        Data = new ObservableCollection<ChartModel>();
+        for (int i = 0; i < values.Length; i++)
+        {
+            Data.Add(new ChartModel
+            {
+                Time = TimeStamps[i],
+                Value = values[i]
+            });
+        }
+
+        BindingContext = this;
     }
 
     protected override void OnDisappearing()

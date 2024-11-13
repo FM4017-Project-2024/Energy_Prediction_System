@@ -83,14 +83,15 @@ public partial class LiveWheaterData : ContentPage
         getWeatherData();
     }
 
-    private async void OnLabelTapped_TTT(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("TTT"));
-    private async void OnLabelTapped_dd(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("dd"));
-    private async void OnLabelTapped_ff(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("ff"));
-    private async void OnLabelTapped_NA(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("NA"));
-    private async void OnLabelTapped_pr(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("NN"));
-    private async void OnLabelTapped_NN(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("TD"));
-    private async void OnLabelTapped_LOW(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("LOW"));
-    private async void OnLabelTapped_MEDIUM(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("MEDIUM"));
-    private async void OnLabelTapped_HIGH(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("HIGH"));
-    private async void OnLabelTapped_TD(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("TD"));
+    private async void OnLabelTapped_TTT(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Temperature", "°C", App.SensorValues.historical.TT01, App.SensorValues.sensor.TT_DT));
+    private async void OnLabelTapped_dd(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Wind direction", "deg", App.SensorValues.historical.TT01, App.SensorValues.sensor.TT_DT));
+    private async void OnLabelTapped_ff(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Wind speed", "m/s", App.SensorValues.historical.TT01, App.SensorValues.sensor.TT_DT));
+    private async void OnLabelTapped_NA(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Wind gust", "%", App.SensorValues.historical.TT01, App.SensorValues.sensor.TT_DT));
+    private async void OnLabelTapped_pr(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Pressure", "hPa", App.SensorValues.historical.TT01, App.SensorValues.sensor.TT_DT));
+    private async void OnLabelTapped_NN(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Cloudiness", "%", App.SensorValues.historical.TT01, App.SensorValues.sensor.TT_DT));
+    private async void OnLabelTapped_LOW(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Low clouds", "%", App.SensorValues.historical.TT01, App.SensorValues.sensor.TT_DT));
+    private async void OnLabelTapped_MEDIUM(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Medium clouds", "%", App.SensorValues.historical.TT01, App.SensorValues.sensor.TT_DT));
+    private async void OnLabelTapped_HIGH(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("High clouds", "%", App.SensorValues.historical.TT01, App.SensorValues.sensor.TT_DT));
+    private async void OnLabelTapped_TD(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Dew point temperatur", "°C", App.SensorValues.historical.TT01, App.SensorValues.sensor.TT_DT));
+
 }
