@@ -13,10 +13,11 @@ namespace Energy_Prediction_System.Services
     {
         private readonly HttpClient _httpClient;
         private readonly string _baseApiAddress;
+        private readonly Env env = new Env();
 
         public DatabaseWebAPIServices()
         {
-            // Ignorer sertifikatvalidering i utviklingsmodus (for testing)
+            // Ignore certificate errors during developement
             var handler = new HttpClientHandler
             {
                 ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) => true
@@ -24,22 +25,28 @@ namespace Energy_Prediction_System.Services
 
             _httpClient = new HttpClient(handler);
 
-            // Velg baseadresse basert på plattform
-            if (DeviceInfo.Platform == DevicePlatform.Android)
+            if (DeviceInfo.DeviceType == DeviceType.Virtual)
             {
-                _baseApiAddress = "https://10.0.2.2:7107";
-            }
-            else if (DeviceInfo.Platform == DevicePlatform.WinUI)
-            {
-                _baseApiAddress = "https://localhost:7107";
-            }
-            else if (DeviceInfo.Platform == DevicePlatform.iOS)
-            {
-                _baseApiAddress = "https://localhost:7107";
+                // Handle emulator-specific addresses
+                if (DeviceInfo.Platform == DevicePlatform.Android)
+                {
+                    _baseApiAddress = env.AndroidDevBaseApiAdress; // Android emulator address
+                }
+                else if (DeviceInfo.Platform == DevicePlatform.iOS)
+                {
+                    _baseApiAddress = env.iOSDevBaseApiAdress; // iOS simulator address
+                }
             }
             else
             {
-                throw new NotSupportedException("Unsupported platform");
+                if (DeviceInfo.Platform == DevicePlatform.WinUI)
+                {
+                    _baseApiAddress = env.WinUIDevBaseApiAdress; // For WinUI development on a local machine
+                }
+                else
+                {
+                    _baseApiAddress = env.ProductionBaseApiAdress; // Production or device address for iOS/Android
+                }
             }
         }
 
