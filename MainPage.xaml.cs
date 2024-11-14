@@ -97,7 +97,8 @@ namespace Energy_Prediction_System
         private async void OnLabelTapped_AvgHum(object sender, EventArgs e) => await Navigation.PushAsync(new LiveSensorData()); 
         private async void OnLabelTapped_OutTemp(object sender, EventArgs e) => await Navigation.PushAsync(new LiveWheaterData());
         private async void OnLabelTapped_OutHum(object sender, EventArgs e) => await Navigation.PushAsync(new LiveWheaterData());
-        private async void OnLabelTapped_Energy(object sender, EventArgs e) => await Navigation.PushAsync(new Energy()); 
+        private async void OnLabelTapped_Energy_Predicted(object sender, EventArgs e) => await Navigation.PushAsync(new Energy());
+        private async void OnLabelTapped_Energy_Current(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Energymeter", "kWh", App.SensorValues.historical.KWH01, App.SensorValues.sensor.KWH_DT));
     }
 }
 

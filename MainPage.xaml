@@ -64,9 +64,9 @@
 
             <Label Text="Energy" FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#202020" />
             <Border Padding="5.0" HorizontalOptions="Center" StrokeThickness="3" Stroke="#0091D5">
-                <Label x:Name="PredEnergy_Label" FontSize="20" Text="Predicted energy:" HorizontalOptions="Center" TextColor="#202020"  FontAttributes="Bold">
+                <Label x:Name="CurrEnergy_Label" FontSize="20" Text="Predicted energy:" HorizontalOptions="Center" TextColor="#202020"  FontAttributes="Bold">
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnLabelTapped_Energy" />
+                        <TapGestureRecognizer Tapped="OnLabelTapped_Energy_Current" />
                     </Label.GestureRecognizers>
                 </Label>
                 <Border.StrokeShape>
@@ -74,15 +74,16 @@
                 </Border.StrokeShape>
             </Border>
             <Border Padding="5.0" HorizontalOptions="Center" StrokeThickness="3" Stroke="#0091D5">
-                <Label x:Name="CurrEnergy_Label" FontSize="20" Text="Predicted energy:" HorizontalOptions="Center" TextColor="#202020"  FontAttributes="Bold">
+                <Label x:Name="PredEnergy_Label" FontSize="20" Text="Predicted energy:" HorizontalOptions="Center" TextColor="#202020"  FontAttributes="Bold">
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnLabelTapped_Energy" />
+                        <TapGestureRecognizer Tapped="OnLabelTapped_Energy_Predicted" />
                     </Label.GestureRecognizers>
                 </Label>
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10,10,10,10" />
                 </Border.StrokeShape>
             </Border>
+            
 
         </VerticalStackLayout>
     </ScrollView>
