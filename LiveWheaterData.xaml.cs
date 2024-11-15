@@ -57,7 +57,7 @@ public partial class LiveWheaterData : ContentPage
             MainThread.BeginInvokeOnMainThread(() =>
             {
                 TTT_Label.Text = $"Temperature: {weatherValues.weather.TTT:F2}" + " °C";
-                dd_Label.Text = $"Wind direction: {weatherValues.weather.dd:F2}" + " deg";
+                dd_Label.Text = $"Wind direction: {weatherValues.weather.dd:F2}" + " °";
                 ff_Label.Text = $"Wind speed: {weatherValues.weather.ff:F2}" + " m/s";
                 NA_Label.Text = $"Humidity: {weatherValues.weather.NA:F2}" + " %";
                 pr_Label.Text = $"Pressure: {weatherValues.weather.pr:F2}" + " hPa";

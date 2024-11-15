@@ -41,7 +41,7 @@
         </Border>
 
         <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
-                <Label x:Name="TT04_Label" FontSize="22" Text="Guestroom:" TextColor="#202020" FontAttributes="Bold">
+                <Label x:Name="TT04_Label" FontSize="22" Text="Guest room:" TextColor="#202020" FontAttributes="Bold">
                     <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnLabelTapped_TT04" />
                 </Label.GestureRecognizers>
@@ -121,7 +121,7 @@
             
             <Label Text="Energy usage" FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#202020"/>
             <Border Padding="5.0" HorizontalOptions="Fill" StrokeThickness="3" Stroke="#0091D5">
-                <Label x:Name="KWH_Label" FontSize="22" Text="Energymeter: " TextColor="#202020" FontAttributes="Bold">
+                <Label x:Name="KWH_Label" FontSize="22" Text="Energy meter: " TextColor="#202020" FontAttributes="Bold">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnLabelTapped_KWH01" />
                     </Label.GestureRecognizers>

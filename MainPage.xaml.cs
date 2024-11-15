@@ -51,10 +51,10 @@ namespace Energy_Prediction_System
             {
                 TempAvg_Label.Text = $"Temperature: {TT_AVG:F2}" + " °C";
                 HumpAvg_Label.Text = $"Humidity: {RHT_AVG:F2}" + " %";
-                OutsideTemp_Label.Text = $"Temperature {TT_OUT:F2}" + " °C";
+                OutsideTemp_Label.Text = $"Temperature: {TT_OUT:F2}" + " °C";
                 OutsideHum_Label.Text = $"Humidity: {RH_OUT:F2}" + " %";
-                PredEnergy_Label.Text = $"Predicted {KWH_PRED:F2}" + " kWh";
-                CurrEnergy_Label.Text = $"Current {KWH_CURR:F2}" + " kWh";
+                PredEnergy_Label.Text = $"Predicted: {KWH_PRED:F2}" + " kWh";
+                CurrEnergy_Label.Text = $"Current: {KWH_CURR:F2}" + " kWh";
 
             });
         }
