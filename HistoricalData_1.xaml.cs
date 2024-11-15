@@ -33,11 +33,12 @@ public partial class HistoricalData_1 : ContentPage
         {
             if (i == 0)
             {
-                TimeStamps[i] = currentDate.Value.ToString("dd/MM/yyyy"); // Current date
+                TimeStamps[i] = currentDate.Value.ToString("dd/MM/yyyy");
             }
             else
             {
-                TimeStamps[i] = $"-{i}"; // Past days as -1, -2, etc.
+                DateTime pastDate = currentDate.Value.AddDays(-i);
+                TimeStamps[i] = $"{pastDate:dd/MM/yyyy} - {i}";
             }
         }
 
