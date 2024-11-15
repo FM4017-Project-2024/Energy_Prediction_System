@@ -23,7 +23,7 @@
             <chart:SfCartesianChart.XAxes >
                 <chart:CategoryAxis>
                     <chart:CategoryAxis.Title>
-                        <chart:ChartAxisTitle Text="Time" FontSize="20" TextColor="Black"/>
+                        <chart:ChartAxisTitle Text="Date" FontSize="20" TextColor="Black"/>
                     </chart:CategoryAxis.Title>
                 </chart:CategoryAxis>
             </chart:SfCartesianChart.XAxes>
