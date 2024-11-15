@@ -31,8 +31,14 @@ public partial class HistoricalData_1 : ContentPage
         DateTime? currentDate = dt;
         for (int i = 0; i < values.Length; i++)
         {
-            DateTime date = currentDate.Value.AddDays(-i);
-            TimeStamps[i] = date.ToString("dd/MM/yyyy");
+            if (i == 0)
+            {
+                TimeStamps[i] = currentDate.Value.ToString("dd/MM/yyyy"); // Current date
+            }
+            else
+            {
+                TimeStamps[i] = $"-{i}"; // Past days as -1, -2, etc.
+            }
         }
 
         Data = new ObservableCollection<ChartModel>();
@@ -46,6 +52,7 @@ public partial class HistoricalData_1 : ContentPage
         }
 
         BindingContext = this;
+
     }
 
     protected override void OnDisappearing()
