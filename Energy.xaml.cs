@@ -25,6 +25,7 @@ public partial class Energy : ContentPage
                 await _predictionService.UpdateDatabaseWithPredictions(7);
             }
             FillEnergyPage();
+            DT_Label.Text = "Prediction time: " + DateTime.Now.ToString("dd.MM.yyyyy HH:mm:ss");
         }
         catch (Exception ex)
         {
