@@ -34,19 +34,38 @@ public partial class Energy : ContentPage
 
     private async void FillEnergyPage()
     {
-        /*
-        Fills the energy page with predictions stored in database
-        */
         List<EnergyPredictionItem>? predictionItems = await _predictionService.GetDatabaseStoredPredictions(7);
         if (predictionItems != null)
         {
-            Day01_Label.Text = "Day 1: "+ predictionItems[0].EnergyPrediction.ToString() + predictionItems[0].EnergyPredictionUoM;
-            Day02_Label.Text = "Day 2: " + predictionItems[1].EnergyPrediction.ToString() + predictionItems[1].EnergyPredictionUoM;
-            Day03_Label.Text = "Day 3: " + predictionItems[2].EnergyPrediction.ToString() + predictionItems[2].EnergyPredictionUoM;
-            Day04_Label.Text = "Day 4: " + predictionItems[3].EnergyPrediction.ToString() + predictionItems[3].EnergyPredictionUoM;
-            Day05_Label.Text = "Day 5: " + predictionItems[4].EnergyPrediction.ToString() + predictionItems[4].EnergyPredictionUoM;
-            Day06_Label.Text = "Day 6: " + predictionItems[5].EnergyPrediction.ToString() + predictionItems[5].EnergyPredictionUoM;
-            Day07_Label.Text = "Day 7: " + predictionItems[6].EnergyPrediction.ToString() + predictionItems[6].EnergyPredictionUoM;
+            for (int i = 0; i < 7; i++)
+            {
+                string dateLabel = DateTime.Now.AddDays(i+1).ToString("dd.MM.yyyy");
+
+            switch (i)
+                {
+                    case 0:
+                        Day01_Label.Text = $"{dateLabel}: {predictionItems[i].EnergyPrediction} {predictionItems[i].EnergyPredictionUoM}";
+                        break;
+                    case 1:
+                        Day02_Label.Text = $"{dateLabel}: {predictionItems[i].EnergyPrediction} {predictionItems[i].EnergyPredictionUoM}";
+                        break;
+                    case 2:
+                        Day03_Label.Text = $"{dateLabel}: {predictionItems[i].EnergyPrediction} {predictionItems[i].EnergyPredictionUoM}";
+                        break;
+                    case 3:
+                        Day04_Label.Text = $"{dateLabel}: {predictionItems[i].EnergyPrediction} {predictionItems[i].EnergyPredictionUoM}";
+                        break;
+                    case 4:
+                        Day05_Label.Text = $"{dateLabel}: {predictionItems[i].EnergyPrediction} {predictionItems[i].EnergyPredictionUoM}";
+                        break;
+                    case 5:
+                        Day06_Label.Text = $"{dateLabel}: {predictionItems[i].EnergyPrediction} {predictionItems[i].EnergyPredictionUoM}";
+                        break;
+                    case 6:
+                        Day07_Label.Text = $"{dateLabel}: {predictionItems[i].EnergyPrediction} {predictionItems[i].EnergyPredictionUoM}";
+                        break;
+                }
+            }
         }
     }
 
