@@ -22,38 +22,23 @@ public partial class HistoricalData_1 : ContentPage
 
     public HistoricalData_1(string sensorName, string unit, float[] values, DateTime? dt)
     {
-
         InitializeComponent();
         SensorName = sensorName;
         AxisTitle.Text = unit;
 
         string[] TimeStamps = new string[values.Length];
         DateTime? currentDate = dt;
-
-        for (int i = 0; i < values.Length; i++)
-        {
-            if (i == 0)
-            {
-                TimeStamps[i] = currentDate.Value.ToString("dd/MM/yyyy");
-            }
-            else
-            {
-                TimeStamps[i] = $"{currentDate.Value:dd/MM/yyyy} - {i}";
-            }
-        }
-
         Data = new ObservableCollection<ChartModel>();
         for (int i = 0; i < values.Length; i++)
         {
+            TimeStamps[i] = currentDate.Value.AddDays(-i).ToString("dd.MM.yyyy");
             Data.Add(new ChartModel
             {
                 Time = TimeStamps[i],
                 Value = values[i]
             });
         }
-
         BindingContext = this;
-
     }
 
     protected override void OnDisappearing()
