@@ -29,6 +29,7 @@ public partial class HistoricalData_1 : ContentPage
 
         string[] TimeStamps = new string[values.Length];
         DateTime? currentDate = dt;
+
         for (int i = 0; i < values.Length; i++)
         {
             if (i == 0)
@@ -37,8 +38,7 @@ public partial class HistoricalData_1 : ContentPage
             }
             else
             {
-                DateTime pastDate = currentDate.Value.AddDays(-i);
-                TimeStamps[i] = $"{pastDate:dd/MM/yyyy} - {i}";
+                TimeStamps[i] = $"{currentDate.Value:dd/MM/yyyy} - {i}";
             }
         }
 
