@@ -10,7 +10,6 @@ namespace Energy_Prediction_System.Classes
         public Livesensors sensor { get; set; } = new Livesensors();
         public HistoricData historical { get; set; } = new HistoricData();
         public Historic_weather historicalWeather { get; set; } = new Historic_weather();
-
         private readonly DatabaseWebAPIServices _databaseWebAPIServices;
 
         public ReadSensors()
@@ -40,30 +39,30 @@ namespace Energy_Prediction_System.Classes
         }
         public class HistoricData
         {
-            public float[] TT01 { get; set; }
-            public float[] TT02 { get; set; }
-            public float[] TT03 { get; set; }
-            public float[] TT04 { get; set; }
-            public float[] TT05 { get; set; }
-            public float[] RHT01 { get; set; }
-            public float[] RHT02 { get; set; }
-            public float[] RHT03 { get; set; }
-            public float[] RHT04 { get; set; }
-            public float[] KWH01 { get; set; }
+            public float[]? TT01 { get; set; }
+            public float[]? TT02 { get; set; }
+            public float[]? TT03 { get; set; }
+            public float[]? TT04 { get; set; }
+            public float[]? TT05 { get; set; }
+            public float[]? RHT01 { get; set; }
+            public float[]? RHT02 { get; set; }
+            public float[]? RHT03 { get; set; }
+            public float[]? RHT04 { get; set; }
+            public float[]? KWH01 { get; set; }
         }
         public class Historic_weather
         {
-            public float[] Temperature { get; set; }
-            public float[] WindDirection { get; set; }
-            public float[] WindSpeed { get; set; }
-            public float[] Humidity { get; set; }
-            public float[] Pressure { get; set; }
-            public float[] Cloudiness { get; set; }
-            public float[] LowClouds { get; set; }
-            public float[] MediumClouds { get; set; }
-            public float[] HighClouds { get; set; }
-            public float[] DewpointTemperature { get; set; }
-            public DateTime[] DT { get; set; }
+            public float[]? Temperature { get; set; }
+            public float[]? WindDirection { get; set; }
+            public float[]? WindSpeed { get; set; }
+            public float[]? Humidity { get; set; }
+            public float[]? Pressure { get; set; }
+            public float[]? Cloudiness { get; set; }
+            public float[]? LowClouds { get; set; }
+            public float[]? MediumClouds { get; set; }
+            public float[]? HighClouds { get; set; }
+            public float[]? DewpointTemperature { get; set; }
+            public DateTime[]? DT { get; set; }
         }
 
         public void getSensorData()
@@ -78,15 +77,14 @@ namespace Energy_Prediction_System.Classes
             GetLatestEnergyPrediction();
         }
 
-        // Methods to retrieve weather forecast data
         private async void GetAllWeatherForecasts()
         {
             string apiUrl = "/api/WeatherForecastItems";
             try
             {
                 List<WeatherForecastItem> weatherForecastItems = await _databaseWebAPIServices.GetWeatherForecastsAsync(apiUrl);
-                // Last 14 days
-                List<WeatherForecastItem> last14Items = weatherForecastItems.OrderByDescending(item => item.Id).Take(14).ToList();
+                List<WeatherForecastItem> last14Items = weatherForecastItems.OrderByDescending(item => item.Id).Take(14).ToList();  // Last 14 days
+
                 historicalWeather.Temperature = last14Items.Select(item => item.Temperature).ToArray();
                 historicalWeather.WindDirection = last14Items.Select(item => item.WindDirection).ToArray();
                 historicalWeather.WindSpeed = last14Items.Select(item => item.WindSpeed).ToArray();
@@ -103,10 +101,6 @@ namespace Energy_Prediction_System.Classes
                 {
                     Debug.WriteLine(item.DateTime); // Assuming DateTime is the property name in WeatherForecastItem
                 }
-
-
-
-
             }
             catch (Exception ex)
             {
@@ -120,17 +114,22 @@ namespace Energy_Prediction_System.Classes
             try
             {
                 List<EnergyPredictionItem> latestPrediction = await _databaseWebAPIServices.GetLatestEnergyPredictionAsync(apiUrl);
-                EnergyPredictionItem newestPrediction = latestPrediction.OrderByDescending(prediction => prediction.DateTime).FirstOrDefault();
-                sensor.Current_Prediciton = newestPrediction.EnergyPrediction;
+                if (latestPrediction != null)
+                {
+                    EnergyPredictionItem newestPrediction = latestPrediction.OrderByDescending(prediction => prediction.DateTime).FirstOrDefault();
+                    if (newestPrediction != null)
+                    {
+                        {
+                            sensor.Current_Prediciton = newestPrediction.EnergyPrediction;
+                        }
+                    }
+                }
             }
-
             catch (Exception ex)
             {
                 Debug.WriteLine(ex + " Failed to fetch latest energy prediction");
             }
         }
-
-
 
         private async void GetAllBuildingKwh()
         {
@@ -138,14 +137,12 @@ namespace Energy_Prediction_System.Classes
             try
             {
                 List<BuildingEnergyMeterItem> kwhItems = await _databaseWebAPIServices.GetBuildingEnergyMeterAsync(apiUrl);
-                // Last 14 days
-                List<BuildingEnergyMeterItem> last14Items = kwhItems.OrderByDescending(item => item.Id).Take(14).ToList();
+                List<BuildingEnergyMeterItem> last14Items = kwhItems.OrderByDescending(item => item.Id).Take(14).ToList();  // Last 14 days
                 historical.KWH01 = last14Items.Select(item => item.EnergyMeter1).ToArray();
                 foreach (var item in last14Items)
                 {
                     Debug.WriteLine(item.EnergyMeterDateTime); // Assuming DateTime is the property name in WeatherForecastItem
                 }
-
             }
             catch (Exception ex)
             {
@@ -159,8 +156,7 @@ namespace Energy_Prediction_System.Classes
             try
             {
                 List<BuildingRelativeHumidityItem> relHumItems = await _databaseWebAPIServices.GetBuildingRelHumidityAsync(apiUrl);
-                // Last 14 days
-                List<BuildingRelativeHumidityItem> last14Items = relHumItems.OrderByDescending(item => item.Id).Take(14).ToList();
+                List<BuildingRelativeHumidityItem> last14Items = relHumItems.OrderByDescending(item => item.Id).Take(14).ToList(); // Last 14 days
                 historical.RHT01 = last14Items.Select(item => item.RelHumidity1).ToArray();
                 historical.RHT02 = last14Items.Select(item => item.RelHumidity1).ToArray();
                 historical.RHT03 = last14Items.Select(item => item.RelHumidity1).ToArray();
@@ -178,8 +174,7 @@ namespace Energy_Prediction_System.Classes
             try
             {
                 List<BuildingTemperatureItem> temperatureItems = await _databaseWebAPIServices.GetBuildingTempsAsync(apiUrl);
-                // Last 14 days
-                List<BuildingTemperatureItem> last14Items = temperatureItems.OrderByDescending(item => item.Id).Take(14).ToList();
+                List<BuildingTemperatureItem> last14Items = temperatureItems.OrderByDescending(item => item.Id).Take(14).ToList(); // Last 14 days
                 historical.TT01 = last14Items.Select(item => item.Temp1).ToArray();
                 historical.TT02 = last14Items.Select(item => item.Temp2).ToArray();
                 historical.TT03 = last14Items.Select(item => item.Temp3).ToArray();
@@ -210,7 +205,6 @@ namespace Energy_Prediction_System.Classes
             catch (Exception ex)
             {
                 Debug.WriteLine(ex + " Failed to fetch temperature data");
-                //await HandleError(ex, "Failed to fetch temperature data");
             }
         }
 
@@ -230,7 +224,6 @@ namespace Energy_Prediction_System.Classes
             catch (Exception ex)
             {
                 Debug.WriteLine(ex + " Failed to fetch latest humidity");
-                //await HandleError(ex, "Failed to fetch latest humidity");
             }
         }
 
@@ -246,17 +239,8 @@ namespace Energy_Prediction_System.Classes
             catch (Exception ex)
             {
                 Debug.WriteLine(ex + " Failed to fetch latest energy meter data");
-                //await HandleError(ex, "Failed to fetch latest energy meter data");
             }
         }
-
-        /*
-        // Error handling method
-        private async Task HandleError(Exception ex, string message)
-        {
-            await DisplayAlert("Error", $"{message}: {ex.Message}", "OK");
-        }
-        */
     }
 }
 
