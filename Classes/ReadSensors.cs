@@ -120,7 +120,7 @@ namespace Energy_Prediction_System.Classes
             try
             {
                 List<EnergyPredictionItem> latestPrediction = await _databaseWebAPIServices.GetLatestEnergyPredictionAsync(apiUrl);
-                EnergyPredictionItem newestPrediction = latestPrediction.OrderByDescending(prediction => prediction.DateTime).LastOrDefault();
+                EnergyPredictionItem newestPrediction = latestPrediction.OrderByDescending(prediction => prediction.DateTime).FirstOrDefault();
                 sensor.Current_Prediciton = newestPrediction.EnergyPrediction;
             }
 
