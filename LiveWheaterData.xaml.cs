@@ -7,8 +7,8 @@ public partial class LiveWheaterData : ContentPage
     private readonly SensorSim _rndVal = new();
 
     private bool _isRunning = true;
-    private bool _simulate = false;
-    private int _taskDelay = 2000;
+    private readonly bool _simulate = false;
+    private readonly int _taskDelay = 2000;
 
     public LiveWheaterData()
     {
@@ -20,7 +20,6 @@ public partial class LiveWheaterData : ContentPage
         {
             _taskDelay = 60000;
         }
-
         InitializeComponent();
         getWeatherData();
     }
@@ -83,15 +82,83 @@ public partial class LiveWheaterData : ContentPage
         getWeatherData();
     }
 
-    private async void OnLabelTapped_TTT(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Temperature", "°C", App.SensorValues.historicalWeather.Temperature, App.SensorValues.historicalWeather.DT.Max()));
-    private async void OnLabelTapped_dd(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Wind direction", "deg", App.SensorValues.historicalWeather.WindDirection, App.SensorValues.historicalWeather.DT.Max()));
-    private async void OnLabelTapped_ff(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Wind speed", "m/s", App.SensorValues.historicalWeather.WindSpeed, App.SensorValues.historicalWeather.DT.Max()));
-    private async void OnLabelTapped_NA(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Humididty", "%", App.SensorValues.historicalWeather.Humidity, App.SensorValues.historicalWeather.DT.Max()));
-    private async void OnLabelTapped_pr(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Pressure", "hPa", App.SensorValues.historicalWeather.Pressure, App.SensorValues.historicalWeather.DT.Max()));
-    private async void OnLabelTapped_NN(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Cloudiness", "%", App.SensorValues.historicalWeather.Cloudiness, App.SensorValues.historicalWeather.DT.Max()));
-    private async void OnLabelTapped_LOW(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Low clouds", "%", App.SensorValues.historicalWeather.LowClouds, App.SensorValues.historicalWeather.DT.Max()));
-    private async void OnLabelTapped_MEDIUM(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Medium clouds", "%", App.SensorValues.historicalWeather.MediumClouds, App.SensorValues.historicalWeather.DT.Max()));
-    private async void OnLabelTapped_HIGH(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("High clouds", "%", App.SensorValues.historicalWeather.HighClouds, App.SensorValues.historicalWeather.DT.Max()));
-    private async void OnLabelTapped_TD(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Dew point temperatur", "°C", App.SensorValues.historicalWeather.DewpointTemperature, App.SensorValues.historicalWeather.DT.Max()));
+    private async void OnLabelTapped_TTT(object sender, EventArgs e)
+    {
+        if (App.SensorValues.historicalWeather.Temperature != null && App.SensorValues.historicalWeather.DT != null)
+        {
+            await Navigation.PushAsync(new HistoricalData_1("Temperature", "°C", App.SensorValues.historicalWeather.Temperature, App.SensorValues.historicalWeather.DT.Max()));
+        }   
+    }
 
+    private async void OnLabelTapped_dd(object sender, EventArgs e)
+    {
+        if (App.SensorValues.historicalWeather.WindDirection != null && App.SensorValues.historicalWeather.DT != null)
+        {
+            await Navigation.PushAsync(new HistoricalData_1("Wind direction", "deg", App.SensorValues.historicalWeather.WindDirection, App.SensorValues.historicalWeather.DT.Max()));
+        }
+    }
+
+    private async void OnLabelTapped_ff(object sender, EventArgs e)
+    {
+        if (App.SensorValues.historicalWeather.WindSpeed != null && App.SensorValues.historicalWeather.DT != null)
+        {
+            await Navigation.PushAsync(new HistoricalData_1("Wind speed", "m/s", App.SensorValues.historicalWeather.WindSpeed, App.SensorValues.historicalWeather.DT.Max()));
+        }
+    }
+
+    private async void OnLabelTapped_NA(object sender, EventArgs e)
+    {
+        if (App.SensorValues.historicalWeather.Humidity != null && App.SensorValues.historicalWeather.DT != null)
+        {
+            await Navigation.PushAsync(new HistoricalData_1("Humididty", "%", App.SensorValues.historicalWeather.Humidity, App.SensorValues.historicalWeather.DT.Max()));
+        }
+    }
+
+    private async void OnLabelTapped_pr(object sender, EventArgs e)
+    {
+        if (App.SensorValues.historicalWeather.Pressure != null && App.SensorValues.historicalWeather.DT != null)
+        {
+            await Navigation.PushAsync(new HistoricalData_1("Pressure", "hPa", App.SensorValues.historicalWeather.Pressure, App.SensorValues.historicalWeather.DT.Max()));
+        }
+    }
+
+    private async void OnLabelTapped_NN(object sender, EventArgs e)
+    {
+        if (App.SensorValues.historicalWeather.Cloudiness != null && App.SensorValues.historicalWeather.DT != null)
+        {
+            await Navigation.PushAsync(new HistoricalData_1("Cloudiness", "%", App.SensorValues.historicalWeather.Cloudiness, App.SensorValues.historicalWeather.DT.Max()));
+        }   
+    }
+
+    private async void OnLabelTapped_LOW(object sender, EventArgs e)
+    {
+        if (App.SensorValues.historicalWeather.LowClouds != null && App.SensorValues.historicalWeather.DT != null)
+        {
+            await Navigation.PushAsync(new HistoricalData_1("Low clouds", "%", App.SensorValues.historicalWeather.LowClouds, App.SensorValues.historicalWeather.DT.Max()));
+        }
+    }
+
+    private async void OnLabelTapped_MEDIUM(object sender, EventArgs e)
+    {
+        if (App.SensorValues.historicalWeather.MediumClouds != null && App.SensorValues.historicalWeather.DT != null)
+        {
+            await Navigation.PushAsync(new HistoricalData_1("Medium clouds", "%", App.SensorValues.historicalWeather.MediumClouds, App.SensorValues.historicalWeather.DT.Max()));
+        }    
+    }
+
+    private async void OnLabelTapped_HIGH(object sender, EventArgs e)
+    {
+        if (App.SensorValues.historicalWeather.HighClouds != null && App.SensorValues.historicalWeather.DT != null)
+        {
+            await Navigation.PushAsync(new HistoricalData_1("High clouds", "%", App.SensorValues.historicalWeather.HighClouds, App.SensorValues.historicalWeather.DT.Max()));
+        }
+    }
+
+    private async void OnLabelTapped_TD(object sender, EventArgs e)
+    {
+        if(App.SensorValues.historicalWeather.DewpointTemperature != null && App.SensorValues.historicalWeather.DT != null)
+        {
+            await Navigation.PushAsync(new HistoricalData_1("Dew point temperatur", "°C", App.SensorValues.historicalWeather.DewpointTemperature, App.SensorValues.historicalWeather.DT.Max()));
+        }
+    }
 }
