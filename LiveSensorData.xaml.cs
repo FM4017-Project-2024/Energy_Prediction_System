@@ -90,14 +90,84 @@ public partial class LiveSensorData : ContentPage
         }
     }
 
-    private async void OnLabelTapped_TT01(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("First floor", "Temperature[°C]", App.SensorValues.historical.TT01, App.SensorValues.sensor.TT_DT));
-    private async void OnLabelTapped_TT02(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Second floor", "Temperature[°C]", App.SensorValues.historical.TT02, App.SensorValues.sensor.TT_DT));
-    private async void OnLabelTapped_TT03(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Office", "Temperature[°C]", App.SensorValues.historical.TT03, App.SensorValues.sensor.TT_DT));
-    private async void OnLabelTapped_TT04(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Guestroom", "Temperature[°C]", App.SensorValues.historical.TT04, App.SensorValues.sensor.TT_DT));
-    private async void OnLabelTapped_TT05(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Kitchen", "Temperature[°C]", App.SensorValues.historical.TT05, App.SensorValues.sensor.TT_DT));
-    private async void OnLabelTapped_RHT01(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("First floor", "Relative humidity[%]", App.SensorValues.historical.RHT01, App.SensorValues.sensor.RHT_DT));
-    private async void OnLabelTapped_RHT02(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Second floor", "Relative humidity[%]", App.SensorValues.historical.RHT02, App.SensorValues.sensor.RHT_DT));
-    private async void OnLabelTapped_RHT03(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Guestroom", "Relative humidity[%]", App.SensorValues.historical.RHT03, App.SensorValues.sensor.RHT_DT));
-    private async void OnLabelTapped_RHT04(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Office", "Relative humidity[%]", App.SensorValues.historical.RHT04, App.SensorValues.sensor.RHT_DT));
-    private async void OnLabelTapped_KWH01(object sender, EventArgs e) => await Navigation.PushAsync(new HistoricalData_1("Energy meter","Energy consumption[kWh]", App.SensorValues.historical.KWH01, App.SensorValues.sensor.KWH_DT));
+    private async void OnLabelTapped_TT01(object sender, EventArgs e)
+    {
+        if (App.SensorValues.historical.TT01 != null)
+        {
+            await Navigation.PushAsync(new HistoricalData_1("First floor", "Temperature[°C]", App.SensorValues.historical.TT01, App.SensorValues.sensor.TT_DT));
+        }
+    }
+
+    private async void OnLabelTapped_TT02(object sender, EventArgs e)
+    {
+        if (App.SensorValues.historical.TT02 != null)
+        {
+            await Navigation.PushAsync(new HistoricalData_1("Second floor", "Temperature[°C]", App.SensorValues.historical.TT02, App.SensorValues.sensor.TT_DT));
+        }
+    }
+
+    private async void OnLabelTapped_TT03(object sender, EventArgs e)
+    {
+        if (App.SensorValues.historical.TT03 != null)
+        {
+            await Navigation.PushAsync(new HistoricalData_1("Office", "Temperature[°C]", App.SensorValues.historical.TT03, App.SensorValues.sensor.TT_DT));
+        }
+        
+    }
+
+    private async void OnLabelTapped_TT04(object sender, EventArgs e)
+    {
+        if (App.SensorValues.historical.TT04 != null)
+        {
+            await Navigation.PushAsync(new HistoricalData_1("Guestroom", "Temperature[°C]", App.SensorValues.historical.TT04, App.SensorValues.sensor.TT_DT));
+        }
+    }
+
+    private async void OnLabelTapped_TT05(object sender, EventArgs e)
+    {
+        if (App.SensorValues.historical.TT05 != null)
+        {
+            await Navigation.PushAsync(new HistoricalData_1("Kitchen", "Temperature[°C]", App.SensorValues.historical.TT05, App.SensorValues.sensor.TT_DT));
+        }
+    }
+
+    private async void OnLabelTapped_RHT01(object sender, EventArgs e)
+    {
+        if (App.SensorValues.historical.RHT01 != null)
+        {
+            await Navigation.PushAsync(new HistoricalData_1("First floor", "Relative humidity[%]", App.SensorValues.historical.RHT01, App.SensorValues.sensor.RHT_DT));
+        }
+    }
+
+    private async void OnLabelTapped_RHT02(object sender, EventArgs e)
+    {
+        if (App.SensorValues.historical.RHT02 != null)
+        {
+            await Navigation.PushAsync(new HistoricalData_1("Second floor", "Relative humidity[%]", App.SensorValues.historical.RHT02, App.SensorValues.sensor.RHT_DT));
+        }
+    }
+
+    private async void OnLabelTapped_RHT03(object sender, EventArgs e)
+    {
+        if (App.SensorValues.historical.RHT03 != null)
+        {
+            await Navigation.PushAsync(new HistoricalData_1("Guestroom", "Relative humidity[%]", App.SensorValues.historical.RHT03, App.SensorValues.sensor.RHT_DT));
+        }
+    }
+
+    private async void OnLabelTapped_RHT04(object sender, EventArgs e)
+    {
+        if (App.SensorValues.historical.RHT04 != null)
+        {
+            await Navigation.PushAsync(new HistoricalData_1("Office", "Relative humidity[%]", App.SensorValues.historical.RHT04, App.SensorValues.sensor.RHT_DT));
+        }
+    }
+
+    private async void OnLabelTapped_KWH01(object sender, EventArgs e)
+    {
+        if (App.SensorValues.historical.KWH01 != null)
+        {
+            await Navigation.PushAsync(new HistoricalData_1("Energy meter", "Energy consumption[kWh]", App.SensorValues.historical.KWH01, App.SensorValues.sensor.KWH_DT));
+        }
+    }
 }
