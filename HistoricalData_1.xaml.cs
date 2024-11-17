@@ -8,16 +8,13 @@ namespace Energy_Prediction_System;
 
 public class ChartModel
 {
-    public string Time { get; set; }
+    public string? Time { get; set; }
     public double Value { get; set; }
 }
 
 public partial class HistoricalData_1 : ContentPage
 {
-    private readonly SensorSim rndVal = new();
-    private bool _isRunning = true;
     public ObservableCollection<ChartModel> Data { get; set; }
-    private int _counter;
     public string SensorName { get; set; }
 
     public HistoricalData_1(string sensorName, string unit, float[] values, DateTime? dt)
@@ -27,23 +24,24 @@ public partial class HistoricalData_1 : ContentPage
         AxisTitle.Text = unit;
 
         string[] TimeStamps = new string[values.Length];
-        DateTime? currentDate = dt;
-        Data = new ObservableCollection<ChartModel>();
-        for (int i = 0; i < values.Length; i++)
+        Data = [];
+        if (dt != null)
         {
-            TimeStamps[i] = currentDate.Value.AddDays(-i).ToString("dd.MM.yyyy");
-            Data.Add(new ChartModel
+            for (int i = 0; i < values.Length; i++)
             {
-                Time = TimeStamps[i],
-                Value = values[i]
-            });
+                TimeStamps[i] = dt.Value.AddDays(-i).ToString("dd.MM.yyyy");
+                Data.Add(new ChartModel
+                {
+                    Time = TimeStamps[i],
+                    Value = values[i]
+                });
+            }
+            BindingContext = this;
         }
-        BindingContext = this;
     }
 
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
-        _isRunning = false;
     }
 }
