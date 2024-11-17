@@ -3,11 +3,13 @@ using Energy_Prediction_System.Services;
 using System.Data;
 
 
+
 namespace Energy_Prediction_System;
 
 public partial class Energy : ContentPage
 {
     private readonly PredictionService _predictionService = new PredictionService();
+    private const int _NumberOfPredictions = 7;
     public Energy()
 	{
 		InitializeComponent();
@@ -35,10 +37,10 @@ public partial class Energy : ContentPage
 
     private async void FillEnergyPage()
     {
-        List<EnergyPredictionItem>? predictionItems = await _predictionService.GetDatabaseStoredPredictions(7);
+        List<EnergyPredictionItem>? predictionItems = await _predictionService.GetDatabaseStoredPredictions(_NumberOfPredictions);
         if (predictionItems != null)
         {
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < _NumberOfPredictions; i++)
             {
                 string dateLabel = DateTime.Now.AddDays(i+1).ToString("dd.MM.yyyy");
 
@@ -69,5 +71,4 @@ public partial class Energy : ContentPage
             }
         }
     }
-
 }
